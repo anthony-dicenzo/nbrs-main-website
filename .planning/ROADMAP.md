@@ -56,6 +56,8 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md — Nav, Footer, layout integration with Inter font (Wave 1)
 - [x] 02-02-PLAN.md — Page transitions and mobile responsive polish (Wave 2)
+- [ ] 02-03-PLAN.md — [GAP] Nav polish: logo, pill buttons, rollover animations (Wave 1)
+- [ ] 02-04-PLAN.md — [GAP] Footer polish: brand text, SVG icons, reference layout (Wave 2)
 
 ### Phase 3: GSAP Animation Foundation
 **Goal**: Splash animation works exactly like the current site with proper cleanup on route changes
@@ -149,7 +151,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Infrastructure | 3/3 | ✓ Complete | 2026-01-31 |
-| 2. Layout & Navigation | 2/2 | ✓ Complete | 2026-01-31 |
+| 2. Layout & Navigation | 2/4 | Gap closure | 2026-01-31 |
 | 3. GSAP Animation Foundation | 0/2 | Not started | - |
 | 4. Video Components | 0/3 | Not started | - |
 | 5. Scroll Animations & Micro-interactions | 0/2 | Not started | - |
