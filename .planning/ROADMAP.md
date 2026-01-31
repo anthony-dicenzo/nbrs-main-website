@@ -12,7 +12,7 @@ This roadmap transforms a laggy, monolithic HTML site into a polished SvelteKit 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Foundation & Infrastructure** - SvelteKit project with video optimization pipeline
+- [x] **Phase 1: Foundation & Infrastructure** - SvelteKit project with video optimization pipeline
 - [ ] **Phase 2: Layout & Navigation** - Shared layout, nav, footer working across routes
 - [ ] **Phase 3: GSAP Animation Foundation** - Splash animation migrated with proper lifecycle
 - [ ] **Phase 4: Video Components** - Optimized video playback with mobile fallbacks
@@ -36,9 +36,9 @@ Decimal phases appear between their surrounding integers in numeric order.
   5. Route structure exists for all pages (/, /partner, /waitlist, /family-1)
 
 Plans:
-- [ ] 01-01-PLAN.md — SvelteKit + Tailwind + GSAP project setup (Wave 1)
-- [ ] 01-02-PLAN.md — Static adapter and route structure (Wave 2)
-- [ ] 01-03-PLAN.md — Video optimization pipeline with FFmpeg presets (Wave 1)
+- [x] 01-01-PLAN.md — SvelteKit + Tailwind + GSAP project setup (Wave 1)
+- [x] 01-02-PLAN.md — Static adapter and route structure (Wave 2)
+- [x] 01-03-PLAN.md — Video optimization pipeline with FFmpeg presets (Wave 1)
 
 ### Phase 2: Layout & Navigation
 **Goal**: Users see consistent navigation and footer on every page
@@ -146,7 +146,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Infrastructure | 0/3 | Planned | - |
+| 1. Foundation & Infrastructure | 3/3 | ✓ Complete | 2026-01-31 |
 | 2. Layout & Navigation | 0/2 | Not started | - |
 | 3. GSAP Animation Foundation | 0/2 | Not started | - |
 | 4. Video Components | 0/3 | Not started | - |

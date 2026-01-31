@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Infrastructure
 
-- [ ] **INFRA-01**: Project scaffolded with SvelteKit 2 + Svelte 5 + TypeScript
-- [ ] **INFRA-02**: Tailwind CSS v4 configured with Vite plugin
-- [ ] **INFRA-03**: GSAP integrated with Svelte actions pattern for clean lifecycle
-- [ ] **INFRA-04**: Static adapter configured for Cloudflare Pages deployment
-- [ ] **INFRA-05**: Video optimization pipeline established (ffmpeg presets for WebM/MP4)
+- [x] **INFRA-01**: Project scaffolded with SvelteKit 2 + Svelte 5 + TypeScript
+- [x] **INFRA-02**: Tailwind CSS v4 configured with Vite plugin
+- [x] **INFRA-03**: GSAP integrated with Svelte actions pattern for clean lifecycle
+- [x] **INFRA-04**: Static adapter configured for Cloudflare Pages deployment
+- [x] **INFRA-05**: Video optimization pipeline established (ffmpeg presets for WebM/MP4)
 
 ### Video & Media
 
@@ -98,11 +98,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 1 | Pending |
-| INFRA-02 | Phase 1 | Pending |
-| INFRA-03 | Phase 1 | Pending |
-| INFRA-04 | Phase 1 | Pending |
-| INFRA-05 | Phase 1 | Pending |
+| INFRA-01 | Phase 1 | Complete |
+| INFRA-02 | Phase 1 | Complete |
+| INFRA-03 | Phase 1 | Complete |
+| INFRA-04 | Phase 1 | Complete |
+| INFRA-05 | Phase 1 | Complete |
 | VID-01 | Phase 4 | Pending |
 | VID-02 | Phase 4 | Pending |
 | VID-03 | Phase 4 | Pending |

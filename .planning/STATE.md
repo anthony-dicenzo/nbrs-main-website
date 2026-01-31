@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-31)
 
 **Core value:** The site must feel alive and polished — smooth animations, instant video playback, buttery transitions — while capturing NBRS's unique personality.
-**Current focus:** Phase 1 - Foundation & Infrastructure
+**Current focus:** Phase 2 - Layout & Navigation
 
 ## Current Position
 
-Phase: 1 of 7 (Foundation & Infrastructure)
-Plan: 3 of 3 in current phase (01-01, 01-02, 01-03 complete)
-Status: Phase complete
-Last activity: 2026-01-31 — Completed 01-02-PLAN.md (Static Adapter + Routes)
+Phase: 2 of 7 (Layout & Navigation)
+Plan: 0 of 2 in current phase
+Status: Ready to plan
+Last activity: 2026-01-31 — Phase 1 complete and verified
 
 Progress: [===.................] 15%
 
