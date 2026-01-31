@@ -1,5 +1,6 @@
 <script lang="ts">
 	import VideoHero from '$lib/components/VideoHero.svelte';
+	import VideoSection from '$lib/components/VideoSection.svelte';
 
 	// Cloudinary video sources from nbrs.ca
 	const heroVideos = [
@@ -13,6 +14,15 @@
 			mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581662/city_tel9gg.mp4'
 		}
 	];
+
+	// Individual video sources for sections
+	const fountainVideo = {
+		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/fountain_duwuhb.mp4'
+	};
+
+	const cityVideo = {
+		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581662/city_tel9gg.mp4'
+	};
 </script>
 
 <VideoHero sources={heroVideos} overlayClass="bg-black/30">
@@ -24,6 +34,68 @@
 		<p class="text-lg italic opacity-90">Sincerely, Your NBRS</p>
 	</div>
 </VideoHero>
+
+<!-- About Section with Lazy-Loaded Video -->
+<section class="py-16 md:py-24 bg-white">
+	<div class="max-w-6xl mx-auto px-6">
+		<div class="grid md:grid-cols-2 gap-12 items-center">
+			<div>
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+					Neighbourhood Scale Housing
+				</h2>
+				<p class="text-lg text-gray-600 mb-4">
+					We're building quality homes that fit into existing communities, creating housing
+					that's affordable without looking affordable.
+				</p>
+				<p class="text-lg text-gray-600">
+					Our approach focuses on smaller, distributed projects that integrate seamlessly
+					with the character of established neighbourhoods.
+				</p>
+			</div>
+			<VideoSection source={fountainVideo} overlayClass="bg-black/10">
+				<div class="absolute inset-0 flex items-end p-6">
+					<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
+						Community Spaces
+					</span>
+				</div>
+			</VideoSection>
+		</div>
+	</div>
+</section>
+
+<!-- Mission Section with Lazy-Loaded Video -->
+<section class="py-16 md:py-24 bg-gray-50">
+	<div class="max-w-6xl mx-auto px-6">
+		<div class="grid md:grid-cols-2 gap-12 items-center">
+			<VideoSection source={cityVideo} aspectRatio="4/3" overlayClass="bg-black/10">
+				<div class="absolute inset-0 flex items-end p-6">
+					<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
+						Urban Integration
+					</span>
+				</div>
+			</VideoSection>
+			<div>
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+					FAMILY 1 Project
+				</h2>
+				<p class="text-lg text-gray-600 mb-4">
+					Our inaugural development brings 6 family-sized units to a vibrant
+					Toronto neighbourhood.
+				</p>
+				<p class="text-lg text-gray-600 mb-6">
+					Designed with families in mind, each unit offers the space and amenities
+					that growing households need.
+				</p>
+				<a
+					href="/family-1"
+					class="inline-block bg-nbrs-green text-white px-6 py-3 rounded-lg font-medium hover:bg-nbrs-green/90 transition-colors"
+				>
+					Learn More
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
 
 <!-- Temporary navigation for testing -->
 <div class="bg-nbrs-green p-8">
