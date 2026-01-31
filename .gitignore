@@ -9,9 +9,13 @@ build/
 .DS_Store
 
 # Video source files (large, process locally)
-*.mp4
-*.mov
 videos-source/
+/*.mp4
+/*.mov
+/video-*.mov
+/video-*.mp4
+/*.mov
+# Note: static/videos/*.mp4 and static/videos/*.webm ARE committed (optimized outputs)
 
 # Environment
 .env

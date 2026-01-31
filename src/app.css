@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/* NBRS Brand Colors */
+:root {
+	--color-nbrs-green: #4fa64f;
+	--color-nbrs-green-dark: #3d8b3d;
+	--color-nbrs-coral: #FF6B6B;
+	--color-nbrs-coral-hover: #FF8787;
+}
+
+/* Tailwind v4 theme extension */
+@theme {
+	--color-nbrs-green: #4fa64f;
+	--color-nbrs-green-dark: #3d8b3d;
+	--color-nbrs-coral: #FF6B6B;
+	--color-nbrs-coral-hover: #FF8787;
+}
