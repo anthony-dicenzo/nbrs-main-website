@@ -11,6 +11,7 @@
 
 {#key data.pathname}
 	<main
+		id="main-content"
 		class="min-h-screen pt-16"
 		in:fade={{ duration: 150, delay: 150 }}
 		out:fade={{ duration: 150 }}

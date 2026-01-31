@@ -15,7 +15,7 @@
 	});
 </script>
 
-<main class="min-h-screen bg-nbrs-green p-8">
+<div class="min-h-screen bg-nbrs-green p-8">
 	<h1 class="text-4xl font-bold text-white mb-4">NBRS Website v4</h1>
 
 	<div class="space-y-2 text-white">
@@ -32,4 +32,4 @@
 		<a href="/waitlist" class="text-white hover:text-nbrs-coral underline">Waitlist</a>
 		<a href="/family-1" class="text-white hover:text-nbrs-coral underline">FAMILY 1</a>
 	</nav>
-</main>
+</div>

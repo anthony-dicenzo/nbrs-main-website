@@ -2,7 +2,7 @@
 	// Waitlist page - prospective resident signup
 </script>
 
-<main class="min-h-screen bg-white p-8">
+<div class="min-h-screen bg-white p-8">
 	<h1 class="text-4xl font-bold text-nbrs-green mb-4">Join the Waitlist</h1>
 	<p class="text-gray-600 mb-8">Be the first to know about available units.</p>
 
@@ -11,4 +11,4 @@
 		<a href="/partner" class="text-nbrs-coral hover:text-nbrs-coral-hover underline">Partner</a>
 		<a href="/family-1" class="text-nbrs-coral hover:text-nbrs-coral-hover underline">FAMILY 1</a>
 	</nav>
-</main>
+</div>
