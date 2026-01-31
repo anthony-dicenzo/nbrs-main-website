@@ -26,4 +26,10 @@
 	<div class="test-box mt-8 p-4 bg-white rounded-lg text-nbrs-green font-bold">
 		If you see this animated in, GSAP works!
 	</div>
+
+	<nav class="mt-8 space-x-4">
+		<a href="/partner" class="text-white hover:text-nbrs-coral underline">Partner</a>
+		<a href="/waitlist" class="text-white hover:text-nbrs-coral underline">Waitlist</a>
+		<a href="/family-1" class="text-white hover:text-nbrs-coral underline">FAMILY 1</a>
+	</nav>
 </main>
