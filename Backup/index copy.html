@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBRS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- Add Lucide Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/font/lucide.min.css">
+    <style>
+        .bg-pattern {
+            background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80"><path fill="%23ffffff" fill-opacity="0.4" d="M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>');
+        }
+        
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #4fa64f;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .intro-text {
+            font-size: clamp(2rem, 15vw, 8rem);
+            font-weight: 900;
+            color: white;
+            position: absolute;
+            z-index: 1001;
+        }
+        
+        .letter {
+            display: inline-block;
+            opacity: 0;
+        }
+
+        .white-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            background: white;
+            border-radius: 50%;
+            z-index: 1000;
+        }
+
+        .slide-content {
+            opacity: 0;
+            transform: translateY(-100px);
+        }
+
+        #app {
+            visibility: hidden;
+        }
+        
+        .buildings-container {
+            position: relative;
+            margin-bottom: -2rem;
+            overflow: hidden;
+        }
+        
+        .buildings-wrapper {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+        
+    
+        .building {
+        opacity: 0;
+            transform-origin: bottom;
+        }
+
+        .cityscape-section {
+            background-color: #4fa64f;
+            padding: 4rem 0 0;
+            position: relative;
+            z-index: 1;
+            margin-bottom: -2rem;
+            overflow: hidden;
+        }
+
+        .building {
+            opacity: 0;
+            transform-origin: bottom;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        #cityscape {
+            display: block;
+            margin-bottom: -2px;
+        }
+
+        .cloud {
+            opacity: 0.4;
+            fill: white;
+            filter: url(#cloudFilter);
+        }
+
+        .bird {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.6);
+            stroke-width: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-overlay">
+        <div class="intro-text">
+            <span class="letter">N</span>
+            <span class="letter">B</span>
+            <span class="letter">R</span>
+            <span class="letter">S</span>
+        </div>
+        <div class="white-overlay"></div>
+    </div>
+    <div id="app" class="min-h-screen bg-[#4fa64f] bg-opacity-90">
+        <!-- Header -->
+        <header class="px-4 lg:px-6 h-16 flex items-center bg-[#4fa64f] shadow-md fixed w-full z-50">
+            <div class="container mx-auto flex items-center justify-between">
+                <a class="flex items-center justify-center" href="#">
+                    <i class="lucide-building-2 h-6 w-6 mr-2 text-white"></i>
+                    <span class="font-bold text-lg text-white">NBRS</span>
+                </a>
+                <button 
+                    @click="menuOpen = !menuOpen" 
+                    class="md:hidden text-white focus:outline-none"
+                >
+                    <i :class="menuOpen ? 'lucide-x' : 'lucide-menu'" class="h-6 w-6"></i>
+                </button>
+
+                    <ul class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8 p-4 md:p-0">
+                        <li><a class="text-sm font-medium hover:underline underline-offset-4 text-white" href="#about">About Us</a></li>
+                        <li><a class="text-sm font-medium hover:underline underline-offset-4 text-white font-bold" href="#partner">Partner With Us</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="pt-16">
+            <!-- Hero Section -->
+            <section class="w-full py-20 md:py-32 lg:py-48">
+                <div class="container mx-auto px-4 md:px-6">
+                    <div class="flex flex-col items-center space-y-8 text-center max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white">
+                            Building Communities in a Neighbourhood Near You
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-100 max-w-[700px]">
+                            NBRS is revolutionizing urban living with small midrise and multiplex projects that foster connection and community. 
+                        </p>
+                        
+                        <a href="#partner" class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-[#FF6B6B] text-white hover:bg-[#FF8787] transition-colors duration-300">
+                            Become a Partner
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        <!-- Add this after the Hero Section and before the About Section -->
+
+                    <!-- Cityscape Section -->
+                    <section class="cityscape-section w-full relative overflow-hidden">
+                        <svg id="cityscape" class="w-full h-32 md:h-48" viewBox="150 0 500 200" preserveAspectRatio="xMidYMax meet">
+                            <!-- Clouds with circular edges -->
+                            <path class="cloud cloud1" 
+                                  d="M50,50 
+                                     C60,40 75,35 90,40
+                                     C100,30 120,30 130,40
+                                     C140,30 160,30 170,40
+                                     C180,35 195,40 200,50
+                                     C200,65 170,70 150,65
+                                     C140,70 110,70 100,65
+                                     C80,70 60,65 50,50
+                                     Z" />
+                                     
+                            <path class="cloud cloud2" 
+                                  d="M250,30
+                                     C260,20 275,15 290,20
+                                     C300,10 320,10 330,20
+                                     C340,15 355,20 360,30
+                                     C360,45 330,50 310,45
+                                     C290,50 270,45 250,30
+                                     Z" />
+                                     
+                            <path class="cloud cloud3" 
+                                  d="M450,70 
+                                     C465,55 490,50 510,60
+                                     C525,45 555,45 570,60
+                                     C585,50 610,55 620,70
+                                     C620,90 580,95 550,90
+                                     C520,95 480,90 450,70
+                                     Z" />
+                            
+                            <!-- Smaller birds -->
+                            <path class="bird bird1" d="M20,40 c5-5,10-5,15,0 c5-5,10-5,15,0" />
+                            <path class="bird bird2" d="M300,60 c4-4,8-4,12,0 c4-4,8-4,12,0" />
+                            <path class="bird bird3" d="M500,30 c6-6,12-6,18,0 c6-6,12-6,18,0" />
+                            
+                            <!-- Buildings with updated colors -->
+                            <path class="building" d="M0,200 v-100 h30 v20 h20 v-40 h15 v120 z" fill="#f5f5f5"/>
+                            <path class="building" d="M65,200 v-80 h25 v-20 h15 v-15 h15 v115 z" fill="#e8e8e8"/>
+                            <path class="building" d="M120,200 v-120 h30 v30 h20 v90 z" fill="#f0f0f0"/>
+                            <path class="building" d="M170,200 v-70 h40 v70 z" fill="#f5f5f5"/>
+                            <path class="building" d="M210,200 v-130 h30 v20 h20 v110 z" fill="#e8e8e8"/>
+                            <path class="building" d="M260,200 v-90 h35 v90 z" fill="#f0f0f0"/>
+                            <path class="building" d="M295,200 v-110 h25 v30 h30 v80 z" fill="#f5f5f5"/>
+                            <path class="building" d="M350,200 v-80 h40 v80 z" fill="#e8e8e8"/>
+                            <path class="building" d="M390,200 v-100 h30 v20 h15 v80 z" fill="#f0f0f0"/>
+                            <path class="building" d="M435,200 v-85 h35 v85 z" fill="#f5f5f5"/>
+                            <path class="building" d="M470,200 v-120 h40 v120 z" fill="#e8e8e8"/>
+                            <path class="building" d="M510,200 v-90 h30 v20 h20 v70 z" fill="#f0f0f0"/>
+                            <path class="building" d="M560,200 v-140 h35 v30 h20 v110 z" fill="#f5f5f5"/>
+                            <path class="building" d="M615,200 v-95 h40 v20 h15 v75 z" fill="#e8e8e8"/>
+                            <path class="building" d="M670,200 v-125 h30 v25 h25 v100 z" fill="#f0f0f0"/>
+                            <path class="building" d="M725,200 v-80 h45 v80 z" fill="#f5f5f5"/>
+                            <path class="building" d="M770,200 v-110 h35 v20 h20 v90 z" fill="#e8e8e8"/>
+                            <path class="building" d="M825,200 v-130 h40 v30 h15 v100 z" fill="#f0f0f0"/>
+                        </svg>
+                    </section>
+
+            <!-- About Section -->
+            <section id="about" class="w-full py-20 md:py-32">
+                <div class="container mx-auto px-4 md:px-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16">About NBRS</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div v-for="card in aboutCards" :key="card.title" 
+                             class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                            <div class="w-16 h-16 rounded-full bg-[#4fa64f]/10 flex items-center justify-center mb-6 mx-auto">
+                                <i :class="card.icon" class="h-8 w-8 text-[#4fa64f]"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#4fa64f] mb-4 text-center">{{ card.title }}</h3>
+                            <p class="text-gray-600 text-center">{{ card.content }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Partner Section -->
+            <section id="partner" class="w-full py-20 md:py-32 bg-white">
+                <div class="container mx-auto px-4 md:px-6">
+                    <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                        <div class="space-y-6">
+                            <h2 class="text-3xl md:text-4xl font-bold text-[#4fa64f]">
+                                Become a Neighborhood Partner
+                            </h2>
+                            <p class="text-gray-600 text-lg">
+                                Are you a landowner looking to develop your property? Partner with NBRS and let us transform your land into thriving, sustainable communities.
+                            </p>
+                            <ul class="space-y-4">
+                                <li v-for="benefit in benefits" :key="benefit" 
+                                    class="flex items-center text-gray-600">
+                                    <i class="lucide-check text-[#4fa64f] mr-3"></i>
+                                    {{ benefit }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#4fa64f] rounded-xl p-8 text-white shadow-xl">
+                            <div class="flex items-center mb-6">
+                                <i class="lucide-handshake h-10 w-10 mr-4"></i>
+                                <h3 class="text-2xl font-bold">Start Your Partnership Journey</h3>
+                            </div>
+                            <form @submit.prevent="submitForm" class="space-y-4" action="confirmation.html">
+                                <!-- Name row -->
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input 
+                                        type="text" 
+                                        placeholder="First Name" 
+                                        class="w-full p-3 rounded-lg bg-white/10 border-0 text-white placeholder-gray-300">
+                                    <input 
+                                        type="text" 
+                                        placeholder="Last Name" 
+                                        class="w-full p-3 rounded-lg bg-white/10 border-0 text-white placeholder-gray-300">
+                                </div>
+                                <!-- Other fields -->
+                                <input 
+                                    type="email" 
+                                    placeholder="Your Email" 
+                                    class="w-full p-3 rounded-lg bg-white/10 border-0 text-white placeholder-gray-300">
+                                <input 
+                                    type="tel" 
+                                    placeholder="Phone Number" 
+                                    class="w-full p-3 rounded-lg bg-white/10 border-0 text-white placeholder-gray-300">
+                                <input 
+                                    type="text" 
+                                    placeholder="Property Address" 
+                                    class="w-full p-3 rounded-lg bg-white/10 border-0 text-white placeholder-gray-300">
+                                <input 
+                                    type="text" 
+                                    placeholder="City" 
+                                    class="w-full p-3 rounded-lg bg-white/10 border-0 text-white placeholder-gray-300">
+                                <button type="submit" 
+                                        class="w-full py-3 px-6 rounded-lg bg-[#FF6B6B] hover:bg-[#FF8787] transition-colors duration-300 flex items-center justify-center">
+                                    Submit
+                                    <i class="lucide-arrow-right ml-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-[#4fa64f] border-t border-[#3d8b3d] py-6">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between">
+                    <p class="text-sm text-white mb-4 sm:mb-0">© 2024 NBRS. All rights reserved.</p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a v-for="link in footerLinks" :key="link.text"
+                           class="flex items-center text-sm text-white hover:underline">
+                            <i :class="link.icon" class="h-4 w-4 mr-2"></i>
+                            {{ link.text }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    menuOpen: false,
+                    aboutCards: [
+                        {
+                            icon: 'lucide-users',
+                            title: 'Community Focused',
+                            content: 'We design spaces that bring people together, fostering a sense of belonging in every project.'
+                        },
+                        {
+                            icon: 'lucide-building-2',
+                            title: 'Urban Innovation',
+                            content: 'Our small midrise and multiplex projects are tailored to fit seamlessly into Toronto\'s urban fabric.'
+                        },
+                        {
+                            icon: 'lucide-tree',
+                            title: 'Sustainable Living',
+                            content: 'We prioritize eco-friendly designs and materials to create sustainable, future-proof communities.'
+                        }
+                    ],
+                    benefits: [
+                        'Expert property development',
+                        'Sustainable design practices',
+                        'Community-focused approach'
+                    ],
+                    formFields: [
+                        { name: 'firstname', type: 'text', placeholder: 'First Name' },
+                        { name: 'lastname', type: 'text', placeholder: 'Last Name' },
+                        { name: 'email', type: 'email', placeholder: 'Your Email' },
+                        { name: 'phone', type: 'tel', placeholder: 'Phone Number' },
+                        { name: 'streetaddress', type: 'text', placeholder: 'Property Address' },
+                        { name: 'city', type: 'text', placeholder: 'City' }
+                    ],
+                    footerLinks: [
+                        { icon: 'lucide-mail', text: 'info@nbrs.com' },
+                        { icon: 'lucide-phone', text: '(416) 555-0123' },
+                        { icon: 'lucide-map-pin', text: 'Toronto, ON' }
+                    ]
+                }
+            },
+            methods: {
+                submitForm() {
+                    // Redirect to confirmation page
+                    window.location.href = 'confirmation.html';
+                }
+            }
+        }).mount('#app')
+    </script>
+    <!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/48114106.js"></script>
+<!-- End of HubSpot Embed Code -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // First timeline - intro sequence
+            const introTimeline = gsap.timeline();
+            
+            // Calculate the diagonal of the screen for the circle expansion
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            const diagonal = Math.sqrt(w * w + h * h);
+            
+            // Add slide-content class to main elements we want to animate
+            document.querySelector('header').classList.add('slide-content');
+            document.querySelectorAll('main section').forEach(section => {
+                section.classList.add('slide-content');
+            });
+            document.querySelector('footer').classList.add('slide-content');
+            
+            // Make app visible but with elements hidden
+            document.querySelector('#app').style.visibility = 'visible';
+            
+            // Initial animation sequence
+            introTimeline
+                .from('.letter', {
+                    opacity: 0,
+                    scale: 0,
+                    y: 100,
+                    rotationX: 180,
+                    stagger: 0.5,
+                    duration: 1,
+                    ease: "back.out(1.7)"
+                })
+                .to('.letter', {
+                    opacity: 1,
+                    scale: 1.2,
+                    stagger: 0.2,
+                    duration: 0.5,
+                    ease: "power2.inOut"
+                })
+                .to('.letter', {
+                    scale: 1,
+                    stagger: 0.2,
+                    duration: 0.5
+                })
+                .to({}, { duration: 0.5 })
+                .to('.white-overlay', {
+                    width: diagonal * 2,
+                    height: diagonal * 2,
+                    duration: 1.5,
+                    ease: "power2.inOut"
+                })
+                .to('.intro-text', {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.inOut"
+                }, "-=1")
+                .set('.intro-overlay', {
+                    display: 'none'
+                })
+                .to('.slide-content', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 2,
+                    stagger: 0.4,
+                    ease: "power4.out"
+                })
+
+            // Update the timing of background animations
+            introTimeline
+                .add(() => {
+                    // Buildings animation
+                    gsap.to('.building', {
+                        opacity: 1,
+                        scaleY: 1,
+                        duration: 1.5,
+                        stagger: {
+                            each: 0.1,
+                            from: "random"
+                        },
+                        ease: "power2.out"
+                    });
+                })
+                .add(() => {
+                    // Clouds and birds appear after buildings
+                    gsap.to(['.cloud', '.bird'], {
+                        opacity: 1,
+                        duration: 1,
+                        stagger: 0.2
+                    });
+                    
+                    // Start the continuous animations
+                    gsap.to('.cloud1', {
+                        x: 300,
+                        duration: 30,
+                        repeat: -1,
+                        ease: 'none'
+                    });
+                    
+                    gsap.to('.cloud2', {
+                        x: 400,
+                        duration: 40,
+                        repeat: -1,
+                        ease: 'none'
+                    });
+                    
+                    gsap.to('.cloud3', {
+                        x: 350,
+                        duration: 35,
+                        repeat: -1,
+                        ease: 'none'
+                    });
+                    
+                    gsap.to('.bird1', {
+                        x: 400,
+                        y: -15,
+                        duration: 20,
+                        repeat: -1,
+                        ease: 'none'
+                    });
+                    
+                    gsap.to('.bird2', {
+                        x: 350,
+                        y: -10,
+                        duration: 25,
+                        repeat: -1,
+                        ease: 'none'
+                    });
+                    
+                    gsap.to('.bird3', {
+                        x: 300,
+                        y: -12,
+                        duration: 22,
+                        repeat: -1,
+                        ease: 'none'
+                    });
+                }, "+=0.5"); // Delay after buildings finish
+        });
+
+        // Set initial state
+        gsap.set(['.cloud', '.bird'], { opacity: 0 });
+    </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBRS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Add Lucide Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/font/lucide.min.css">
+    <style>
+        .bg-pattern {
+            background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80"><path fill="%23ffffff" fill-opacity="0.4" d="M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path></svg>');
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="min-h-screen bg-[#4fa64f] bg-opacity-90">
+        <!-- Header -->
+        <header class="px-4 lg:px-6 h-16 flex items-center bg-[#4fa64f] shadow-md fixed w-full z-50">
+            <div class="container mx-auto">
+                <nav class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <a class="flex items-center justify-center" href="#">
+                        <i class="lucide-building-2 h-6 w-6 mr-2 text-white"></i>
+                        <span class="font-bold text-lg text-white">NBRS</span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a class="text-sm font-medium text-white hover:underline underline-offset-4" href="#about">About Us</a>
+                        <a class="text-sm font-medium text-white hover:underline underline-offset-4" href="#partner">Partner With Us</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button 
+                        @click="menuOpen = !menuOpen" 
+                        class="md:hidden text-white focus:outline-none"
+                    >
+                        <i :class="menuOpen ? 'lucide-x' : 'lucide-menu'" class="h-6 w-6"></i>
+                    </button>
+                </nav>
+
+                <!-- Mobile Navigation -->
+                <div 
+                    v-show="menuOpen" 
+                    class="md:hidden absolute left-0 right-0 bg-[#4fa64f] shadow-lg mt-4"
+                >
+                    <div class="px-4 py-3 space-y-3">
+                        <a class="block text-sm font-medium text-white hover:underline underline-offset-4" 
+                           href="#about"
+                           @click="menuOpen = false">About Us</a>
+                        <a class="block text-sm font-medium text-white hover:underline underline-offset-4" 
+                           href="#partner"
+                           @click="menuOpen = false">Partner With Us</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="pt-16">
+            <!-- Hero Section -->
+            <section class="w-full py-20 md:py-32 lg:py-48">
+                <div class="container mx-auto px-4 md:px-6">
+                    <div class="flex flex-col items-center space-y-8 text-center max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-white">
+                            Building Communities in Toronto
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-100 max-w-[700px]">
+                            NBRS is revolutionizing urban living with small midrise and multiplex projects that foster connection and community.
+                        </p>
+                        <a href="#partner" class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-[#FF6B6B] text-white hover:bg-[#FF8787] transition-colors duration-300">
+                            Become a Partner
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="w-full py-20 md:py-32">
+                <div class="container mx-auto px-4 md:px-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-16">About NBRS</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                        <div v-for="card in aboutCards" :key="card.title" 
+                             class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                            <div class="w-16 h-16 rounded-full bg-[#4fa64f]/10 flex items-center justify-center mb-6 mx-auto">
+                                <i :class="card.icon" class="h-8 w-8 text-[#4fa64f]"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#4fa64f] mb-4 text-center">{{ card.title }}</h3>
+                            <p class="text-gray-600 text-center">{{ card.content }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Partner Section -->
+            <section id="partner" class="w-full py-20 md:py-32 bg-white">
+                <div class="container mx-auto px-4 md:px-6">
+                    <div class="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+                        <div class="space-y-6">
+                            <h2 class="text-3xl md:text-4xl font-bold text-[#4fa64f]">
+                                Become a Neighborhood Partner
+                            </h2>
+                            <p class="text-gray-600 text-lg">
+                                Are you a landowner looking to develop your property? Partner with NBRS and let us transform your land into thriving, sustainable communities.
+                            </p>
+                            <ul class="space-y-4">
+                                <li v-for="benefit in benefits" :key="benefit" 
+                                    class="flex items-center text-gray-600">
+                                    <i class="lucide-check text-[#4fa64f] mr-3"></i>
+                                    {{ benefit }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-[#4fa64f] rounded-xl p-8 text-white shadow-xl">
+                            <div class="flex items-center mb-6">
+                                <i class="lucide-handshake h-10 w-10 mr-4"></i>
+                                <h3 class="text-2xl font-bold">Start Your Partnership Journey</h3>
+                            </div>
+                            <form @submit.prevent="submitForm" class="space-y-4">
+                                <input v-for="field in formFields" :key="field.name"
+                                       :type="field.type"
+                                       :placeholder="field.placeholder"
+                                       class="w-full p-3 rounded-lg bg-white/10 border-0 text-white placeholder-gray-300">
+                                <button type="submit" 
+                                        class="w-full py-3 px-6 rounded-lg bg-[#FF6B6B] hover:bg-[#FF8787] transition-colors duration-300 flex items-center justify-center">
+                                    Submit
+                                    <i class="lucide-arrow-right ml-2"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-[#4fa64f] border-t border-[#3d8b3d] py-6">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between">
+                    <p class="text-sm text-white mb-4 sm:mb-0">© 2024 NBRS. All rights reserved.</p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a v-for="link in footerLinks" :key="link.text"
+                           class="flex items-center text-sm text-white hover:underline">
+                            <i :class="link.icon" class="h-4 w-4 mr-2"></i>
+                            {{ link.text }}
+                        </a>
+                    </div>
+                </div>
+                <!-- HubSpot Form Embed -->
+                <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-[#4fa64f] mb-4">Contact Us</h3>
+                    <p class="text-gray-600 mb-6">Fill out the form below to get in touch with us.</p>
+                    <div id="hubspot-form" class="text-gray-800">
+                        <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                        <script>
+                            hbspt.forms.create({
+                                portalId: "48114106",
+                                formId: "a023165b-5d04-48f9-979c-6b3bf6426686",
+                                target: '#hubspot-form'
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            data() {
+                return {
+                    menuOpen: false,
+                    aboutCards: [
+                        {
+                            icon: 'lucide-users',
+                            title: 'Community Focused',
+                            content: 'We design spaces that bring people together, fostering a sense of belonging in every project.'
+                        },
+                        {
+                            icon: 'lucide-building-2',
+                            title: 'Urban Innovation',
+                            content: 'Our small midrise and multiplex projects are tailored to fit seamlessly into Toronto\'s urban fabric.'
+                        },
+                        {
+                            icon: 'lucide-tree',
+                            title: 'Sustainable Living',
+                            content: 'We prioritize eco-friendly designs and materials to create sustainable, future-proof communities.'
+                        }
+                    ],
+                    benefits: [
+                        'Expert property development',
+                        'Sustainable design practices',
+                        'Community-focused approach'
+                    ],
+                    formFields: [
+                        { name: 'name', type: 'text', placeholder: 'Your Name' },
+                        { name: 'email', type: 'email', placeholder: 'Your Email' },
+                        { name: 'location', type: 'text', placeholder: 'Your Property Location' }
+                    ],
+                    footerLinks: [
+                        { icon: 'lucide-mail', text: 'info@nbrs.com' },
+                        { icon: 'lucide-phone', text: '(416) 555-0123' },
+                        { icon: 'lucide-map-pin', text: 'Toronto, ON' }
+                    ]
+                }
+            },
+            methods: {
+                submitForm() {
+                    // Add form submission logic here
+                    console.log('Form submitted')
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>

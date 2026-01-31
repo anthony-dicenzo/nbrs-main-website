@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBRS Citywalk</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@0.16.29/font/lucide.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    html, body {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #4fa64f;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+    header, footer {
+      width: 100%;
+      background: #388e3c;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+      position: fixed;
+      left: 0;
+      z-index: 100;
+    }
+    header { top: 0; }
+    footer { bottom: 0; font-size: 0.95rem; }
+    .citywalk-section {
+      position: relative;
+      min-height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .bg-video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s;
+      pointer-events: none;
+    }
+    .city-svg {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100vw;
+      height: 40vh;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .section-content {
+      position: relative;
+      z-index: 3;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      background: rgba(34, 34, 34, 0.45);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      text-align: center;
+      backdrop-filter: blur(2px);
+    }
+    .section-content h1, .section-content h2 {
+      margin: 0 0 1rem 0;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .section-content p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+    @media (max-width: 700px) {
+      .city-svg { height: 28vh; }
+      .section-content { padding: 1.2rem 0.5rem; }
+    }
+    @media (max-width: 500px) {
+      .city-svg { height: 18vh; }
+      .section-content { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <i class="lucide-building-2" style="vertical-align: middle;"></i>
+    <span style="font-weight: bold; font-size: 1.2rem; margin-left: 0.5rem;">NBRS Citywalk</span>
+  </header>
+
+  <main style="padding-top: 4.5rem; padding-bottom: 3.5rem;">
+    <!-- Section 1: Day -->
+    <section class="citywalk-section" id="scene-1">
+      <video class="bg-video" src="./video-output-E4E7476A-A746-4397-8515-58E3B7A0A0AA.mp4" muted loop playsinline></video>
+      <svg class="city-svg" viewBox="0 0 900 200" preserveAspectRatio="xMidYMax meet">
+        <g class="buildings">
+          <rect x="0" y="100" width="40" height="100" fill="#f5f5f5"/>
+          <rect x="50" y="120" width="30" height="80" fill="#e8e8e8"/>
+          <rect x="90" y="80" width="50" height="120" fill="#f0f0f0"/>
+          <rect x="150" y="130" width="40" height="70" fill="#f5f5f5"/>
+          <rect x="200" y="70" width="60" height="130" fill="#e8e8e8"/>
+          <rect x="270" y="110" width="40" height="90" fill="#f0f0f0"/>
+          <rect x="320" y="90" width="60" height="110" fill="#f5f5f5"/>
+          <rect x="390" y="120" width="50" height="80" fill="#e8e8e8"/>
+          <rect x="450" y="100" width="40" height="100" fill="#f0f0f0"/>
+          <rect x="500" y="115" width="35" height="85" fill="#f5f5f5"/>
+          <rect x="540" y="80" width="60" height="120" fill="#e8e8e8"/>
+          <rect x="610" y="110" width="50" height="90" fill="#f0f0f0"/>
+          <rect x="670" y="60" width="70" height="140" fill="#f5f5f5"/>
+          <rect x="750" y="105" width="55" height="95" fill="#e8e8e8"/>
+          <rect x="810" y="75" width="60" height="125" fill="#f0f0f0"/>
+        </g>
+        <ellipse class="cloud" cx="120" cy="60" rx="40" ry="18" fill="#fff" opacity="0.5"/>
+        <ellipse class="cloud" cx="300" cy="40" rx="30" ry="12" fill="#fff" opacity="0.4"/>
+        <ellipse class="cloud" cx="700" cy="50" rx="50" ry="20" fill="#fff" opacity="0.5"/>
+      </svg>
+      <div class="section-content">
+        <h1>Building Communities in a Neighbourhood Near You</h1>
+        <p>NBRS is revolutionizing urban living with small midrise and multiplex projects that foster connection and community.</p>
+      </div>
+    </section>
+    <!-- Section 2: Fountain -->
+    <section class="citywalk-section" id="scene-2">
+      <video class="bg-video" src="./fountain.mp4" muted loop playsinline></video>
+      <svg class="city-svg" viewBox="0 0 900 200" preserveAspectRatio="xMidYMax meet">
+        <g class="buildings">
+          <rect x="0" y="120" width="40" height="80" fill="#e8e8e8"/>
+          <rect x="50" y="100" width="30" height="100" fill="#f0f0f0"/>
+          <rect x="90" y="110" width="50" height="90" fill="#f5f5f5"/>
+          <rect x="150" y="130" width="40" height="70" fill="#e8e8e8"/>
+          <rect x="200" y="90" width="60" height="110" fill="#f0f0f0"/>
+          <rect x="270" y="80" width="40" height="120" fill="#f5f5f5"/>
+          <rect x="320" y="120" width="60" height="80" fill="#e8e8e8"/>
+          <rect x="390" y="100" width="50" height="100" fill="#f0f0f0"/>
+          <rect x="450" y="110" width="40" height="90" fill="#f5f5f5"/>
+          <rect x="500" y="130" width="35" height="70" fill="#e8e8e8"/>
+          <rect x="540" y="90" width="60" height="110" fill="#f0f0f0"/>
+          <rect x="610" y="80" width="50" height="120" fill="#f5f5f5"/>
+          <rect x="670" y="105" width="70" height="95" fill="#e8e8e8"/>
+          <rect x="750" y="75" width="55" height="125" fill="#f0f0f0"/>
+          <rect x="810" y="100" width="60" height="100" fill="#f5f5f5"/>
+        </g>
+        <ellipse class="cloud" cx="200" cy="50" rx="35" ry="15" fill="#fff" opacity="0.4"/>
+        <ellipse class="cloud" cx="600" cy="60" rx="40" ry="16" fill="#fff" opacity="0.5"/>
+      </svg>
+      <div class="section-content">
+        <h2>Urban Innovation</h2>
+        <p>Our small midrise and multiplex projects are tailored to fit seamlessly into Toronto's urban fabric, with vibrant public spaces and sustainable design.</p>
+      </div>
+    </section>
+    <!-- Section 3: Night -->
+    <section class="citywalk-section" id="scene-3">
+      <video class="bg-video" src="./night.mp4" muted loop playsinline></video>
+      <svg class="city-svg" viewBox="0 0 900 200" preserveAspectRatio="xMidYMax meet">
+        <g class="buildings">
+          <rect x="0" y="110" width="40" height="90" fill="#f0f0f0"/>
+          <rect x="50" y="130" width="30" height="70" fill="#f5f5f5"/>
+          <rect x="90" y="100" width="50" height="100" fill="#e8e8e8"/>
+          <rect x="150" y="120" width="40" height="80" fill="#f0f0f0"/>
+          <rect x="200" y="80" width="60" height="120" fill="#f5f5f5"/>
+          <rect x="270" y="90" width="40" height="110" fill="#e8e8e8"/>
+          <rect x="320" y="110" width="60" height="90" fill="#f0f0f0"/>
+          <rect x="390" y="100" width="50" height="100" fill="#f5f5f5"/>
+          <rect x="450" y="120" width="40" height="80" fill="#e8e8e8"/>
+          <rect x="500" y="105" width="35" height="95" fill="#f0f0f0"/>
+          <rect x="540" y="90" width="60" height="110" fill="#f5f5f5"/>
+          <rect x="610" y="80" width="50" height="120" fill="#e8e8e8"/>
+          <rect x="670" y="105" width="70" height="95" fill="#f0f0f0"/>
+          <rect x="750" y="75" width="55" height="125" fill="#f5f5f5"/>
+          <rect x="810" y="100" width="60" height="100" fill="#e8e8e8"/>
+        </g>
+        <ellipse class="cloud" cx="300" cy="40" rx="30" ry="12" fill="#fff" opacity="0.2"/>
+        <ellipse class="cloud" cx="700" cy="50" rx="50" ry="20" fill="#fff" opacity="0.2"/>
+        <circle cx="850" cy="30" r="12" fill="#fff" opacity="0.7"/>
+        <circle cx="870" cy="50" r="4" fill="#fff" opacity="0.5"/>
+      </svg>
+      <div class="section-content">
+        <h2>Sustainable Living</h2>
+        <p>We prioritize eco-friendly designs and materials to create sustainable, future-proof communities. Partner with NBRS and help shape the city of tomorrow.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2024 NBRS. All rights reserved. &bull; <i class="lucide-mail"></i> hello@nbrs.ca &bull; <i class="lucide-map-pin"></i> Toronto, ON
+  </footer>
+
+  <script>
+    // Animate video fade-in/out and parallax SVGs on scroll
+    gsap.registerPlugin(ScrollTrigger);
+    // Fade in each video as its section enters, fade out as it leaves
+    document.querySelectorAll('.citywalk-section').forEach((section, i) => {
+      const video = section.querySelector('.bg-video');
+      gsap.to(video, {
+        opacity: 1,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top center',
+          end: 'bottom center',
+          scrub: true,
+          onEnter: () => video.play(),
+          onLeave: () => video.pause(),
+          onEnterBack: () => video.play(),
+          onLeaveBack: () => video.pause(),
+        }
+      });
+      // Parallax buildings
+      const svg = section.querySelector('.city-svg');
+      gsap.to(svg, {
+        y: -60,
+        scrollTrigger: {
+          trigger: section,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+      // Animate clouds
+      svg.querySelectorAll('.cloud').forEach((cloud, idx) => {
+        gsap.to(cloud, {
+          x: 80 + 60 * idx,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html> 

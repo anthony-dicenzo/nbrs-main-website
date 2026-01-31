@@ -1,0 +1,21 @@
+# Enable proper MIME types
+AddType video/mp4 .mp4
+
+# Enable CORS
+Header set Access-Control-Allow-Origin "*"
+
+# Enable proper caching for videos
+<FilesMatch "\.(mp4)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Enable compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE video/mp4
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Set default character set
+AddDefaultCharset UTF-8 

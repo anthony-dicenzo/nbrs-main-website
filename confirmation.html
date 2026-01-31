@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - NBRS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Add Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div id="app" class="min-h-screen bg-[#4fa64f]">
+        <!-- Header -->
+        <header class="px-4 lg:px-6 h-16 flex items-center bg-[#4fa64f] shadow-md fixed w-full z-50">
+            <div class="container mx-auto">
+                <nav class="flex items-center justify-between">
+                    <!-- Logo -->
+                    <a class="flex items-center justify-center" href="index.html">
+                        <i class="lucide-building-2 h-6 w-6 mr-2 text-white"></i>
+                        <span class="font-bold text-lg text-white">NBRS</span>
+                    </a>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a class="text-sm font-medium text-white hover:underline underline-offset-4" href="index.html#about">About Us</a>
+                        <a class="text-sm font-medium text-white hover:underline underline-offset-4" href="index.html#partner">Partner With Us</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Confirmation Message Section -->
+        <main class="flex-1 pt-16">
+            <section class="w-full min-h-screen flex items-center justify-center py-20 md:py-32">
+                <div class="container px-4 md:px-6">
+                    <div class="max-w-2xl mx-auto text-center">
+                        <div class="bg-white rounded-xl shadow-xl p-8 md:p-12">
+                            <i class="lucide-check-circle h-16 w-16 text-[#4fa64f] mx-auto mb-6"></i>
+                            <h1 class="text-3xl md:text-4xl font-bold text-[#4fa64f] mb-4">
+                                Thank You!
+                            </h1>
+                            <p class="text-xl text-gray-600 mb-8">
+                                Thanks for reaching out! A member of the NBRS team will be in contact within 24 hours.
+                            </p>
+                            <a href="index.html" 
+                               class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#4fa64f] text-white hover:bg-[#3d8b3d] transition-colors duration-300">
+                                <i class="lucide-arrow-left mr-2 h-4 w-4"></i>
+                                Return to Homepage
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-[#4fa64f] border-t border-[#3d8b3d] py-6">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col sm:flex-row items-center justify-between">
+                    <p class="text-sm text-white mb-4 sm:mb-0">© 2024 NBRS. All rights reserved.</p>
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a class="flex items-center text-sm text-white hover:underline">
+                            <i class="lucide-mail h-4 w-4 mr-2"></i>
+                            info@nbrs.com
+                        </a>
+                        <a class="flex items-center text-sm text-white hover:underline">
+                            <i class="lucide-phone h-4 w-4 mr-2"></i>
+                            (416) 555-0123
+                        </a>
+                        <a class="flex items-center text-sm text-white hover:underline">
+                            <i class="lucide-map-pin h-4 w-4 mr-2"></i>
+                            Toronto, ON
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- HubSpot Tracking Code -->
+    <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/48114106.js"></script>
+
+    <script>
+        const { createApp } = Vue
+        createApp({
+            data() {
+                return {
+                    // Add any necessary data here
+                }
+            },
+            methods: {
+                submitForm() {
+                    this.isSubmitting = true;
+                    
+                    // After form submission is successful
+                    setTimeout(() => {
+                        // Redirect to confirmation page
+                        window.location.href = 'confirmation.html';
+                    }, 1000); // Add a small delay to show loading state
+                }
+            }
+        }).mount('#app')
+
+        // Initialize Lucide icons
+        lucide.createIcons()
+    </script>
+</body>
+</html>
