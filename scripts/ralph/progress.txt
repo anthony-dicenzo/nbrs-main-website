@@ -1,0 +1,66 @@
+# Ralph Progress Log
+Started: 2026-01-31
+
+## Codebase Patterns
+
+### Svelte 5 Runes
+- Use `let x = $state(0)` for reactive state, not `let x = 0`
+- Use `$effect(() => { ... })` for side effects, not `$: { ... }`
+- Props: `let { prop } = $props()` not `export let prop`
+
+### GSAP Integration
+- MUST dynamically import in onMount to avoid SSR errors
+- Example: `const gsap = (await import('gsap')).default`
+- Use GSAP context for cleanup: `ctx = gsap.context(() => { ... })`
+- Call `ctx.revert()` in onDestroy to prevent memory leaks
+
+### Tailwind v4
+- Config is in `src/app.css` using `@theme` block, NOT tailwind.config.js
+- Brand colors: `--color-nbrs-green: #4fa64f`
+- Use classes like `bg-nbrs-green`, `text-nbrs-green`
+
+### Page Transitions
+- Use Svelte `#key` block with `data.pathname` in +layout.svelte
+- `+layout.ts` provides pathname via load function
+- Nav and Footer stay OUTSIDE #key block (persist during transitions)
+
+### Component Patterns
+- Rollover.svelte: Text slide animation, requires parent `group` class
+- Logo.svelte: variant prop for 'color' or 'white'
+- SocialIcons.svelte: LinkedIn, X, Instagram links
+
+### Build Requirements
+- `npm run build` MUST pass (adapter-static for Cloudflare Pages)
+- All routes must exist or build fails
+- Videos should be < 5MB, WebM primary, MP4 fallback
+
+### Reference Sites
+- Design reference: https://www.americanhousing.co/
+- Brand assets: https://nbrs.ca (videos on Cloudinary)
+
+---
+
+## 2026-01-31 - Phase 1 & 2 Complete (Manual)
+
+### Phase 1: Foundation & Infrastructure
+- SvelteKit + Tailwind v4 + GSAP project setup
+- Static adapter for Cloudflare Pages
+- Video optimization pipeline (FFmpeg scripts)
+- Route structure for all pages
+
+### Phase 2: Layout & Navigation
+- Scroll-responsive Nav (hides on scroll down, shows on scroll up)
+- Footer with "Neighbourhood Scale" branding, SVG social icons
+- Page transitions (150ms fade in/out)
+- Mobile responsive (320px+)
+
+### Gap Closure (02-03, 02-04)
+- Nav polished: NBRS logo SVG, pill buttons, rollover animations, skip-to-content
+- Footer polished: Large brand text, real SVG icons, americanhousing.co layout
+
+**Learnings:**
+- White logo on light background is invisible - use green logo when no dark hero
+- Always create placeholder routes for nav links or build fails
+- Reference quality expectations must be explicit in planning
+
+---

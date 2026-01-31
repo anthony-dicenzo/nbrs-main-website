@@ -1,0 +1,201 @@
+{
+  "projectName": "NBRS Main Website v4",
+  "branchName": "main",
+  "description": "A polished marketing website for NBRS matching americanhousing.co quality with NBRS brand personality",
+  "referenceUrl": "https://www.americanhousing.co/",
+  "brandAssets": "https://nbrs.ca",
+  "userStories": [
+    {
+      "id": "PHASE3-01",
+      "title": "GSAP Context Pattern and Reusable Actions",
+      "priority": 1,
+      "description": "Create a reusable GSAP context pattern for Svelte 5 that properly handles cleanup on route changes. Create a gsap.ts utility with a useGsap action that sets up GSAP context and reverts on destroy.",
+      "acceptanceCriteria": [
+        "src/lib/utils/gsap.ts exports a useGsap Svelte action",
+        "GSAP context is created on mount, reverted on destroy",
+        "No GSAP errors or memory leaks when navigating between routes",
+        "Build passes with adapter-static"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE3-02",
+      "title": "Splash Animation Component",
+      "priority": 2,
+      "description": "Create the NBRS splash animation matching nbrs.ca: letters appear staggered with scale/bounce, pulse, settle, then white circle expands to reveal content. Animation only plays once per session (sessionStorage gated). Respects prefers-reduced-motion.",
+      "acceptanceCriteria": [
+        "Splash.svelte component with GSAP timeline animation",
+        "Letters 'N', 'B', 'R', 'S' animate in with stagger",
+        "White circle expands to reveal main content",
+        "Animation only plays once per session (check sessionStorage)",
+        "Skips/simplifies for prefers-reduced-motion",
+        "No console errors, build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE4-01",
+      "title": "VideoHero Component with Poster Preload",
+      "priority": 3,
+      "description": "Create a VideoHero component for the homepage hero section. Shows poster image immediately, then plays video. Videos from Cloudinary (nbrs.ca uses night_reubgh.mp4, fountain_duwuhb.mp4, city_tel9gg.mp4). WebM primary, MP4 fallback.",
+      "acceptanceCriteria": [
+        "VideoHero.svelte component created",
+        "Poster image shows immediately on load",
+        "Video autoplays (muted) after poster loads",
+        "Supports WebM and MP4 sources",
+        "Responsive sizing (full viewport height for hero)",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE4-02",
+      "title": "VideoSection Component with Lazy Loading",
+      "priority": 4,
+      "description": "Create a VideoSection component for below-fold video content. Videos only load when scrolled into view (IntersectionObserver). Smooth fade transition when video appears.",
+      "acceptanceCriteria": [
+        "VideoSection.svelte component created",
+        "Uses IntersectionObserver to detect visibility",
+        "Video only loads when in/near viewport",
+        "Fade transition on video appearance",
+        "Works with WebM/MP4 sources",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE4-03",
+      "title": "Mobile Video Fallback",
+      "priority": 5,
+      "description": "Add mobile detection that shows static poster image instead of video on mobile devices. Mobile video playback is often problematic, so fallback to high-quality poster is better UX.",
+      "acceptanceCriteria": [
+        "Mobile detection utility (screen width or user agent)",
+        "VideoHero shows poster only on mobile",
+        "VideoSection shows poster only on mobile",
+        "Desktop continues to play video",
+        "No layout shift when switching modes",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE5-01",
+      "title": "ScrollTrigger Section Reveals",
+      "priority": 6,
+      "description": "Add GSAP ScrollTrigger animations for content sections. Sections fade/slide in as user scrolls. Match americanhousing.co scroll reveal style.",
+      "acceptanceCriteria": [
+        "GSAP ScrollTrigger integrated",
+        "Content sections animate in on scroll",
+        "Animations are subtle and professional",
+        "Respects prefers-reduced-motion",
+        "No jank or frame drops (60fps)",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE5-02",
+      "title": "Micro-interactions and Hover States",
+      "priority": 7,
+      "description": "Add polished hover states and micro-interactions to interactive elements. Buttons should have subtle feedback, links should have smooth transitions. Match americanhousing.co interaction quality.",
+      "acceptanceCriteria": [
+        "Buttons have hover/active states with subtle animation",
+        "Links have smooth color transitions",
+        "Form inputs have focus states",
+        "All interactions feel responsive and polished",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE6-01",
+      "title": "Homepage Hero and Sections Structure",
+      "priority": 8,
+      "description": "Build the homepage structure with hero video section, FAMILY 1 project preview, How We Build section, and About section. Reference americanhousing.co layout but with NBRS content/branding.",
+      "acceptanceCriteria": [
+        "Homepage has hero section with video background",
+        "Hero has headline and 'Sincerely, Your NBRS' tagline",
+        "Project preview section for FAMILY 1",
+        "How We Build section explaining NBRS process",
+        "About/Mission section with NBRS story",
+        "Responsive layout matching reference quality",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE6-02",
+      "title": "Partner and Waitlist Pages",
+      "priority": 9,
+      "description": "Build the Partner page (for investors/nonprofits/landowners) and Waitlist page (for prospective FAMILY 1 residents). Both should have forms and compelling content.",
+      "acceptanceCriteria": [
+        "Partner page explains investment/partnership opportunities",
+        "Partner page has contact form",
+        "Waitlist page for FAMILY 1 project",
+        "Waitlist collects: name, email, phone, household size, neighborhood, unit type",
+        "Pages match site design quality",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE6-03",
+      "title": "HubSpot Form Integration",
+      "priority": 10,
+      "description": "Integrate forms with HubSpot for lead capture. Partner form and Waitlist form should submit to HubSpot. Show loading state during submission, success message after.",
+      "acceptanceCriteria": [
+        "Forms submit to HubSpot API",
+        "Loading state shown during submission",
+        "Success message shown after submission",
+        "Error handling for failed submissions",
+        "Form validation with clear error messages",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE7-01",
+      "title": "Core Web Vitals Optimization",
+      "priority": 11,
+      "description": "Optimize for Core Web Vitals: LCP < 2.5s, CLS < 0.1, INP < 200ms. Focus on video loading, image optimization, and layout stability.",
+      "acceptanceCriteria": [
+        "LCP under 2.5 seconds on mobile 4G",
+        "CLS under 0.1 (no layout shifts from video loading)",
+        "Lighthouse Performance score > 90",
+        "Videos have proper poster images to prevent CLS",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE7-02",
+      "title": "Accessibility Audit and Fixes",
+      "priority": 12,
+      "description": "Ensure WCAG 2.2 AA compliance. All interactive elements keyboard accessible, screen reader compatible, proper heading hierarchy, sufficient color contrast.",
+      "acceptanceCriteria": [
+        "Lighthouse Accessibility score > 90",
+        "All interactive elements reachable via keyboard",
+        "Screen reader announces content meaningfully",
+        "Proper heading hierarchy (h1, h2, h3)",
+        "Color contrast meets WCAG AA",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE7-03",
+      "title": "Mobile Responsive Polish",
+      "priority": 13,
+      "description": "Final responsive polish for all pages. Test at 320px, 375px, 390px, 428px viewports. No horizontal overflow, readable text, usable forms.",
+      "acceptanceCriteria": [
+        "All pages work at 320px viewport",
+        "No horizontal scrollbar on any page",
+        "Text is readable without zooming",
+        "Forms are usable on mobile",
+        "Touch targets are adequate size (44px min)",
+        "Build passes"
+      ],
+      "passes": false
+    }
+  ]
+}
