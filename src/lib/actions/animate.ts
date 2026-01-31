@@ -1,25 +1,43 @@
-import { gsap } from 'gsap';
+import type { Action } from 'svelte/action';
+import { loadGsap } from '$lib/utils/gsap';
 
 /**
- * Svelte action for GSAP animations with automatic cleanup.
+ * Svelte action for simple GSAP "from" animations with automatic cleanup.
  *
- * Usage:
+ * For more complex animations (timelines, ScrollTrigger, etc.), use
+ * the `useGsap` action from `$lib/utils/gsap` instead.
+ *
+ * @example
+ * ```svelte
  * <div use:animate={{ opacity: 0, y: 50, duration: 1, ease: "power2.out" }}>
  *   Animated content
  * </div>
+ * ```
  *
- * IMPORTANT: This action runs on the client only (Svelte actions don't run during SSR).
- * For complex animations or ScrollTrigger, use onMount with dynamic imports.
+ * @deprecated Prefer `useGsap` from `$lib/utils/gsap` for better cleanup and flexibility.
  */
-export function animate(
-	node: HTMLElement,
-	params: gsap.TweenVars
-): { destroy: () => void } {
-	const tween = gsap.from(node, params);
+export const animate: Action<HTMLElement, gsap.TweenVars> = (node, params) => {
+	let tween: gsap.core.Tween | null = null;
+
+	const init = async () => {
+		const gsap = await loadGsap();
+		tween = gsap.from(node, params);
+	};
+
+	init();
 
 	return {
+		update(newParams: gsap.TweenVars) {
+			if (tween) {
+				tween.kill();
+			}
+			params = newParams;
+			init();
+		},
 		destroy() {
-			tween.kill();
+			if (tween) {
+				tween.kill();
+			}
 		}
 	};
-}
+};

@@ -1,18 +1,7 @@
 <script>
-	import { onMount } from 'svelte';
+	import { useGsap, prefersReducedMotion } from '$lib/utils/gsap';
 
 	let gsapLoaded = $state(false);
-
-	onMount(async () => {
-		const { gsap } = await import('gsap');
-		gsapLoaded = true;
-
-		gsap.from('.test-box', {
-			opacity: 0,
-			y: 20,
-			duration: 0.5
-		});
-	});
 </script>
 
 <div class="min-h-screen bg-nbrs-green p-8">
@@ -23,7 +12,17 @@
 		<p>GSAP: <span class="font-bold">{gsapLoaded ? 'Loaded' : 'Loading...'}</span></p>
 	</div>
 
-	<div class="test-box mt-8 p-4 bg-white rounded-lg text-nbrs-green font-bold">
+	<div
+		class="test-box mt-8 p-4 bg-white rounded-lg text-nbrs-green font-bold"
+		use:useGsap={(gsap, el) => {
+			gsapLoaded = true;
+			if (prefersReducedMotion()) {
+				gsap.set(el, { opacity: 1 });
+				return;
+			}
+			gsap.from(el, { opacity: 0, y: 20, duration: 0.5 });
+		}}
+	>
 		If you see this animated in, GSAP works!
 	</div>
 
