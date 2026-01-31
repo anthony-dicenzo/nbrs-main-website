@@ -42,7 +42,7 @@
 			aria-label="Home"
 			class="pointer-events-auto absolute top-4 left-4 md:top-6 md:left-6"
 		>
-			<Logo variant={atTop ? 'white' : 'color'} />
+			<Logo variant="color" />
 		</a>
 
 		<!-- Nav links -->
@@ -50,10 +50,10 @@
 			aria-label="Main"
 			class="pointer-events-auto absolute top-4 right-4 flex items-center gap-3 md:top-6 md:right-6"
 		>
-			<!-- Mission - outlined pill with backdrop blur -->
+			<!-- Mission - outlined pill -->
 			<a
 				href="/mission"
-				class="group flex rounded-full border border-white/60 bg-black/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-black/30"
+				class="group flex rounded-full border border-nbrs-green/30 bg-white/80 px-4 py-2 text-sm font-medium text-nbrs-green backdrop-blur-md transition-colors hover:bg-white"
 			>
 				<Rollover text="Mission" />
 			</a>
