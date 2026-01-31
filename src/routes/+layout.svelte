@@ -3,9 +3,14 @@
 	import '../app.css';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+	import Splash from '$lib/components/Splash.svelte';
 
 	let { children, data } = $props();
+
+	let splashComplete = $state(false);
 </script>
+
+<Splash onComplete={() => (splashComplete = true)} />
 
 <Nav />
 
