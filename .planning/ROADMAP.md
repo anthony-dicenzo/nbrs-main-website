@@ -44,16 +44,18 @@ Plans:
 **Goal**: Users see consistent navigation and footer on every page
 **Depends on**: Phase 1
 **Requirements**: PAGE-01, HOME-06
+**Plans**: 2 plans in 2 waves
+
 **Success Criteria** (what must be TRUE):
   1. Navigation header appears on all routes with links to all pages
   2. Footer with navigation links and social media appears on all routes
-  3. Mobile menu opens/closes smoothly on small screens
+  3. Mobile viewports display nav and footer without overflow
   4. Layout persists across route navigation (no flash or reload)
-**Plans**: TBD
+  5. Page transitions fade smoothly between routes
 
 Plans:
-- [ ] 02-01: Root layout with header and footer components
-- [ ] 02-02: Responsive mobile navigation
+- [ ] 02-01-PLAN.md — Nav, Footer, layout integration with Inter font (Wave 1)
+- [ ] 02-02-PLAN.md — Page transitions and mobile responsive polish (Wave 2)
 
 ### Phase 3: GSAP Animation Foundation
 **Goal**: Splash animation works exactly like the current site with proper cleanup on route changes
