@@ -26,18 +26,19 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Goal**: Project scaffolded with SvelteKit, Tailwind, GSAP, and video optimization pipeline ready for content
 **Depends on**: Nothing (first phase)
 **Requirements**: INFRA-01, INFRA-02, INFRA-03, INFRA-04, INFRA-05
+**Plans**: 3 plans in 2 waves
+
 **Success Criteria** (what must be TRUE):
   1. Running `npm run dev` serves a working SvelteKit app with Tailwind styles applied
   2. Running `npm run build` produces static output suitable for Cloudflare Pages
   3. GSAP can be imported and used in a component without errors
   4. FFmpeg scripts exist to compress any video to <5MB WebM/MP4
   5. Route structure exists for all pages (/, /partner, /waitlist, /family-1)
-**Plans**: TBD
 
 Plans:
-- [ ] 01-01: SvelteKit + Tailwind + GSAP project setup
-- [ ] 01-02: Static adapter and route structure
-- [ ] 01-03: Video optimization pipeline (FFmpeg presets)
+- [ ] 01-01-PLAN.md — SvelteKit + Tailwind + GSAP project setup (Wave 1)
+- [ ] 01-02-PLAN.md — Static adapter and route structure (Wave 2)
+- [ ] 01-03-PLAN.md — Video optimization pipeline with FFmpeg presets (Wave 1)
 
 ### Phase 2: Layout & Navigation
 **Goal**: Users see consistent navigation and footer on every page
@@ -145,7 +146,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Infrastructure | 0/3 | Not started | - |
+| 1. Foundation & Infrastructure | 0/3 | Planned | - |
 | 2. Layout & Navigation | 0/2 | Not started | - |
 | 3. GSAP Animation Foundation | 0/2 | Not started | - |
 | 4. Video Components | 0/3 | Not started | - |
