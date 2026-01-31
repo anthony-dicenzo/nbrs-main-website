@@ -10,27 +10,28 @@ See: .planning/PROJECT.md (updated 2026-01-31)
 ## Current Position
 
 Phase: 2 of 7 (Layout & Navigation)
-Plan: 0 of 2 in current phase
-Status: Ready to plan
-Last activity: 2026-01-31 — Phase 1 complete and verified
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-01-31 — Completed 02-01-PLAN.md
 
-Progress: [===.................] 15%
+Progress: [====................] 20%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 3 min
-- Total execution time: 10 min
+- Total execution time: 12 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1 | 3/3 | 10 min | 3 min |
+| 2 | 1/2 | 2 min | 2 min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4 min), 01-03 (4 min), 01-02 (2 min)
+- Last 5 plans: 01-01 (4 min), 01-03 (4 min), 01-02 (2 min), 02-01 (2 min)
 - Trend: On track - accelerating
 
 *Updated after each plan completion*
@@ -50,6 +51,9 @@ Recent decisions affecting current work:
 - Auto-generate WebP poster from first frame
 - SVG favicon for simplicity and scalability
 - Precompress enabled for Cloudflare Pages performance
+- Inter font via rsms.me CDN with variable font support
+- Navigation uses Svelte 5 runes for scroll state management
+- Footer email signup uses Formspree placeholder
 
 ### Pending Todos
 
@@ -61,6 +65,6 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-31T19:46:14Z
-Stopped at: Completed 01-02-PLAN.md (Static Adapter + Routes) - Phase 1 complete
+Last session: 2026-01-31T21:02:46Z
+Stopped at: Completed 02-01-PLAN.md (Core Layout Components)
 Resume file: None
