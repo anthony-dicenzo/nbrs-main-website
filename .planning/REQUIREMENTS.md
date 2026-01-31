@@ -37,11 +37,11 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **HOME-03**: How We Build section (NBRS process/approach)
 - [ ] **HOME-04**: About/Mission section (NBRS story, values, personality)
 - [ ] **HOME-05**: Partner With Us CTA section with contact form
-- [ ] **HOME-06**: Footer with navigation links and social media
+- [x] **HOME-06**: Footer with navigation links and social media
 
 ### Pages
 
-- [ ] **PAGE-01**: Shared layout with navigation header and footer
+- [x] **PAGE-01**: Shared layout with navigation header and footer
 - [ ] **PAGE-02**: Partner/Investor page for non-profits, landowners, investors
 - [ ] **PAGE-03**: FAMILY 1 Waitlist page with rich form experience
 
@@ -117,8 +117,8 @@ Which phases cover which requirements. Updated during roadmap creation.
 | HOME-03 | Phase 6 | Pending |
 | HOME-04 | Phase 6 | Pending |
 | HOME-05 | Phase 6 | Pending |
-| HOME-06 | Phase 2 | Pending |
-| PAGE-01 | Phase 2 | Pending |
+| HOME-06 | Phase 2 | Complete |
+| PAGE-01 | Phase 2 | Complete |
 | PAGE-02 | Phase 6 | Pending |
 | PAGE-03 | Phase 6 | Pending |
 | FORM-01 | Phase 6 | Pending |

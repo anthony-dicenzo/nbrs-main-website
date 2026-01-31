@@ -13,7 +13,7 @@ This roadmap transforms a laggy, monolithic HTML site into a polished SvelteKit 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Foundation & Infrastructure** - SvelteKit project with video optimization pipeline
-- [ ] **Phase 2: Layout & Navigation** - Shared layout, nav, footer working across routes
+- [x] **Phase 2: Layout & Navigation** - Shared layout, nav, footer working across routes
 - [ ] **Phase 3: GSAP Animation Foundation** - Splash animation migrated with proper lifecycle
 - [ ] **Phase 4: Video Components** - Optimized video playback with mobile fallbacks
 - [ ] **Phase 5: Scroll Animations & Micro-interactions** - Scroll effects and hover polish
@@ -54,8 +54,8 @@ Plans:
   5. Page transitions fade smoothly between routes
 
 Plans:
-- [ ] 02-01-PLAN.md — Nav, Footer, layout integration with Inter font (Wave 1)
-- [ ] 02-02-PLAN.md — Page transitions and mobile responsive polish (Wave 2)
+- [x] 02-01-PLAN.md — Nav, Footer, layout integration with Inter font (Wave 1)
+- [x] 02-02-PLAN.md — Page transitions and mobile responsive polish (Wave 2)
 
 ### Phase 3: GSAP Animation Foundation
 **Goal**: Splash animation works exactly like the current site with proper cleanup on route changes
@@ -149,7 +149,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Infrastructure | 3/3 | ✓ Complete | 2026-01-31 |
-| 2. Layout & Navigation | 0/2 | Not started | - |
+| 2. Layout & Navigation | 2/2 | ✓ Complete | 2026-01-31 |
 | 3. GSAP Animation Foundation | 0/2 | Not started | - |
 | 4. Video Components | 0/3 | Not started | - |
 | 5. Scroll Animations & Micro-interactions | 0/2 | Not started | - |

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-31)
 
 **Core value:** The site must feel alive and polished — smooth animations, instant video playback, buttery transitions — while capturing NBRS's unique personality.
-**Current focus:** Phase 2 - Layout & Navigation
+**Current focus:** Phase 3 - GSAP Animation Foundation
 
 ## Current Position
 
-Phase: 2 of 7 (Layout & Navigation)
-Plan: 2 of 2 in current phase
-Status: Phase complete
-Last activity: 2026-01-31 — Completed 02-02-PLAN.md
+Phase: 3 of 7 (GSAP Animation Foundation)
+Plan: 0 of 2 in current phase
+Status: Ready to plan
+Last activity: 2026-01-31 — Phase 2 verified and complete
 
 Progress: [======..............] 30%
 
