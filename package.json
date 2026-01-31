@@ -1,19 +1,21 @@
 {
-  "name": "v3",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "nbrs-website",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "tailwindcss -i ./src/input.css -o ./css/tailwind.min.css --minify",
-    "watch": "tailwindcss -i ./src/input.css -o ./css/tailwind.min.css --watch"
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
-    "autoprefixer": "^10.4.17",
-    "postcss": "^8.4.35",
-    "tailwindcss": "^3.4.1"
+    "@sveltejs/kit": "^2.15.2",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "svelte": "^5.19.0",
+    "svelte-check": "^4.1.4",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.7"
   }
 }

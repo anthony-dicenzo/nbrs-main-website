@@ -1,4 +1,24 @@
+# Dependencies
 node_modules/
+
+# SvelteKit build outputs
+.svelte-kit/
+build/
+
+# OS files
 .DS_Store
+
+# Video source files (large, process locally)
 *.mp4
 *.mov
+videos-source/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# IDE
+.idea/
+*.swp
+*.swo
