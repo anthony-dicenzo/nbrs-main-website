@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import type { Snippet } from 'svelte';
+	import { initMobileDetection, isMobile } from '$lib/utils/mobile.svelte';
 
 	interface VideoSource {
 		mp4: string;
@@ -28,6 +29,9 @@
 	let shouldLoad = $state(false);
 	let observer: IntersectionObserver | null = null;
 
+	// Mobile detection - show poster only on mobile devices
+	const showVideoOnDevice = $derived(!isMobile());
+
 	// Generate poster URL from video URL if not provided
 	function getPosterUrl(src: VideoSource): string {
 		if (src.poster) return src.poster;
@@ -46,6 +50,9 @@
 	}
 
 	onMount(() => {
+		// Initialize mobile detection
+		initMobileDetection();
+
 		if (!containerRef || typeof IntersectionObserver === 'undefined') {
 			// Fallback: load immediately if IntersectionObserver not available
 			shouldLoad = true;
@@ -91,18 +98,18 @@
 	class:opacity-100={isVisible}
 	style="aspect-ratio: {aspectRatio};"
 >
-	<!-- Poster image (shows until video loads) -->
+	<!-- Poster image (shows until video loads, stays visible on mobile) -->
 	<img
 		src={getPosterUrl(source)}
 		alt=""
 		class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-		class:opacity-0={videoLoaded}
+		class:opacity-0={videoLoaded && showVideoOnDevice}
 		aria-hidden="true"
 		loading="lazy"
 	/>
 
-	<!-- Video (loads when in/near viewport) -->
-	{#if shouldLoad}
+	<!-- Video (loads when in/near viewport - desktop only) -->
+	{#if shouldLoad && showVideoOnDevice}
 		<video
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 			class:opacity-0={!videoLoaded}

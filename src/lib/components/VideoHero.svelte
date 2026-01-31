@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import type { Snippet } from 'svelte';
+	import { initMobileDetection, isMobile } from '$lib/utils/mobile.svelte';
 
 	interface VideoSource {
 		mp4: string;
@@ -24,6 +25,9 @@
 	let videoLoaded = $state(false);
 	let posterLoaded = $state(false);
 	let rotationTimer: ReturnType<typeof setInterval> | null = null;
+
+	// Mobile detection - show poster only on mobile devices
+	const showVideoOnDevice = $derived(!isMobile());
 
 	// Get current source
 	const currentSource = $derived(sources[currentIndex] || sources[0]);
@@ -66,6 +70,9 @@
 	}
 
 	onMount(async () => {
+		// Initialize mobile detection
+		initMobileDetection();
+
 		if (!sources.length) return;
 
 		// Preload first poster
@@ -73,8 +80,8 @@
 		await preloadPoster(posterUrl);
 		posterLoaded = true;
 
-		// Start rotation if multiple videos
-		if (sources.length > 1) {
+		// Start rotation if multiple videos (only on desktop where videos play)
+		if (sources.length > 1 && showVideoOnDevice) {
 			rotationTimer = setInterval(rotateVideo, rotationInterval);
 		}
 	});
@@ -87,19 +94,19 @@
 </script>
 
 <div class="relative w-full h-screen overflow-hidden">
-	<!-- Poster image (shows immediately) -->
+	<!-- Poster image (shows immediately, stays visible on mobile) -->
 	{#if currentSource}
 		<img
 			src={getPosterUrl(currentSource)}
 			alt=""
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-			class:opacity-0={videoLoaded}
+			class:opacity-0={videoLoaded && showVideoOnDevice}
 			aria-hidden="true"
 		/>
 	{/if}
 
-	<!-- Video (autoplays when ready) -->
-	{#if currentSource && posterLoaded}
+	<!-- Video (autoplays when ready - desktop only) -->
+	{#if currentSource && posterLoaded && showVideoOnDevice}
 		{#key currentIndex}
 			<video
 				class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"

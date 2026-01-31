@@ -16,7 +16,7 @@
         "No GSAP errors or memory leaks when navigating between routes",
         "Build passes with adapter-static"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE3-02",
@@ -31,7 +31,7 @@
         "Skips/simplifies for prefers-reduced-motion",
         "No console errors, build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE4-01",
@@ -46,7 +46,7 @@
         "Responsive sizing (full viewport height for hero)",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE4-02",
@@ -61,7 +61,7 @@
         "Works with WebM/MP4 sources",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE4-03",
@@ -76,7 +76,7 @@
         "No layout shift when switching modes",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE5-01",

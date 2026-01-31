@@ -38,6 +38,76 @@ Started: 2026-01-31
 - Design reference: https://www.americanhousing.co/
 - Brand assets: https://nbrs.ca (videos on Cloudinary)
 
+### GSAP Utility Pattern (from PHASE3-01)
+- Use `useGsap` action from `$lib/utils/gsap` for GSAP animations
+- Action signature: `use:useGsap={(gsap, el) => { ... }}`
+- Returns from callback for cleanup: `return gsap.timeline()` or `return tween`
+- Use `prefersReducedMotion()` helper for accessibility
+- For complex scenarios (ScrollTrigger), use `createGsapContext()` in onMount
+
+### VideoHero Pattern (from PHASE4-01)
+- Use `children` prop with `Snippet` type instead of deprecated `<slot>`
+- Cloudinary auto-generates poster: replace `.mp4` with `.jpg` in URL
+- Cloudinary auto-generates WebM: replace `.mp4` with `.webm` in URL
+- Video rotation: Use `#key currentIndex` to properly unmount/remount video element
+- Always include `playsinline` attribute for iOS autoplay support
+
+### Mobile Detection Pattern (from PHASE4-03)
+- File MUST be `.svelte.ts` (not `.ts`) to use Svelte 5 runes
+- Import from `$lib/utils/mobile.svelte` (without .ts extension)
+- Call `initMobileDetection()` in onMount
+- Use `$derived(!isMobile())` for reactive video visibility
+- MOBILE_BREAKPOINT = 768px matches Tailwind `md:` breakpoint
+
+---
+
+## 2026-01-31 - PHASE3-01: GSAP Context Pattern and Reusable Actions
+
+### What was implemented
+- Created `src/lib/utils/gsap.ts` with:
+  - `useGsap` Svelte action for GSAP animations with automatic context cleanup
+  - `loadGsap()` and `loadScrollTrigger()` for dynamic SSR-safe imports
+  - `prefersReducedMotion()` helper for accessibility
+  - `createGsapContext()` for complex manual usage with onMount/onDestroy
+- Updated `src/lib/actions/animate.ts` to use dynamic imports via `loadGsap()`
+- Updated homepage to demonstrate `useGsap` action with prefers-reduced-motion
+
+### Files changed
+- src/lib/utils/gsap.ts (new)
+- src/lib/actions/animate.ts (updated to dynamic imports)
+- src/routes/+page.svelte (updated to use useGsap action)
+
+### Learnings for future iterations
+- GSAP context `ctx.revert()` cleans up ALL animations in scope automatically
+- Dynamic import caches: `gsapInstance` pattern prevents multiple loads
+- Action return object `update()` allows reactive params without re-creating context
+- The `loadGsap()` helper is synchronous after first load (returns cached instance)
+
+---
+
+## 2026-01-31 - PHASE3-02: Splash Animation Component
+
+### What was implemented
+- Created `src/lib/components/Splash.svelte` with:
+  - Full GSAP timeline animation matching nbrs.ca style
+  - N-B-R-S letters animate in with stagger (scale 0→1.2→1, rotationX: 180→0, y: 100→0)
+  - Uses `back.out(1.7)` easing for playful bounce effect
+  - White circle expands from center to reveal main content
+  - sessionStorage gating: animation only plays once per session
+  - prefers-reduced-motion support: brief display then instant hide
+- Integrated Splash component into `+layout.svelte`
+
+### Files changed
+- src/lib/components/Splash.svelte (new)
+- src/routes/+layout.svelte (added Splash import and component)
+
+### Learnings for future iterations
+- For complex GSAP timelines with multi-phase animations, use `createGsapContext()` in onMount
+- `bind:this` refs work in Svelte 5 without $state() - the warning is informational
+- Circle expansion trick: use `w-[150vmax] h-[150vmax]` to ensure circle covers all viewport sizes
+- Timeline chaining with negative offsets (`'-=0.1'`) creates smooth overlapping transitions
+- Props in Svelte 5: `let { onComplete }: { onComplete?: () => void } = $props()`
+
 ---
 
 ## 2026-01-31 - Phase 1 & 2 Complete (Manual)
@@ -62,5 +132,105 @@ Started: 2026-01-31
 - White logo on light background is invisible - use green logo when no dark hero
 - Always create placeholder routes for nav links or build fails
 - Reference quality expectations must be explicit in planning
+
+---
+
+## 2026-01-31 - PHASE4-01: VideoHero Component with Poster Preload
+
+### What was implemented
+- Created `src/lib/components/VideoHero.svelte` with:
+  - Poster image shows immediately (preloaded via JS Image constructor)
+  - Video autoplays muted after poster loads
+  - WebM primary, MP4 fallback (Cloudinary URL transformation)
+  - Video rotation support for multiple sources (9s interval)
+  - Optional overlay class for darkening/gradients
+  - Content via `children` Snippet (Svelte 5 pattern)
+  - Full viewport height hero sizing
+- Updated homepage with VideoHero showing 3 rotating videos from nbrs.ca
+
+### Files changed
+- src/lib/components/VideoHero.svelte (new)
+- src/routes/+page.svelte (replaced with VideoHero demo)
+
+### Learnings for future iterations
+- Svelte 5: Use `import type { Snippet } from 'svelte'` for typed children props
+- Svelte 5: `{@render children()}` replaces deprecated `<slot>`
+- Cloudinary URL transformations: Just change file extension for format conversion
+- Video poster preload: Use `new Image()` to preload, then show video element
+- `#key currentIndex` forces video element remount on source change (clean swap)
+
+### VideoSection Pattern (from PHASE4-02)
+- Use IntersectionObserver with `rootMargin: '200px'` to start loading before visible
+- Stop observing after first intersection (video stays loaded)
+- Use `shouldLoad` state to conditionally render `<video>` element (prevents network requests)
+- Fade transition: Container has `transition-opacity duration-700`, starts `opacity-0`
+- SSR fallback: Check `typeof IntersectionObserver === 'undefined'` and load immediately
+
+---
+
+## 2026-01-31 - PHASE4-02: VideoSection Component with Lazy Loading
+
+### What was implemented
+- Created `src/lib/components/VideoSection.svelte` with:
+  - IntersectionObserver-based lazy loading
+  - Video only loads when in/near viewport (200px rootMargin)
+  - Smooth fade transition (700ms) when video becomes visible
+  - Poster image shows until video loads
+  - Configurable aspect ratio via `aspectRatio` prop
+  - Optional overlay class for darkening/gradients
+  - Content via `children` Snippet (Svelte 5 pattern)
+  - SSR fallback: loads immediately if IntersectionObserver unavailable
+- Updated homepage with two VideoSection demos showing lazy-loaded content sections
+
+### Files changed
+- src/lib/components/VideoSection.svelte (new)
+- src/routes/+page.svelte (added VideoSection imports and demo sections)
+
+### Learnings for future iterations
+- IntersectionObserver cleanup: Must call both `unobserve()` and `disconnect()` in onDestroy
+- Use `shouldLoad` boolean to conditionally render video element (prevents network requests)
+- `requestAnimationFrame` after intersection helps ensure smooth fade-in timing
+- Container-level fade (`opacity-0` → `opacity-100`) + video crossfade creates polished effect
+- Stop observing after first intersection to prevent re-triggering
+
+---
+
+## 2026-01-31 - PHASE4-03: Mobile Video Fallback
+
+### What was implemented
+- Created `src/lib/utils/mobile.svelte.ts` with:
+  - `initMobileDetection()` to set up window resize listener
+  - `isMobile()` reactive function returning current mobile state
+  - `checkIsMobile()` for one-time checks
+  - Uses 768px breakpoint (matches Tailwind `md:`)
+  - SSR-safe: returns false during server-side rendering
+- Updated `src/lib/components/VideoHero.svelte`:
+  - Imports and uses `initMobileDetection()` and `isMobile()`
+  - Conditionally renders video element only on desktop
+  - Poster image stays visible on mobile (no fade out)
+  - Video rotation only starts on desktop
+- Updated `src/lib/components/VideoSection.svelte`:
+  - Same mobile detection integration
+  - Video lazy loading only triggers on desktop
+  - Poster image remains as static fallback on mobile
+
+### Files changed
+- src/lib/utils/mobile.svelte.ts (new)
+- src/lib/components/VideoHero.svelte (updated)
+- src/lib/components/VideoSection.svelte (updated)
+
+### Learnings for future iterations
+- Svelte 5 runes (`$state`, `$derived`) require `.svelte.ts` extension, NOT plain `.ts`
+- Mobile detection via screen width is more reliable than user agent sniffing
+- Reactive mobile detection allows layout to adapt if window is resized
+- Poster images prevent layout shift: same dimensions as video element
+- SSR default of `false` for `isMobile()` means videos load on server-side render, then client hydration may hide them on mobile - this is acceptable as the alternative (SSR showing mobile view) would flash on desktop
+
+### Mobile Detection Pattern (from PHASE4-03)
+- File must be `.svelte.ts` to use runes
+- Call `initMobileDetection()` in onMount of components that need it
+- Use `isMobile()` in `$derived` for reactive checks
+- MOBILE_BREAKPOINT = 768px matches Tailwind md: breakpoint
+- Pattern: `const showVideoOnDevice = $derived(!isMobile())`
 
 ---
