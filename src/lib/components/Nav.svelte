@@ -23,11 +23,11 @@
 		? 'translate-y-0'
 		: '-translate-y-full'} {atTop ? 'bg-transparent' : 'bg-nbrs-green'}"
 >
-	<nav class="mx-auto flex max-w-[1280px] items-center justify-between px-6 py-4">
-		<a href="/" class="text-xl font-bold text-white">NBRS</a>
-		<div class="flex gap-8">
-			<a href="/mission" class="text-white">Mission</a>
-			<a href="/partner" class="text-white">Partner</a>
+	<nav class="mx-auto flex max-w-[1280px] items-center justify-between px-4 py-4 md:px-6">
+		<a href="/" class="text-lg font-bold text-white md:text-xl">NBRS</a>
+		<div class="flex gap-4 md:gap-8">
+			<a href="/mission" class="text-sm text-white md:text-base">Mission</a>
+			<a href="/partner" class="text-sm text-white md:text-base">Partner</a>
 		</div>
 	</nav>
 </header>
