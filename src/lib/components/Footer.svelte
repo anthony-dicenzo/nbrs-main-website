@@ -1,78 +1,87 @@
 <script lang="ts">
-	// Social media links (placeholders)
-	const socialLinks = [
-		{ name: 'LinkedIn', href: '#', icon: 'in' },
-		{ name: 'X', href: '#', icon: 'X' },
-		{ name: 'Instagram', href: '#', icon: 'ig' }
-	];
+	import SocialIcons from './SocialIcons.svelte';
 
-	// Navigation links
 	const navLinks = [
-		{ name: 'Contact', href: '/contact' },
-		{ name: 'Mission', href: '/mission' },
-		{ name: 'FAQs', href: '/faqs' }
+		{ label: 'Contact', href: '/contact' },
+		{ label: 'Mission', href: '/mission' },
+		{ label: 'FAQs', href: '/faqs' }
 	];
 </script>
 
-<footer class="bg-nbrs-green py-12 md:py-16">
-	<div class="mx-auto max-w-[1280px] px-4 md:px-6">
-		<!-- Large brand heading -->
-		<h2 class="mb-8 text-3xl font-bold text-white md:mb-12 md:text-4xl lg:text-6xl">
-			Neighbourhood Scale
+<footer class="bg-nbrs-green">
+	<div class="mx-auto flex min-h-[400px] max-w-[1440px] flex-col p-4 text-white md:p-6">
+		<!-- Spacer for top -->
+		<div class="h-16 md:h-20"></div>
+
+		<!-- Large brand text -->
+		<h2 class="text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl">
+			Neighbourhood<br class="hidden sm:block" /> Scale
 		</h2>
 
-		<!-- Bottom section: two columns -->
-		<div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-			<!-- Left: Social icons -->
-			<div class="flex gap-4 md:gap-6">
-				{#each socialLinks as link}
-					<a
-						href={link.href}
-						aria-label={link.name}
-						class="flex h-9 w-9 items-center justify-center rounded-full border border-white text-xs font-bold text-white transition-colors hover:bg-white hover:text-nbrs-green md:h-10 md:w-10 md:text-sm"
-					>
-						{link.icon}
-					</a>
-				{/each}
-			</div>
+		<!-- Flexible spacer -->
+		<div class="min-h-16 flex-1"></div>
 
-			<!-- Right: Nav links + email signup -->
-			<div class="flex flex-col gap-6 md:items-end">
+		<!-- Bottom section: social | nav + form | copyright -->
+		<div class="flex flex-col gap-8 sm:gap-6">
+			<!-- Row: Social icons, nav links, email form -->
+			<div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+				<!-- Social icons -->
+				<SocialIcons />
+
+				<!-- Spacer -->
+				<div class="hidden flex-1 sm:block"></div>
+
 				<!-- Nav links -->
-				<nav class="flex flex-wrap gap-4 md:gap-6">
+				<nav aria-label="Footer" class="flex flex-col gap-4 text-sm sm:flex-row sm:gap-6 md:gap-10">
 					{#each navLinks as link}
-						<a href={link.href} class="text-sm text-white hover:underline md:text-base"
-							>{link.name}</a
-						>
+						<a href={link.href} class="transition-opacity hover:opacity-70">
+							{link.label}
+						</a>
 					{/each}
 				</nav>
 
-				<!-- Email signup form -->
+				<!-- Email signup form (hidden on mobile, shown sm+) -->
 				<form
 					action="https://formspree.io/f/FORM_ID"
 					method="POST"
-					class="flex w-full flex-col gap-2 sm:w-auto sm:flex-row"
+					class="hidden items-center gap-2 border-b border-white/60 pb-1 sm:flex"
 				>
 					<input
 						type="email"
 						name="email"
+						placeholder="Enter email"
 						required
-						placeholder="Enter your email"
-						class="w-full rounded px-4 py-2 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white sm:w-auto"
+						class="w-32 bg-transparent text-sm text-white outline-none placeholder:text-white/50 md:w-40"
 					/>
-					<button
-						type="submit"
-						class="rounded bg-white px-4 py-2 font-semibold text-nbrs-green transition-colors hover:bg-gray-100"
-					>
+					<button type="submit" class="text-sm transition-opacity hover:opacity-70">
 						Sign up
 					</button>
 				</form>
 			</div>
+
+			<!-- Mobile email form -->
+			<form
+				action="https://formspree.io/f/FORM_ID"
+				method="POST"
+				class="flex items-center gap-2 border-b border-white/60 pb-1 sm:hidden"
+			>
+				<input
+					type="email"
+					name="email"
+					placeholder="Enter email"
+					required
+					class="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50"
+				/>
+				<button type="submit" class="text-sm transition-opacity hover:opacity-70">
+					Sign up
+				</button>
+			</form>
+
+			<!-- Copyright -->
+			<div class="text-sm opacity-70">Neighbourhood Scale, 2026</div>
 		</div>
 
-		<!-- Copyright -->
-		<div class="mt-8 border-t border-white/30 pt-6 text-center text-sm text-white/80 md:mt-12">
-			Neighbourhood Scale, 2026
-		</div>
+		<!-- Bottom spacer -->
+		<div class="h-8 md:h-10"></div>
 	</div>
 </footer>
