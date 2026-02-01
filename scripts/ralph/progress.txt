@@ -233,4 +233,41 @@ Started: 2026-01-31
 - MOBILE_BREAKPOINT = 768px matches Tailwind md: breakpoint
 - Pattern: `const showVideoOnDevice = $derived(!isMobile())`
 
+### ScrollTrigger Pattern (from PHASE5-01)
+- Use `scrollReveal` action from `$lib/utils/gsap` for scroll-triggered animations
+- Action signature: `use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}`
+- Animation types: 'fade', 'slide-up', 'slide-left', 'slide-right', 'scale'
+- Options: duration, delay, distance, start, stagger, staggerSelector
+- Automatically respects `prefers-reduced-motion` for accessibility
+- Uses GSAP context for proper cleanup on route changes
+
+---
+
+## 2026-02-01 - PHASE5-01: ScrollTrigger Section Reveals
+
+### What was implemented
+- Extended `src/lib/utils/gsap.ts` with:
+  - `ScrollRevealOptions` interface for configurable scroll animations
+  - `scrollReveal` Svelte action using GSAP ScrollTrigger
+  - Five animation types: fade, slide-up, slide-left, slide-right, scale
+  - Support for staggered children animations
+  - Automatic prefers-reduced-motion respect
+  - Proper cleanup via GSAP context on destroy
+- Updated `src/routes/+page.svelte`:
+  - Added scroll reveal to About section (text slides up, video fades in)
+  - Added scroll reveal to Mission section (video fades in, text slides up)
+  - Added scroll reveal to bottom navigation section
+
+### Files changed
+- src/lib/utils/gsap.ts (extended with scrollReveal action)
+- src/routes/+page.svelte (added scrollReveal to sections)
+
+### Learnings for future iterations
+- ScrollTrigger automatically reverts with GSAP context - no manual cleanup needed
+- `toggleActions: 'play none none none'` plays once and doesn't reverse (professional feel)
+- `start: 'top 85%'` triggers animation when element is 85% from top of viewport
+- Subtle distances (60px slide) and durations (0.8s) feel professional
+- Wrapping VideoSection in a div for scrollReveal keeps video component clean
+- `power2.out` easing provides natural deceleration for reveal animations
+
 ---

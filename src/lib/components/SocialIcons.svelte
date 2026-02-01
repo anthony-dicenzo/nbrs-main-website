@@ -13,7 +13,7 @@
 			target="_blank"
 			rel="noopener noreferrer"
 			aria-label={social.name}
-			class="opacity-80 transition-opacity hover:opacity-100"
+			class="social-icon opacity-80"
 		>
 			<img src={social.icon} width="18" height="18" alt="" class="invert" />
 		</a>

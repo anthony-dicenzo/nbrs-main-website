@@ -34,7 +34,7 @@
 				<!-- Nav links -->
 				<nav aria-label="Footer" class="flex flex-col gap-4 text-sm sm:flex-row sm:gap-6 md:gap-10">
 					{#each navLinks as link}
-						<a href={link.href} class="transition-opacity hover:opacity-70">
+						<a href={link.href} class="link-underline hover:opacity-80">
 							{link.label}
 						</a>
 					{/each}
@@ -44,16 +44,16 @@
 				<form
 					action="https://formspree.io/f/FORM_ID"
 					method="POST"
-					class="hidden items-center gap-2 border-b border-white/60 pb-1 sm:flex"
+					class="hidden items-center gap-2 border-b border-white/60 pb-1 sm:flex focus-within:border-white"
 				>
 					<input
 						type="email"
 						name="email"
 						placeholder="Enter email"
 						required
-						class="w-32 bg-transparent text-sm text-white outline-none placeholder:text-white/50 md:w-40"
+						class="w-32 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70 md:w-40"
 					/>
-					<button type="submit" class="text-sm transition-opacity hover:opacity-70">
+					<button type="submit" class="btn text-sm hover:opacity-80">
 						Sign up
 					</button>
 				</form>
@@ -63,16 +63,16 @@
 			<form
 				action="https://formspree.io/f/FORM_ID"
 				method="POST"
-				class="flex items-center gap-2 border-b border-white/60 pb-1 sm:hidden"
+				class="flex items-center gap-2 border-b border-white/60 pb-1 focus-within:border-white sm:hidden"
 			>
 				<input
 					type="email"
 					name="email"
 					placeholder="Enter email"
 					required
-					class="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50"
+					class="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70"
 				/>
-				<button type="submit" class="text-sm transition-opacity hover:opacity-70">
+				<button type="submit" class="btn text-sm hover:opacity-80">
 					Sign up
 				</button>
 			</form>

@@ -25,3 +25,222 @@
 		font-family: "InterVariable", system-ui, sans-serif;
 	}
 }
+
+/* ================================================
+   MICRO-INTERACTIONS & HOVER STATES
+   ================================================ */
+
+/* Base transition for all interactive elements */
+a,
+button,
+input,
+textarea,
+select,
+[role="button"] {
+	transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+	transition-duration: 200ms;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Button base styles */
+.btn {
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+/* Button hover lift effect */
+.btn:hover:not(:disabled) {
+	transform: translateY(-1px);
+}
+
+/* Button active press effect */
+.btn:active:not(:disabled) {
+	transform: translateY(0);
+}
+
+/* Primary button (green) - used for main CTAs */
+.btn-primary {
+	background-color: var(--color-nbrs-green);
+	color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+	background-color: var(--color-nbrs-green-dark);
+	box-shadow: 0 4px 12px rgba(79, 166, 79, 0.3);
+}
+
+.btn-primary:active:not(:disabled) {
+	box-shadow: 0 2px 6px rgba(79, 166, 79, 0.2);
+}
+
+/* Secondary button (outlined) */
+.btn-secondary {
+	background-color: transparent;
+	border: 1px solid currentColor;
+}
+
+.btn-secondary:hover:not(:disabled) {
+	background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* White button */
+.btn-white {
+	background-color: white;
+	color: var(--color-nbrs-green);
+}
+
+.btn-white:hover:not(:disabled) {
+	background-color: #f9fafb;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Link hover underline animation */
+.link-underline {
+	position: relative;
+}
+
+.link-underline::after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 1px;
+	background-color: currentColor;
+	transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.link-underline:hover::after {
+	width: 100%;
+}
+
+/* Input focus states */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+	outline: none;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+	border-color: var(--color-nbrs-green);
+	box-shadow: 0 0 0 3px rgba(79, 166, 79, 0.15);
+}
+
+/* Form input styling */
+.form-input {
+	border: 1px solid #e5e7eb;
+	border-radius: 0.5rem;
+	padding: 0.75rem 1rem;
+	width: 100%;
+	background-color: white;
+}
+
+.form-input:hover:not(:focus):not(:disabled) {
+	border-color: #d1d5db;
+}
+
+.form-input:focus {
+	border-color: var(--color-nbrs-green);
+	box-shadow: 0 0 0 3px rgba(79, 166, 79, 0.15);
+}
+
+.form-input:disabled {
+	background-color: #f9fafb;
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+/* Social icon hover effect */
+.social-icon {
+	transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms;
+}
+
+.social-icon:hover {
+	transform: scale(1.1);
+	opacity: 1 !important;
+}
+
+/* Card hover effect */
+.card-interactive {
+	transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 300ms;
+}
+
+.card-interactive:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon arrow animation (for buttons with arrows) */
+.icon-arrow {
+	transition: transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .icon-arrow {
+	transform: translateX(4px);
+}
+
+/* Focus visible styles for keyboard navigation */
+:focus-visible {
+	outline: 2px solid var(--color-nbrs-green);
+	outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+:focus:not(:focus-visible) {
+	outline: none;
+}
+
+/* Disabled state */
+button:disabled,
+input:disabled,
+.btn:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+/* Loading state animation */
+@keyframes pulse-subtle {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.7;
+	}
+}
+
+.loading {
+	animation: pulse-subtle 1.5s ease-in-out infinite;
+	pointer-events: none;
+}
+
+/* Pill button base (nav style) */
+.pill {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.5rem 1rem;
+	border-radius: 9999px;
+	font-weight: 500;
+	font-size: 0.875rem;
+}
+
+.pill-outlined {
+	border: 1px solid rgba(79, 166, 79, 0.3);
+	background-color: rgba(255, 255, 255, 0.8);
+	backdrop-filter: blur(12px);
+}
+
+.pill-outlined:hover {
+	background-color: white;
+	border-color: rgba(79, 166, 79, 0.5);
+}
+
+.pill-solid {
+	background-color: white;
+}
+
+.pill-solid:hover {
+	background-color: #f9fafb;
+}

@@ -53,7 +53,7 @@
 			<!-- Mission - outlined pill -->
 			<a
 				href="/mission"
-				class="group flex rounded-full border border-nbrs-green/30 bg-white/80 px-4 py-2 text-sm font-medium text-nbrs-green backdrop-blur-md transition-colors hover:bg-white"
+				class="pill pill-outlined group text-nbrs-green"
 			>
 				<Rollover text="Mission" />
 			</a>
@@ -61,7 +61,7 @@
 			<!-- Partner - solid pill -->
 			<a
 				href="/partner"
-				class="group flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-nbrs-green transition-colors hover:bg-gray-100"
+				class="pill pill-solid group gap-2 text-nbrs-green shadow-sm hover:shadow-md"
 			>
 				<Rollover text="Partner" />
 				<svg
@@ -69,7 +69,7 @@
 					height="10"
 					viewBox="0 0 12 10"
 					fill="currentColor"
-					class="transition-transform group-hover:translate-x-0.5"
+					class="icon-arrow"
 				>
 					<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
 				</svg>
