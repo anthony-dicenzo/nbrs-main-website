@@ -99,6 +99,7 @@
 	style="aspect-ratio: {aspectRatio};"
 >
 	<!-- Poster image (shows until video loads, stays visible on mobile) -->
+	<!-- Explicit dimensions prevent layout shift -->
 	<img
 		src={getPosterUrl(source)}
 		alt=""
@@ -106,6 +107,9 @@
 		class:opacity-0={videoLoaded && showVideoOnDevice}
 		aria-hidden="true"
 		loading="lazy"
+		decoding="async"
+		width="1920"
+		height="1080"
 	/>
 
 	<!-- Video (loads when in/near viewport - desktop only) -->

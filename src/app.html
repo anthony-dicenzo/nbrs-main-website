@@ -4,6 +4,12 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- Preconnect to Cloudinary for faster video/image loading -->
+		<link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+		<link rel="dns-prefetch" href="https://res.cloudinary.com" />
+		<!-- Preconnect to font CDN -->
+		<link rel="preconnect" href="https://rsms.me" crossorigin />
+		<link rel="dns-prefetch" href="https://rsms.me" />
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

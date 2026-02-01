@@ -3,6 +3,10 @@
 	import VideoSection from '$lib/components/VideoSection.svelte';
 	import { scrollReveal } from '$lib/utils/gsap';
 
+	// LCP optimization: Preload the first hero poster for faster initial render
+	const heroPosterUrl =
+		'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/night_reubgh.jpg';
+
 	// Cloudinary video sources from nbrs.ca
 	const heroVideos = [
 		{
@@ -44,6 +48,16 @@
 		}
 	];
 </script>
+
+<svelte:head>
+	<title>NBRS - Neighbourhood Based Rental Solutions</title>
+	<meta
+		name="description"
+		content="Quality rental housing at the neighbourhood scale. NBRS builds family-sized homes in established Toronto communities."
+	/>
+	<!-- Preload LCP image for faster hero render -->
+	<link rel="preload" as="image" href={heroPosterUrl} fetchpriority="high" />
+</svelte:head>
 
 <!-- Hero Section -->
 <VideoHero sources={heroVideos} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">

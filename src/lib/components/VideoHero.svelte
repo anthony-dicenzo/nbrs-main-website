@@ -95,6 +95,7 @@
 
 <div class="relative w-full h-screen overflow-hidden">
 	<!-- Poster image (shows immediately, stays visible on mobile) -->
+	<!-- fetchpriority="high" ensures LCP image loads first -->
 	{#if currentSource}
 		<img
 			src={getPosterUrl(currentSource)}
@@ -102,6 +103,10 @@
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 			class:opacity-0={videoLoaded && showVideoOnDevice}
 			aria-hidden="true"
+			fetchpriority="high"
+			decoding="async"
+			width="1920"
+			height="1080"
 		/>
 	{/if}
 
