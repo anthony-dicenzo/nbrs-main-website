@@ -666,3 +666,26 @@ Started: 2026-01-31
 - Works with `<path>` elements, not `<rect>` or `<circle>` (use opacity for those)
 
 ---
+
+## 2026-02-01 - PHASE9-01: Hero Video - Community Oriented
+
+### What was implemented
+- **Already complete**: The hero video was already updated to use community-street-festival
+- Verified `src/routes/+page.svelte` has:
+  - `heroVideo` pointing to `/videos/new/community-street-festival.mp4/.webm/.jpg`
+  - LCP preload for community-street-festival.jpg poster
+- All web-converted files exist in `static/videos/new/`:
+  - community-street-festival.mp4 (15MB)
+  - community-street-festival.webm (22MB)
+  - community-street-festival.jpg (413KB)
+- Build passes
+
+### Files changed
+- No changes needed (already implemented)
+- scripts/ralph/prd.json (marked passes: true)
+
+### Learnings for future iterations
+- Always check if work was already done in a previous session
+- Video conversion from MOV to web formats already established pattern
+
+---

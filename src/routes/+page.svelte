@@ -6,12 +6,13 @@
 	import { scrollReveal } from '$lib/utils/gsap';
 
 	// LCP optimization: Preload the hero poster for faster initial render
-	const heroPosterUrl =
-		'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/night_reubgh.jpg';
+	const heroPosterUrl = '/videos/new/community-street-festival.jpg';
 
-	// Single hero video (not carousel)
+	// Hero video - community-oriented street festival footage
 	const heroVideo = {
-		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/night_reubgh.mp4'
+		mp4: '/videos/new/community-street-festival.mp4',
+		webm: '/videos/new/community-street-festival.webm',
+		poster: '/videos/new/community-street-festival.jpg'
 	};
 
 	// FAMILY 1 building render video (local asset)
@@ -19,9 +20,10 @@
 		mp4: '/videos/new/building-render-dusk.mov'
 	};
 
-	// Community/neighbourhood video
-	const communityVideo = {
-		mp4: '/videos/new/community-street-festival.mov'
+	// Toronto skyline video for About section
+	const torontoVideo = {
+		mp4: '/videos/new/toronto-skyline-sunset.mp4',
+		poster: '/videos/new/toronto-skyline-sunset.jpg'
 	};
 
 	// Construction progress video
@@ -146,10 +148,10 @@
 				</a>
 			</div>
 			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
-				<VideoSection source={communityVideo} aspectRatio="16/9" overlayClass="bg-black/10">
+				<VideoSection source={torontoVideo} aspectRatio="16/9" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
-							Community Living
+							Toronto Living
 						</span>
 					</div>
 				</VideoSection>

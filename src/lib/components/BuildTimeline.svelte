@@ -8,18 +8,15 @@
 	const steps = [
 		{
 			number: '1',
-			title: 'Buy Land',
-			description: 'We identify underutilized parcels in established neighbourhoods where gentle density makes sense.'
+			title: 'Buy Land'
 		},
 		{
 			number: '2',
-			title: 'Build Homes',
-			description: 'Quality construction with thoughtful design—homes that fit in and stand out.'
+			title: 'Build Homes'
 		},
 		{
 			number: '3',
-			title: 'Sell Homes',
-			description: 'Families move into spaces designed for real life—room to grow, room to thrive.'
+			title: 'Sell Homes'
 		}
 	];
 
@@ -32,7 +29,7 @@
 		ctx = gsap.context(() => {
 			// Animate SVG paths with line drawing effect
 			const paths = container.querySelectorAll('.draw-path');
-			paths.forEach((path) => {
+			paths.forEach((path, index) => {
 				const svgPath = path as SVGPathElement;
 				const length = svgPath.getTotalLength();
 
@@ -43,23 +40,38 @@
 
 				gsap.to(svgPath, {
 					strokeDashoffset: 0,
-					duration: 1.5,
+					duration: 1.2,
+					delay: index * 0.03,
 					ease: 'power2.out',
 					scrollTrigger: {
-						trigger: svgPath.closest('.step-card'),
-						start: 'top 85%',
+						trigger: svgPath.closest('.step-panel'),
+						start: 'top 80%',
 						toggleActions: 'play none none none'
 					}
 				});
 			});
 
-			// Animate step cards
-			const cards = container.querySelectorAll('.step-card');
-			gsap.from(cards, {
+			// Fade in circles and fills
+			const fills = container.querySelectorAll('.fill-element');
+			gsap.from(fills, {
 				opacity: 0,
-				y: 30,
-				duration: 0.8,
-				stagger: 0.15,
+				duration: 0.6,
+				stagger: 0.05,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: container,
+					start: 'top 75%',
+					toggleActions: 'play none none none'
+				}
+			});
+
+			// Animate headers
+			const headers = container.querySelectorAll('.step-header');
+			gsap.from(headers, {
+				opacity: 0,
+				y: 20,
+				duration: 0.6,
+				stagger: 0.1,
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: container,
@@ -77,178 +89,232 @@
 
 <section
 	aria-labelledby="build-timeline-heading"
-	class="py-16 sm:py-20 md:py-24 bg-amber-50"
+	class="py-20 sm:py-24 md:py-32 bg-amber-50"
 	bind:this={container}
 >
 	<div class="max-w-7xl mx-auto px-4 sm:px-6">
-		<!-- Timeline Grid - 3 columns with dividers -->
-		<div class="grid md:grid-cols-3 relative">
-			<!-- Vertical dividers (desktop only) -->
-			<div class="hidden md:block absolute top-0 bottom-0 left-1/3 w-px bg-nbrs-green/20" aria-hidden="true"></div>
-			<div class="hidden md:block absolute top-0 bottom-0 left-2/3 w-px bg-nbrs-green/20" aria-hidden="true"></div>
+		<!-- Section heading (visually hidden but accessible) -->
+		<h2 id="build-timeline-heading" class="sr-only">How We Build</h2>
 
+		<!-- 3-Panel Grid -->
+		<div class="grid md:grid-cols-3 relative">
 			{#each steps as step, i}
-				<div class="step-card px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-0 {i > 0 ? 'border-t md:border-t-0 border-nbrs-green/20' : ''}">
-					<!-- Step Header -->
-					<h3 class="flex items-center gap-3 text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">
-						<span class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-900 text-white text-lg sm:text-xl font-bold">
+				<div class="step-panel relative {i < 2 ? 'md:border-r md:border-gray-300' : ''} px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-12">
+					<!-- Step Header: Number + Title -->
+					<div class="step-header flex items-center gap-4 mb-8 md:mb-10">
+						<span class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gray-900 text-white text-xl sm:text-2xl font-bold fill-element">
 							{step.number}
 						</span>
-						<span>{step.title}</span>
-					</h3>
+						<h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+							{step.title}
+						</h3>
+					</div>
 
-					<!-- Illustration -->
-					<div class="w-full aspect-[4/3] mb-6 md:mb-8">
-						<svg viewBox="0 0 400 300" class="w-full h-full" aria-hidden="true">
+					<!-- Large Illustration Area -->
+					<div class="w-full aspect-square">
+						<svg viewBox="0 0 400 400" class="w-full h-full" aria-hidden="true">
 							{#if step.number === '1'}
-								<!-- Buy Land: Property lot with dashed lines, measurement marks, small vegetation -->
-								<!-- Ground line -->
-								<line class="draw-path" x1="40" y1="260" x2="360" y2="260" stroke="#4fa64f" stroke-width="2"/>
+								<!-- BUY LAND: Detailed property lot blueprint -->
+								<!-- Ground baseline -->
+								<line class="draw-path" x1="20" y1="360" x2="380" y2="360" stroke="#4fa64f" stroke-width="2"/>
 
-								<!-- Property boundary - dashed rectangle -->
-								<rect class="draw-path" x="80" y="100" width="240" height="160" fill="none" stroke="#4fa64f" stroke-width="2" stroke-dasharray="12 6"/>
+								<!-- Property boundary - main rectangle -->
+								<rect class="draw-path" x="60" y="80" width="280" height="260" fill="none" stroke="#4fa64f" stroke-width="2.5"/>
 
-								<!-- Corner stakes -->
-								<circle cx="80" cy="100" r="6" fill="#4fa64f"/>
-								<circle cx="320" cy="100" r="6" fill="#4fa64f"/>
-								<circle cx="80" cy="260" r="6" fill="#4fa64f"/>
-								<circle cx="320" cy="260" r="6" fill="#4fa64f"/>
+								<!-- Property corner stakes with circles -->
+								<circle class="fill-element" cx="60" cy="80" r="8" fill="#4fa64f"/>
+								<circle class="fill-element" cx="340" cy="80" r="8" fill="#4fa64f"/>
+								<circle class="fill-element" cx="60" cy="340" r="8" fill="#4fa64f"/>
+								<circle class="fill-element" cx="340" cy="340" r="8" fill="#4fa64f"/>
 
-								<!-- Measurement lines left side -->
-								<line class="draw-path" x1="50" y1="110" x2="50" y2="250" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="42" y1="110" x2="58" y2="110" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="42" y1="250" x2="58" y2="250" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Dashed setback lines -->
+								<rect class="draw-path" x="90" y="110" width="220" height="200" fill="none" stroke="#4fa64f" stroke-width="1.5" stroke-dasharray="8 4"/>
 
-								<!-- Measurement lines bottom -->
-								<line class="draw-path" x1="90" y1="280" x2="310" y2="280" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="90" y1="272" x2="90" y2="288" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="310" y1="272" x2="310" y2="288" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Left dimension line -->
+								<line class="draw-path" x1="35" y1="90" x2="35" y2="330" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="28" y1="90" x2="42" y2="90" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="28" y1="330" x2="42" y2="330" stroke="#4fa64f" stroke-width="1.5"/>
+								<text x="35" y="215" text-anchor="middle" fill="#4fa64f" font-size="12" transform="rotate(-90 35 215)" class="fill-element">40'</text>
 
-								<!-- Small trees/vegetation -->
-								<path class="draw-path" d="M140 240 L140 260" stroke="#4fa64f" stroke-width="2"/>
-								<path class="draw-path" d="M120 240 Q140 200 160 240" stroke="#4fa64f" stroke-width="2" fill="none"/>
+								<!-- Bottom dimension line -->
+								<line class="draw-path" x1="70" y1="375" x2="330" y2="375" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="70" y1="368" x2="70" y2="382" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="330" y1="368" x2="330" y2="382" stroke="#4fa64f" stroke-width="1.5"/>
+								<text x="200" y="390" text-anchor="middle" fill="#4fa64f" font-size="12" class="fill-element">120'</text>
 
-								<path class="draw-path" d="M280 240 L280 260" stroke="#4fa64f" stroke-width="2"/>
-								<path class="draw-path" d="M260 240 Q280 200 300 240" stroke="#4fa64f" stroke-width="2" fill="none"/>
+								<!-- Trees (architectural style) -->
+								<circle class="draw-path" cx="140" cy="180" r="25" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<circle class="draw-path" cx="140" cy="180" r="15" fill="none" stroke="#4fa64f" stroke-width="1"/>
+								<circle class="fill-element" cx="140" cy="180" r="4" fill="#4fa64f"/>
 
-								<!-- Small grass tufts -->
-								<path class="draw-path" d="M180 258 L185 248 M185 258 L188 250 M190 258 L193 252" stroke="#4fa64f" stroke-width="1.5" stroke-linecap="round"/>
-								<path class="draw-path" d="M230 258 L235 250 M235 258 L240 252" stroke="#4fa64f" stroke-width="1.5" stroke-linecap="round"/>
+								<circle class="draw-path" cx="260" cy="260" r="30" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<circle class="draw-path" cx="260" cy="260" r="18" fill="none" stroke="#4fa64f" stroke-width="1"/>
+								<circle class="fill-element" cx="260" cy="260" r="5" fill="#4fa64f"/>
+
+								<!-- North arrow -->
+								<line class="draw-path" x1="350" y1="50" x2="350" y2="20" stroke="#4fa64f" stroke-width="2"/>
+								<path class="draw-path" d="M343 30 L350 18 L357 30" stroke="#4fa64f" stroke-width="2" fill="none"/>
+								<text x="350" y="62" text-anchor="middle" fill="#4fa64f" font-size="10" class="fill-element">N</text>
+
+								<!-- Scale indicator -->
+								<line class="draw-path" x1="60" y1="30" x2="120" y2="30" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="60" y1="25" x2="60" y2="35" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="120" y1="25" x2="120" y2="35" stroke="#4fa64f" stroke-width="2"/>
+								<text x="90" y="48" text-anchor="middle" fill="#4fa64f" font-size="10" class="fill-element">1" = 20'</text>
 
 							{:else if step.number === '2'}
-								<!-- Build Homes: Building under construction with crane -->
+								<!-- BUILD HOMES: Construction site with detailed building -->
 								<!-- Ground -->
-								<line class="draw-path" x1="20" y1="260" x2="380" y2="260" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="20" y1="360" x2="380" y2="360" stroke="#4fa64f" stroke-width="2"/>
 
-								<!-- Building structure -->
-								<rect class="draw-path" x="60" y="120" width="180" height="140" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<!-- Building foundation -->
+								<rect class="draw-path" x="40" y="340" width="220" height="20" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="40" y1="350" x2="260" y2="350" stroke="#4fa64f" stroke-width="1"/>
 
-								<!-- Floor lines -->
-								<line class="draw-path" x1="60" y1="160" x2="240" y2="160" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="60" y1="200" x2="240" y2="200" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Building frame - main structure -->
+								<rect class="draw-path" x="50" y="140" width="200" height="200" fill="none" stroke="#4fa64f" stroke-width="2"/>
 
-								<!-- Windows Row 1 -->
-								<rect class="draw-path" x="75" y="130" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="90" y1="130" x2="90" y2="152" stroke="#4fa64f" stroke-width="1"/>
-								<rect class="draw-path" x="125" y="130" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="140" y1="130" x2="140" y2="152" stroke="#4fa64f" stroke-width="1"/>
-								<rect class="draw-path" x="195" y="130" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="210" y1="130" x2="210" y2="152" stroke="#4fa64f" stroke-width="1"/>
+								<!-- Floor levels -->
+								<line class="draw-path" x1="50" y1="200" x2="250" y2="200" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="50" y1="260" x2="250" y2="260" stroke="#4fa64f" stroke-width="1.5"/>
 
-								<!-- Windows Row 2 -->
-								<rect class="draw-path" x="75" y="170" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="125" y="170" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="195" y="170" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Roof trusses (under construction) -->
+								<line class="draw-path" x1="50" y1="140" x2="150" y2="80" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="150" y1="80" x2="250" y2="140" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="100" y1="110" x2="100" y2="140" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="150" y1="80" x2="150" y2="140" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="200" y1="110" x2="200" y2="140" stroke="#4fa64f" stroke-width="1.5"/>
 
-								<!-- Windows Row 3 -->
-								<rect class="draw-path" x="75" y="210" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="195" y="210" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Window openings (framed but not filled) -->
+								<rect class="draw-path" x="70" y="155" width="35" height="30" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="130" y="155" width="40" height="30" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="195" y="155" width="35" height="30" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
 
-								<!-- Door opening -->
-								<rect class="draw-path" x="125" y="210" width="50" height="50" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="70" y="215" width="35" height="30" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="195" y="215" width="35" height="30" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
 
-								<!-- Crane tower -->
-								<line class="draw-path" x1="310" y1="260" x2="310" y2="40" stroke="#4fa64f" stroke-width="3"/>
+								<!-- Door frame -->
+								<rect class="draw-path" x="125" y="275" width="50" height="65" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Scaffolding left side -->
+								<line class="draw-path" x1="30" y1="360" x2="30" y2="100" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="20" y1="360" x2="40" y2="360" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="30" y1="180" x2="50" y2="180" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="30" y1="240" x2="50" y2="240" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="30" y1="300" x2="50" y2="300" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Tower crane -->
+								<line class="draw-path" x1="330" y1="360" x2="330" y2="30" stroke="#4fa64f" stroke-width="3"/>
 								<!-- Crane base -->
-								<line class="draw-path" x1="290" y1="260" x2="330" y2="260" stroke="#4fa64f" stroke-width="3"/>
-								<!-- Crane arm -->
-								<line class="draw-path" x1="310" y1="50" x2="380" y2="50" stroke="#4fa64f" stroke-width="2.5"/>
-								<line class="draw-path" x1="310" y1="50" x2="270" y2="50" stroke="#4fa64f" stroke-width="2.5"/>
+								<rect class="draw-path" x="315" y="340" width="30" height="20" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<!-- Crane arm (jib) -->
+								<line class="draw-path" x1="330" y1="40" x2="380" y2="40" stroke="#4fa64f" stroke-width="2.5"/>
+								<line class="draw-path" x1="330" y1="40" x2="280" y2="40" stroke="#4fa64f" stroke-width="2.5"/>
+								<!-- Counter jib -->
+								<rect class="draw-path" x="275" y="35" width="15" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
 								<!-- Crane cabin -->
-								<rect class="draw-path" x="300" y="55" width="20" height="25" fill="none" stroke="#4fa64f" stroke-width="2"/>
-								<!-- Counter weight -->
-								<rect class="draw-path" x="268" y="45" width="15" height="12" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<rect class="draw-path" x="322" y="50" width="16" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
 								<!-- Cable and hook -->
-								<line class="draw-path" x1="360" y1="50" x2="360" y2="110" stroke="#4fa64f" stroke-width="1.5"/>
-								<path class="draw-path" d="M352 110 L360 120 L368 110" stroke="#4fa64f" stroke-width="2" fill="none"/>
+								<line class="draw-path" x1="360" y1="40" x2="360" y2="120" stroke="#4fa64f" stroke-width="1.5"/>
+								<path class="draw-path" d="M353 118 L360 130 L367 118" stroke="#4fa64f" stroke-width="2" fill="none"/>
 								<!-- Beam being lifted -->
-								<rect class="draw-path" x="340" y="125" width="40" height="8" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="340" y="135" width="40" height="8" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Construction materials on ground -->
+								<rect class="draw-path" x="280" y="340" width="40" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="280" y1="350" x2="320" y2="350" stroke="#4fa64f" stroke-width="1"/>
 
 							{:else}
-								<!-- Sell Homes: Completed townhouse with car -->
+								<!-- SELL HOMES: Completed townhouse row -->
 								<!-- Ground -->
-								<line class="draw-path" x1="20" y1="260" x2="380" y2="260" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="20" y1="360" x2="380" y2="360" stroke="#4fa64f" stroke-width="2"/>
 
-								<!-- Main building -->
-								<rect class="draw-path" x="50" y="100" width="220" height="160" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<!-- Main building structure -->
+								<rect class="draw-path" x="40" y="120" width="280" height="240" fill="none" stroke="#4fa64f" stroke-width="2"/>
 
 								<!-- Roof -->
-								<line class="draw-path" x1="50" y1="100" x2="50" y2="80" stroke="#4fa64f" stroke-width="2"/>
-								<line class="draw-path" x1="270" y1="100" x2="270" y2="80" stroke="#4fa64f" stroke-width="2"/>
-								<line class="draw-path" x1="40" y1="80" x2="280" y2="80" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="40" y1="120" x2="40" y2="100" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="320" y1="120" x2="320" y2="100" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="30" y1="100" x2="330" y2="100" stroke="#4fa64f" stroke-width="2.5"/>
+								<!-- Roof detail lines -->
+								<line class="draw-path" x1="35" y1="95" x2="325" y2="95" stroke="#4fa64f" stroke-width="1"/>
 
-								<!-- Vertical dividers (townhouse units) -->
-								<line class="draw-path" x1="130" y1="80" x2="130" y2="260" stroke="#4fa64f" stroke-width="1.5"/>
-								<line class="draw-path" x1="190" y1="80" x2="190" y2="260" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Unit dividers (3 townhouses) -->
+								<line class="draw-path" x1="133" y1="100" x2="133" y2="360" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="227" y1="100" x2="227" y2="360" stroke="#4fa64f" stroke-width="2"/>
 
-								<!-- Windows Unit 1 -->
-								<rect class="draw-path" x="65" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="95" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="65" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="95" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- UNIT 1 (left) -->
+								<!-- Upper windows -->
+								<rect class="draw-path" x="55" y="135" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="69" y1="135" x2="69" y2="170" stroke="#4fa64f" stroke-width="1"/>
+								<line class="draw-path" x1="55" y1="152" x2="83" y2="152" stroke="#4fa64f" stroke-width="1"/>
 
-								<!-- Door Unit 1 -->
-								<rect class="draw-path" x="75" y="200" width="35" height="60" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<circle cx="105" cy="235" r="3" fill="#4fa64f"/>
+								<rect class="draw-path" x="93" y="135" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="107" y1="135" x2="107" y2="170" stroke="#4fa64f" stroke-width="1"/>
+								<line class="draw-path" x1="93" y1="152" x2="121" y2="152" stroke="#4fa64f" stroke-width="1"/>
 
-								<!-- Windows Unit 2 -->
-								<rect class="draw-path" x="145" y="110" width="30" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="145" y="145" width="30" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Lower windows -->
+								<rect class="draw-path" x="55" y="195" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="69" y1="195" x2="69" y2="230" stroke="#4fa64f" stroke-width="1"/>
 
-								<!-- Door Unit 2 -->
-								<rect class="draw-path" x="147" y="200" width="28" height="60" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<circle cx="170" cy="235" r="3" fill="#4fa64f"/>
+								<rect class="draw-path" x="93" y="195" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="107" y1="195" x2="107" y2="230" stroke="#4fa64f" stroke-width="1"/>
 
-								<!-- Windows Unit 3 -->
-								<rect class="draw-path" x="205" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="235" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="205" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<rect class="draw-path" x="235" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Door -->
+								<rect class="draw-path" x="67" y="275" width="40" height="70" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="87" y1="275" x2="87" y2="345" stroke="#4fa64f" stroke-width="1"/>
+								<circle class="fill-element" cx="95" cy="315" r="4" fill="#4fa64f"/>
+								<!-- Step -->
+								<rect class="draw-path" x="60" y="345" width="54" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
 
-								<!-- Door Unit 3 -->
-								<rect class="draw-path" x="212" y="200" width="35" height="60" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<circle cx="242" cy="235" r="3" fill="#4fa64f"/>
+								<!-- UNIT 2 (middle) -->
+								<rect class="draw-path" x="150" y="135" width="30" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="165" y1="135" x2="165" y2="170" stroke="#4fa64f" stroke-width="1"/>
+								<line class="draw-path" x1="150" y1="152" x2="180" y2="152" stroke="#4fa64f" stroke-width="1"/>
 
-								<!-- Car -->
-								<path class="draw-path" d="M295 260 L295 240 Q295 230 310 230 L355 230 Q370 230 370 240 L370 260" stroke="#4fa64f" stroke-width="2" fill="none"/>
-								<line class="draw-path" x1="295" y1="245" x2="370" y2="245" stroke="#4fa64f" stroke-width="1.5"/>
-								<!-- Car windows -->
-								<path class="draw-path" d="M305 245 L310 235 L340 235 L345 245" stroke="#4fa64f" stroke-width="1.5" fill="none"/>
-								<!-- Wheels -->
-								<circle class="draw-path" cx="310" cy="260" r="10" fill="none" stroke="#4fa64f" stroke-width="2"/>
-								<circle class="draw-path" cx="355" cy="260" r="10" fill="none" stroke="#4fa64f" stroke-width="2"/>
-								<!-- For Sale sign -->
-								<line class="draw-path" x1="320" y1="200" x2="320" y2="180" stroke="#4fa64f" stroke-width="2"/>
-								<rect class="draw-path" x="300" y="165" width="55" height="18" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<text x="327" y="178" text-anchor="middle" fill="#4fa64f" font-size="8" font-weight="bold">For Sale</text>
+								<rect class="draw-path" x="190" y="135" width="30" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="205" y1="135" x2="205" y2="170" stroke="#4fa64f" stroke-width="1"/>
+								<line class="draw-path" x1="190" y1="152" x2="220" y2="152" stroke="#4fa64f" stroke-width="1"/>
+
+								<rect class="draw-path" x="150" y="195" width="30" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="190" y="195" width="30" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<rect class="draw-path" x="160" y="275" width="40" height="70" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="180" y1="275" x2="180" y2="345" stroke="#4fa64f" stroke-width="1"/>
+								<circle class="fill-element" cx="188" cy="315" r="4" fill="#4fa64f"/>
+								<rect class="draw-path" x="153" y="345" width="54" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- UNIT 3 (right) -->
+								<rect class="draw-path" x="242" y="135" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="256" y1="135" x2="256" y2="170" stroke="#4fa64f" stroke-width="1"/>
+
+								<rect class="draw-path" x="280" y="135" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="294" y1="135" x2="294" y2="170" stroke="#4fa64f" stroke-width="1"/>
+
+								<rect class="draw-path" x="242" y="195" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="280" y="195" width="28" height="35" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<rect class="draw-path" x="254" y="275" width="40" height="70" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="274" y1="275" x2="274" y2="345" stroke="#4fa64f" stroke-width="1"/>
+								<circle class="fill-element" cx="282" cy="315" r="4" fill="#4fa64f"/>
+								<rect class="draw-path" x="247" y="345" width="54" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Landscaping -->
+								<circle class="draw-path" cx="350" cy="320" r="18" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<circle class="draw-path" cx="350" cy="320" r="10" fill="none" stroke="#4fa64f" stroke-width="1"/>
+								<circle class="fill-element" cx="350" cy="320" r="3" fill="#4fa64f"/>
+
+								<!-- Pathway -->
+								<line class="draw-path" x1="87" y1="360" x2="87" y2="380" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="180" y1="360" x2="180" y2="380" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="274" y1="360" x2="274" y2="380" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- SOLD banner -->
+								<rect class="draw-path" x="340" y="140" width="50" height="22" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<text x="365" y="156" text-anchor="middle" fill="#4fa64f" font-size="12" font-weight="bold" class="fill-element">SOLD</text>
 							{/if}
 						</svg>
 					</div>
-
-					<!-- Description -->
-					<p class="text-sm sm:text-base text-gray-600 leading-relaxed">
-						{step.description}
-					</p>
 				</div>
 			{/each}
 		</div>

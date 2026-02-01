@@ -218,7 +218,7 @@
         "Poster image updated to match",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE9-02",
