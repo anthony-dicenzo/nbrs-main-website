@@ -278,7 +278,7 @@
         "Responsive layout",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     }
   ]
 }

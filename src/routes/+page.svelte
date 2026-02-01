@@ -2,6 +2,7 @@
 	import VideoHero from '$lib/components/VideoHero.svelte';
 	import VideoSection from '$lib/components/VideoSection.svelte';
 	import BuildTimeline from '$lib/components/BuildTimeline.svelte';
+	import ConstructionProgress from '$lib/components/ConstructionProgress.svelte';
 	import CompanyTimeline from '$lib/components/CompanyTimeline.svelte';
 	import { scrollReveal } from '$lib/utils/gsap';
 
@@ -26,11 +27,7 @@
 		poster: '/videos/new/toronto-skyline-sunset.jpg'
 	};
 
-	// Construction progress video
-	const constructionVideo = {
-		mp4: '/videos/new/construction-crane-progress.mov'
-	};
-</script>
+	</script>
 
 <svelte:head>
 	<title>NBRS - Quality Rental Housing at the Neighbourhood Scale</title>
@@ -115,6 +112,9 @@
 
 <!-- How We Build Section - Illustrated Timeline -->
 <BuildTimeline />
+
+<!-- Construction Progress Section -->
+<ConstructionProgress />
 
 <!-- About/Mission Section -->
 <section aria-labelledby="about-heading" class="py-16 sm:py-20 md:py-32 bg-white">

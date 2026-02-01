@@ -746,3 +746,47 @@ Started: 2026-01-31
 - `tracking-tight` helps larger text feel more compact and branded
 
 ---
+
+## 2026-02-01 - PHASE8-03: Construction Progress Section
+
+### What was implemented
+- **Video conversion**:
+  - Converted construction-crane-progress.mov to MP4 (1.1MB, 720p, CRF 28)
+  - Converted construction-site-barriers.mov to MP4 (2.3MB, 720p, CRF 28)
+  - Created poster images for both videos
+
+- **ConstructionProgress.svelte component**:
+  - Dark background section (bg-gray-900) for visual contrast
+  - "Building in Progress" label with NBRS green
+  - "Watch Us Build" heading
+  - Descriptive subtext
+  - 2-column grid layout for videos (stacks on mobile)
+  - Uses VideoSection component for lazy loading
+  - 9/16 portrait aspect ratio (matches source videos)
+  - Gradient overlay on videos (from-black/60 via-transparent to-transparent)
+  - Video labels ("Active Construction", "Site Progress") with green pill badges
+  - CTA button to FAMILY 1 project page
+  - Scroll reveal animations with stagger
+
+- **Homepage integration**:
+  - Added ConstructionProgress import
+  - Placed section after BuildTimeline, before About/Mission section
+  - Removed unused constructionVideo variable
+
+### Files changed
+- static/videos/new/construction-crane-progress.mp4 (new - 1.1MB)
+- static/videos/new/construction-crane-progress.jpg (new - 170KB)
+- static/videos/new/construction-site-barriers.mp4 (new - 2.3MB)
+- static/videos/new/construction-site-barriers.jpg (new - 295KB)
+- src/lib/components/ConstructionProgress.svelte (new)
+- src/routes/+page.svelte (updated imports, added section)
+- scripts/ralph/prd.json (marked passes: true)
+
+### Learnings for future iterations
+- Portrait videos (9:16) work well for construction footage - emphasizes height/verticality
+- Dark section backgrounds provide good visual rhythm between light sections
+- ffmpeg video conversion: `-crf 28 -preset slow -vf "scale=720:-2"` for good quality/size balance
+- Gradient overlay pattern: `from-black/60 via-transparent to-transparent` works well for bottom-aligned content
+- VideoSection reusable for any video grid - just wrap in responsive container
+
+---
