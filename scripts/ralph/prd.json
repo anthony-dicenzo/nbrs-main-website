@@ -121,7 +121,7 @@
         "Responsive layout matching reference quality",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE6-02",

@@ -271,3 +271,30 @@ Started: 2026-01-31
 - `power2.out` easing provides natural deceleration for reveal animations
 
 ---
+
+## 2026-02-01 - PHASE6-01: Homepage Hero and Sections Structure
+
+### What was implemented
+- Completely redesigned `src/routes/+page.svelte` with polished homepage structure:
+  - **Hero Section**: Video background with gradient overlay, two-line headline "Building Homes, Building Community", subheadline, and "Sincerely, Your NBRS" tagline. Added scroll indicator with bounce animation.
+  - **FAMILY 1 Project Preview**: Left video, right content with section label, large title, description, and two CTAs (Learn More, Join Waitlist). Uses btn classes for polished interactions.
+  - **How We Build Section**: Centered intro with three numbered process steps. Large faded numbers (01, 02, 03) create visual hierarchy. Steps stagger on scroll reveal.
+  - **About/Mission Section**: Explains NBRS name (Neighbourhood Based Rental Solutions) with bold letter highlighting. Left content, right video.
+  - **Partner CTA Section**: Full-width NBRS green section with centered headline and partner CTA button.
+- All sections use scroll reveal animations with appropriate timing and delays
+- Responsive layout with sm/md/lg breakpoints
+
+### Files changed
+- src/routes/+page.svelte (complete rewrite)
+
+### Learnings for future iterations
+- Section label pattern: `text-nbrs-green font-semibold text-sm tracking-wider uppercase` creates consistency
+- Gradient overlay on hero: `bg-gradient-to-b from-black/40 via-black/20 to-black/50` gives depth
+- btn/btn-primary/btn-secondary classes from app.css create consistent button styling
+- Staggered scroll reveals: use `delay: i * 0.15` for sequential items
+- Large faded numbers (text-nbrs-green/10) create visual interest without competing
+- Break headlines at natural points with `<br />` for better typography
+- Aspect ratio 4/5 for taller portrait videos in About section
+- Partner CTA section doesn't need video - text-only with brand color is effective
+
+---
