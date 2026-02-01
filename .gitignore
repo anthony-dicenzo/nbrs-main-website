@@ -26,3 +26,5 @@ videos-source/
 .idea/
 *.swp
 *.swo
+# Local video assets (too large for git)
+static/videos/new/*.mov

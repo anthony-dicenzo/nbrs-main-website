@@ -79,10 +79,31 @@ If ALL stories are complete, reply with:
 
 If there are still stories with `passes: false`, end your response normally.
 
+## Local Video Assets
+
+New video assets are available in `static/videos/new/`. Use these to enhance the site:
+
+| File | Content | Dimensions | Duration | **Required Usage** |
+|------|---------|------------|----------|-------------------|
+| `building-render-dusk.mov` | Modern townhouse rendering at dusk | 1176x1440 | 10s | **MUST USE in FAMILY 1 project section** |
+| `community-street-festival.mov` | Street festival/community gathering | 1920x1080 | 16s | Community/neighborhood vibes |
+| `construction-crane-progress.mov` | Active construction with crane | 720x1280 | 9s | "How We Build" section |
+| `construction-site-barriers.mov` | Construction site with colorful barriers | 1080x1920 | 7s | Construction progress |
+| `downtown-cyclist-portrait.mov` | Downtown Toronto street scene | 1080x1920 | 10s | Urban lifestyle |
+| `toronto-skyline-sunset.mov` | Toronto skyline at sunset | 1080x1920 | 10s | Hero background or city context |
+
+**IMPORTANT:** The `building-render-dusk.mov` video shows the FAMILY 1 building rendering and MUST be used in the project preview section on the homepage. Convert to WebM for web use.
+
+To convert MOV to WebM (if ffmpeg available):
+```bash
+ffmpeg -i input.mov -c:v libvpx-vp9 -crf 30 -b:v 0 -an output.webm
+```
+
 ## Important
 
 - Work on ONE story per iteration
 - Match americanhousing.co visual quality
-- Videos from nbrs.ca are on Cloudinary
+- Videos from nbrs.ca are on Cloudinary (hero videos)
+- Local videos in static/videos/new/ for project-specific content
 - Commit frequently with atomic changes
 - Keep build passing
