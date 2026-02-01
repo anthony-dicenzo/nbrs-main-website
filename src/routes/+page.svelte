@@ -24,37 +24,166 @@
 	const cityVideo = {
 		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581662/city_tel9gg.mp4'
 	};
+
+	// How We Build process steps
+	const buildSteps = [
+		{
+			number: '01',
+			title: 'Find the Right Sites',
+			description: 'We identify underutilized parcels in established neighbourhoods where gentle density makes sense.'
+		},
+		{
+			number: '02',
+			title: 'Design for Families',
+			description: 'Every unit is sized and planned for real family living—bedrooms, storage, outdoor space.'
+		},
+		{
+			number: '03',
+			title: 'Build to Last',
+			description: 'Quality construction that ages well, creating homes people want to stay in for the long term.'
+		}
+	];
 </script>
 
-<VideoHero sources={heroVideos} overlayClass="bg-black/30">
+<!-- Hero Section -->
+<VideoHero sources={heroVideos} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
 	<div class="flex flex-col items-center justify-center h-full text-white text-center px-6">
-		<h1 class="text-5xl md:text-7xl font-bold mb-6">Building Community</h1>
-		<p class="text-xl md:text-2xl font-light mb-8 max-w-2xl">
-			Quality homes for families who need them most
+		<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
+			Building Homes,<br />Building Community
+		</h1>
+		<p class="text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 max-w-2xl opacity-90">
+			Quality rental housing at the neighbourhood scale
 		</p>
-		<p class="text-lg italic opacity-90">Sincerely, Your NBRS</p>
+		<p class="text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your NBRS</p>
+
+		<!-- Scroll indicator -->
+		<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+			<svg class="w-6 h-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+			</svg>
+		</div>
 	</div>
 </VideoHero>
 
-<!-- About Section with Lazy-Loaded Video -->
-<section class="py-16 md:py-24 bg-white">
+<!-- FAMILY 1 Project Preview -->
+<section class="py-20 md:py-32 bg-white">
 	<div class="max-w-6xl mx-auto px-6">
-		<div class="grid md:grid-cols-2 gap-12 items-center">
-			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-					Neighbourhood Scale Housing
+		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+			<div use:scrollReveal={{ type: 'fade', duration: 1 }}>
+				<VideoSection source={cityVideo} aspectRatio="4/3" overlayClass="bg-black/10">
+					<div class="absolute inset-0 flex items-end p-6">
+						<span class="text-white text-sm font-medium bg-nbrs-green px-4 py-2 rounded-full">
+							Coming 2026
+						</span>
+					</div>
+				</VideoSection>
+			</div>
+			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: 0.2 }}>
+				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+					Our First Project
+				</span>
+				<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+					FAMILY 1
 				</h2>
 				<p class="text-lg text-gray-600 mb-4">
-					We're building quality homes that fit into existing communities, creating housing
-					that's affordable without looking affordable.
+					Six family-sized rental units in a vibrant Toronto neighbourhood. Designed from the ground up
+					for families who need space to grow.
 				</p>
-				<p class="text-lg text-gray-600">
-					Our approach focuses on smaller, distributed projects that integrate seamlessly
-					with the character of established neighbourhoods.
+				<p class="text-lg text-gray-600 mb-8">
+					Three-bedroom homes with real storage, outdoor space, and room for life to happen.
 				</p>
+				<div class="flex flex-wrap gap-4">
+					<a
+						href="/family-1"
+						class="btn btn-primary group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium"
+					>
+						<span>Learn More</span>
+						<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10">
+							<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
+						</svg>
+					</a>
+					<a
+						href="/waitlist"
+						class="btn btn-secondary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green"
+					>
+						Join the Waitlist
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- How We Build Section -->
+<section class="py-20 md:py-32 bg-gray-50">
+	<div class="max-w-6xl mx-auto px-6">
+		<div class="text-center mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
+			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+				Our Approach
+			</span>
+			<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+				How We Build
+			</h2>
+			<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+				We create quality rental homes that fit into existing communities—affordable without looking affordable.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-3 gap-8 md:gap-12">
+			{#each buildSteps as step, i}
+				<div
+					class="relative"
+					use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: i * 0.15 }}
+				>
+					<span class="text-6xl md:text-7xl font-bold text-nbrs-green/10 absolute -top-4 -left-2">
+						{step.number}
+					</span>
+					<div class="relative pt-8 pl-4">
+						<h3 class="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
+						<p class="text-gray-600 leading-relaxed">{step.description}</p>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- About/Mission Section -->
+<section class="py-20 md:py-32 bg-white">
+	<div class="max-w-6xl mx-auto px-6">
+		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
+				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+					Who We Are
+				</span>
+				<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+					Neighbourhood<br />Scale Housing
+				</h2>
+				<p class="text-lg text-gray-600 mb-4">
+					We believe great cities are made of great neighbourhoods. NBRS builds quality rental housing
+					that integrates seamlessly into the communities we serve.
+				</p>
+				<p class="text-lg text-gray-600 mb-4">
+					Smaller, distributed projects. Thoughtful design. Buildings that look like they belong—because they do.
+				</p>
+				<p class="text-lg text-gray-600 mb-8">
+					Our name says it all: <strong class="text-gray-900">N</strong>eighbourhood
+					<strong class="text-gray-900">B</strong>ased
+					<strong class="text-gray-900">R</strong>ental
+					<strong class="text-gray-900">S</strong>olutions.
+				</p>
+				<a
+					href="/mission"
+					class="btn btn-secondary group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green"
+				>
+					<span>Our Mission</span>
+					<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10">
+						<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
+					</svg>
+				</a>
 			</div>
 			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
-				<VideoSection source={fountainVideo} overlayClass="bg-black/10">
+				<VideoSection source={fountainVideo} aspectRatio="4/5" overlayClass="bg-black/5">
 					<div class="absolute inset-0 flex items-end p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
 							Community Spaces
@@ -66,47 +195,24 @@
 	</div>
 </section>
 
-<!-- Mission Section with Lazy-Loaded Video -->
-<section class="py-16 md:py-24 bg-gray-50">
-	<div class="max-w-6xl mx-auto px-6">
-		<div class="grid md:grid-cols-2 gap-12 items-center">
-			<div use:scrollReveal={{ type: 'fade', duration: 1 }}>
-				<VideoSection source={cityVideo} aspectRatio="4/3" overlayClass="bg-black/10">
-					<div class="absolute inset-0 flex items-end p-6">
-						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
-							Urban Integration
-						</span>
-					</div>
-				</VideoSection>
-			</div>
-			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: 0.2 }}>
-				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-					FAMILY 1 Project
-				</h2>
-				<p class="text-lg text-gray-600 mb-4">
-					Our inaugural development brings 6 family-sized units to a vibrant
-					Toronto neighbourhood.
-				</p>
-				<p class="text-lg text-gray-600 mb-6">
-					Designed with families in mind, each unit offers the space and amenities
-					that growing households need.
-				</p>
-				<a
-					href="/family-1"
-					class="inline-block bg-nbrs-green text-white px-6 py-3 rounded-lg font-medium hover:bg-nbrs-green/90 transition-colors"
-				>
-					Learn More
-				</a>
-			</div>
-		</div>
+<!-- Partner CTA Section -->
+<section class="py-20 md:py-32 bg-nbrs-green text-white">
+	<div class="max-w-4xl mx-auto px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
+		<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+			Build With Us
+		</h2>
+		<p class="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+			We're looking for partners who share our vision—investors, nonprofits, landowners,
+			and municipalities ready to create housing that works.
+		</p>
+		<a
+			href="/partner"
+			class="btn btn-white group inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-nbrs-green"
+		>
+			<span>Partner With NBRS</span>
+			<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10">
+				<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
+			</svg>
+		</a>
 	</div>
 </section>
-
-<!-- Temporary navigation for testing -->
-<div class="bg-nbrs-green p-8" use:scrollReveal={{ type: 'fade', duration: 0.6 }}>
-	<nav class="space-x-4">
-		<a href="/partner" class="text-white hover:text-nbrs-coral underline">Partner</a>
-		<a href="/waitlist" class="text-white hover:text-nbrs-coral underline">Waitlist</a>
-		<a href="/family-1" class="text-white hover:text-nbrs-coral underline">FAMILY 1</a>
-	</nav>
-</div>
