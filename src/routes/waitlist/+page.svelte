@@ -1,8 +1,14 @@
 <script lang="ts">
 	import { scrollReveal } from '$lib/utils/gsap';
+	import {
+		submitWaitlistForm,
+		validateWaitlistForm,
+		type WaitlistFormData,
+		type ValidationErrors
+	} from '$lib/utils/hubspot';
 
 	// Form state using Svelte 5 runes
-	let formData = $state({
+	let formData = $state<WaitlistFormData>({
 		firstName: '',
 		lastName: '',
 		email: '',
@@ -14,6 +20,8 @@
 
 	let isSubmitting = $state(false);
 	let submitStatus = $state<'idle' | 'success' | 'error'>('idle');
+	let fieldErrors = $state<ValidationErrors>({});
+	let generalError = $state('');
 
 	const householdSizes = [
 		{ value: '1', label: '1 person' },
@@ -48,15 +56,32 @@
 		{ icon: 'community', title: 'Vibrant Area', description: 'Established neighbourhood' }
 	];
 
+	// Clear field error when user starts typing
+	function clearFieldError(field: keyof WaitlistFormData) {
+		if (fieldErrors[field]) {
+			fieldErrors = { ...fieldErrors, [field]: '' };
+		}
+	}
+
 	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
 		isSubmitting = true;
 		submitStatus = 'idle';
+		fieldErrors = {};
+		generalError = '';
 
-		// Placeholder for HubSpot integration (PHASE6-03)
-		try {
-			// Simulate form submission
-			await new Promise((resolve) => setTimeout(resolve, 1000));
+		// Client-side validation first
+		const errors = validateWaitlistForm(formData);
+		if (Object.keys(errors).length > 0) {
+			fieldErrors = errors;
+			isSubmitting = false;
+			return;
+		}
+
+		// Submit to HubSpot
+		const result = await submitWaitlistForm(formData);
+
+		if (result.success) {
 			submitStatus = 'success';
 			formData = {
 				firstName: '',
@@ -67,11 +92,17 @@
 				neighbourhood: '',
 				unitType: ''
 			};
-		} catch {
+		} else {
 			submitStatus = 'error';
-		} finally {
-			isSubmitting = false;
+			if (result.errors) {
+				fieldErrors = result.errors;
+			}
+			if (result.message) {
+				generalError = result.message;
+			}
 		}
+
+		isSubmitting = false;
 	}
 </script>
 
@@ -215,10 +246,16 @@
 									type="text"
 									id="firstName"
 									bind:value={formData.firstName}
+									oninput={() => clearFieldError('firstName')}
 									required
-									class="form-input"
+									class="form-input {fieldErrors.firstName ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]' : ''}"
 									placeholder="First name"
+									aria-invalid={!!fieldErrors.firstName}
+									aria-describedby={fieldErrors.firstName ? 'firstName-error' : undefined}
 								/>
+								{#if fieldErrors.firstName}
+									<p id="firstName-error" class="text-red-600 text-sm mt-1">{fieldErrors.firstName}</p>
+								{/if}
 							</div>
 							<div>
 								<label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
@@ -226,10 +263,16 @@
 									type="text"
 									id="lastName"
 									bind:value={formData.lastName}
+									oninput={() => clearFieldError('lastName')}
 									required
-									class="form-input"
+									class="form-input {fieldErrors.lastName ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]' : ''}"
 									placeholder="Last name"
+									aria-invalid={!!fieldErrors.lastName}
+									aria-describedby={fieldErrors.lastName ? 'lastName-error' : undefined}
 								/>
+								{#if fieldErrors.lastName}
+									<p id="lastName-error" class="text-red-600 text-sm mt-1">{fieldErrors.lastName}</p>
+								{/if}
 							</div>
 						</div>
 						<div>
@@ -238,10 +281,16 @@
 								type="email"
 								id="email"
 								bind:value={formData.email}
+								oninput={() => clearFieldError('email')}
 								required
-								class="form-input"
+								class="form-input {fieldErrors.email ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]' : ''}"
 								placeholder="you@example.com"
+								aria-invalid={!!fieldErrors.email}
+								aria-describedby={fieldErrors.email ? 'email-error' : undefined}
 							/>
+							{#if fieldErrors.email}
+								<p id="email-error" class="text-red-600 text-sm mt-1">{fieldErrors.email}</p>
+							{/if}
 						</div>
 						<div>
 							<label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone *</label>
@@ -249,56 +298,84 @@
 								type="tel"
 								id="phone"
 								bind:value={formData.phone}
+								oninput={() => clearFieldError('phone')}
 								required
-								class="form-input"
+								class="form-input {fieldErrors.phone ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]' : ''}"
 								placeholder="(416) 555-0123"
+								aria-invalid={!!fieldErrors.phone}
+								aria-describedby={fieldErrors.phone ? 'phone-error' : undefined}
 							/>
+							{#if fieldErrors.phone}
+								<p id="phone-error" class="text-red-600 text-sm mt-1">{fieldErrors.phone}</p>
+							{/if}
 						</div>
 						<div>
 							<label for="householdSize" class="block text-sm font-medium text-gray-700 mb-1">Household Size *</label>
 							<select
 								id="householdSize"
 								bind:value={formData.householdSize}
+								onchange={() => clearFieldError('householdSize')}
 								required
-								class="form-input"
+								class="form-input {fieldErrors.householdSize ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]' : ''}"
+								aria-invalid={!!fieldErrors.householdSize}
+								aria-describedby={fieldErrors.householdSize ? 'householdSize-error' : undefined}
 							>
 								<option value="">Select household size</option>
 								{#each householdSizes as size}
 									<option value={size.value}>{size.label}</option>
 								{/each}
 							</select>
+							{#if fieldErrors.householdSize}
+								<p id="householdSize-error" class="text-red-600 text-sm mt-1">{fieldErrors.householdSize}</p>
+							{/if}
 						</div>
 						<div>
 							<label for="neighbourhood" class="block text-sm font-medium text-gray-700 mb-1">Current Neighbourhood *</label>
 							<select
 								id="neighbourhood"
 								bind:value={formData.neighbourhood}
+								onchange={() => clearFieldError('neighbourhood')}
 								required
-								class="form-input"
+								class="form-input {fieldErrors.neighbourhood ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]' : ''}"
+								aria-invalid={!!fieldErrors.neighbourhood}
+								aria-describedby={fieldErrors.neighbourhood ? 'neighbourhood-error' : undefined}
 							>
 								<option value="">Where do you currently live?</option>
 								{#each neighbourhoods as area}
 									<option value={area.value}>{area.label}</option>
 								{/each}
 							</select>
+							{#if fieldErrors.neighbourhood}
+								<p id="neighbourhood-error" class="text-red-600 text-sm mt-1">{fieldErrors.neighbourhood}</p>
+							{/if}
 						</div>
 						<div>
 							<label for="unitType" class="block text-sm font-medium text-gray-700 mb-1">Preferred Unit Type *</label>
 							<select
 								id="unitType"
 								bind:value={formData.unitType}
+								onchange={() => clearFieldError('unitType')}
 								required
-								class="form-input"
+								class="form-input {fieldErrors.unitType ? 'border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]' : ''}"
+								aria-invalid={!!fieldErrors.unitType}
+								aria-describedby={fieldErrors.unitType ? 'unitType-error' : undefined}
 							>
 								<option value="">What size unit do you need?</option>
 								{#each unitTypes as unit}
 									<option value={unit.value}>{unit.label}</option>
 								{/each}
 							</select>
+							{#if fieldErrors.unitType}
+								<p id="unitType-error" class="text-red-600 text-sm mt-1">{fieldErrors.unitType}</p>
+							{/if}
 						</div>
 
-						{#if submitStatus === 'error'}
-							<div class="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+						{#if submitStatus === 'error' && generalError}
+							<div class="text-red-600 text-sm bg-red-50 p-3 rounded-lg" role="alert">
+								{generalError}
+							</div>
+						{:else if submitStatus === 'error'}
+							<div class="text-red-600 text-sm bg-red-50 p-3 rounded-lg" role="alert">
 								Something went wrong. Please try again or email us directly at <a href="mailto:waitlist@nbrs.ca" class="underline">waitlist@nbrs.ca</a>
 							</div>
 						{/if}
@@ -308,7 +385,17 @@
 							disabled={isSubmitting}
 							class="btn btn-primary w-full py-3 rounded-lg font-semibold text-lg {isSubmitting ? 'loading' : ''}"
 						>
-							{isSubmitting ? 'Joining...' : 'Join Waitlist'}
+							{#if isSubmitting}
+								<span class="inline-flex items-center gap-2">
+									<svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+										<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+										<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+									</svg>
+									Joining...
+								</span>
+							{:else}
+								Join Waitlist
+							{/if}
 						</button>
 
 						<p class="text-xs text-gray-500 text-center mt-4">
