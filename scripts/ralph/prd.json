@@ -165,7 +165,7 @@
         "Videos have proper poster images to prevent CLS",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE7-02",

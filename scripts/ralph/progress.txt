@@ -67,6 +67,15 @@ Started: 2026-01-31
 - Demo mode: Works without HubSpot config (simulates success after 800ms)
 - Error styling: `border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]`
 
+### Core Web Vitals Pattern (from PHASE7-01)
+- Use `@font-face` with `font-display: swap` (not `@import url()`)
+- Add `rel="preconnect"` in app.html for external domains (Cloudinary, fonts)
+- Use `fetchpriority="high"` on LCP images (hero poster)
+- Always add `width` and `height` attributes to images to prevent CLS
+- Preload LCP image in `<svelte:head>` with `<link rel="preload" as="image">`
+- Use `decoding="async"` on images for non-blocking decode
+- Vite: `cssMinify: 'lightningcss'` for smaller, faster CSS
+
 ---
 
 ## 2026-01-31 - PHASE3-01: GSAP Context Pattern and Reusable Actions
@@ -395,5 +404,58 @@ Started: 2026-01-31
 - Validation functions return `ValidationErrors` object (empty = valid)
 - Submit functions return `SubmissionResult` with `success`, `errors?`, `message?`
 - Forms need: `fieldErrors: ValidationErrors`, `generalError: string`, `clearFieldError()` function
+
+---
+
+## 2026-02-01 - PHASE7-01: Core Web Vitals Optimization
+
+### What was implemented
+- **Font loading optimization** (`src/app.css`):
+  - Replaced blocking `@import url()` with direct `@font-face` declarations
+  - Added `font-display: swap` to prevent render blocking
+  - Uses Inter Variable font (woff2) for optimal compression
+
+- **Resource preconnect** (`src/app.html`):
+  - Added `preconnect` and `dns-prefetch` for Cloudinary (video/images)
+  - Added `preconnect` and `dns-prefetch` for rsms.me (fonts)
+
+- **LCP image optimization**:
+  - Added `<link rel="preload">` for hero poster in `svelte:head`
+  - Added `fetchpriority="high"` to hero poster image
+  - Added explicit `width` and `height` attributes (1920x1080)
+  - Added `decoding="async"` for non-blocking decode
+
+- **CLS prevention**:
+  - Added explicit dimensions to all video poster images
+  - Container already uses `h-screen` or `aspect-ratio` for stability
+
+- **Build optimization** (`vite.config.ts`):
+  - Enabled `lightningcss` for CSS minification
+  - Enabled `cssCodeSplit` for better caching
+  - Increased `assetsInlineLimit` to 4096 bytes
+  - Configured output filenames for cache optimization
+
+### Files changed
+- src/app.css (font-face with font-display: swap)
+- src/app.html (preconnect hints)
+- src/lib/components/VideoHero.svelte (fetchpriority, dimensions)
+- src/lib/components/VideoSection.svelte (dimensions, decoding)
+- src/routes/+page.svelte (LCP preload in svelte:head, meta tags)
+- vite.config.ts (build optimizations)
+
+### Learnings for future iterations
+- `font-display: swap` shows fallback font immediately, swaps when custom font loads
+- `fetchpriority="high"` tells browser to prioritize LCP image over other resources
+- Explicit `width`/`height` on images prevents CLS by reserving space
+- `decoding="async"` allows main thread to continue while image decodes
+- Vite's `lightningcss` minifier is faster and produces smaller output than default
+- SvelteKit overrides some rollup output options (entryFileNames, etc.) - warnings are normal
+
+### Core Web Vitals Pattern (for Codebase Patterns section)
+- Use `@font-face` with `font-display: swap` instead of `@import url()`
+- Add `rel="preconnect"` for external domains (CDNs, fonts)
+- Use `fetchpriority="high"` on LCP images
+- Always add `width` and `height` to images to prevent CLS
+- Preload LCP resources in `<svelte:head>` with `rel="preload"`
 
 ---
