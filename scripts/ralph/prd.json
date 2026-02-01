@@ -196,6 +196,55 @@
         "Build passes"
       ],
       "passes": false
+    },
+    {
+      "id": "PHASE8-01",
+      "title": "Illustrated Build Timeline Section",
+      "priority": 14,
+      "description": "Replace the plain 'How We Build' section with a visually impactful illustrated timeline matching americanhousing.co style. Create SVG blueprint-style illustrations for each step. Three steps: 1) Find Land (empty lot with dashed outline), 2) Build Together (building under construction with crane), 3) Welcome Home (completed building with family/car). Use NBRS green (#4fa64f) for the line drawings on cream/beige background. Animate illustrations on scroll with GSAP - lines should draw in progressively.",
+      "acceptanceCriteria": [
+        "BuildTimeline.svelte component with 3-step visual process",
+        "Custom SVG illustrations in blueprint/architectural line style",
+        "Step 1: Empty lot with property lines (dashed)",
+        "Step 2: Building under construction with crane",
+        "Step 3: Completed building with 'Welcome' elements",
+        "GSAP scroll-triggered line drawing animation",
+        "Cream/beige background matching americanhousing.co",
+        "Bold numbered headings (1 Find Land, 2 Build Together, 3 Welcome Home)",
+        "Responsive layout (stacked on mobile, horizontal on desktop)",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE8-02",
+      "title": "FAMILY 1 Project Section with Building Render Video",
+      "priority": 15,
+      "description": "Update the FAMILY 1 project preview section to use the building render video from static/videos/new/building-render-dusk.mov. This video shows the actual FAMILY 1 building rendering at dusk and MUST be prominently featured. Convert MOV to web formats, add compelling copy about the project timeline, unit mix, and location.",
+      "acceptanceCriteria": [
+        "FAMILY 1 section uses building-render-dusk video (converted to WebM/MP4)",
+        "Video shows the architectural rendering of FAMILY 1",
+        "Section includes project details: location, unit count, timeline",
+        "Call-to-action to join waitlist",
+        "Scroll reveal animation on section",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE8-03",
+      "title": "Construction Progress Section",
+      "priority": 16,
+      "description": "Add a construction progress section using the local construction videos (construction-crane-progress.mov, construction-site-barriers.mov). Show NBRS building in action - real footage of the construction process. Can be a video carousel or grid layout.",
+      "acceptanceCriteria": [
+        "Construction section with real site footage",
+        "Uses construction-crane-progress.mov and/or construction-site-barriers.mov",
+        "Compelling heading like 'Building in Progress' or 'Watch Us Build'",
+        "Videos converted to web formats",
+        "Responsive layout",
+        "Build passes"
+      ],
+      "passes": false
     }
   ]
 }
