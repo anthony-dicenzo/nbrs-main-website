@@ -30,7 +30,7 @@
 </a>
 
 <!-- Nav container -->
-<div
+<header
 	class="pointer-events-none fixed top-0 right-0 left-0 z-50 transition-transform duration-300"
 	class:translate-y-0={visible}
 	class:-translate-y-full={!visible}
@@ -70,6 +70,7 @@
 					viewBox="0 0 12 10"
 					fill="currentColor"
 					class="icon-arrow"
+					aria-hidden="true"
 				>
 					<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
 				</svg>
@@ -82,5 +83,6 @@
 		class="absolute inset-0 -z-10 bg-white shadow-sm transition-opacity duration-300"
 		class:opacity-0={atTop}
 		class:opacity-100={!atTop}
+		aria-hidden="true"
 	></div>
-</div>
+</header>

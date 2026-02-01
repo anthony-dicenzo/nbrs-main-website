@@ -60,27 +60,29 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<VideoHero sources={heroVideos} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
-	<div class="flex flex-col items-center justify-center h-full text-white text-center px-6">
-		<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
-			Building Homes,<br />Building Community
-		</h1>
-		<p class="text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 max-w-2xl opacity-90">
-			Quality rental housing at the neighbourhood scale
-		</p>
-		<p class="text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your NBRS</p>
+<section aria-label="Welcome">
+	<VideoHero sources={heroVideos} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
+		<div class="flex flex-col items-center justify-center h-full text-white text-center px-6">
+			<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
+				Building Homes,<br />Building Community
+			</h1>
+			<p class="text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 max-w-2xl opacity-90">
+				Quality rental housing at the neighbourhood scale
+			</p>
+			<p class="text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your NBRS</p>
 
-		<!-- Scroll indicator -->
-		<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-			<svg class="w-6 h-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-			</svg>
+			<!-- Scroll indicator -->
+			<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
+				<svg class="w-6 h-6 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+				</svg>
+			</div>
 		</div>
-	</div>
-</VideoHero>
+	</VideoHero>
+</section>
 
 <!-- FAMILY 1 Project Preview -->
-<section class="py-20 md:py-32 bg-white">
+<section aria-labelledby="family1-heading" class="py-20 md:py-32 bg-white">
 	<div class="max-w-6xl mx-auto px-6">
 		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'fade', duration: 1 }}>
@@ -96,7 +98,7 @@
 				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
 					Our First Project
 				</span>
-				<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+				<h2 id="family1-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
 					FAMILY 1
 				</h2>
 				<p class="text-lg text-gray-600 mb-4">
@@ -112,7 +114,7 @@
 						class="btn btn-primary group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium"
 					>
 						<span>Learn More</span>
-						<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10">
+						<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
 							<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
 						</svg>
 					</a>
@@ -129,13 +131,13 @@
 </section>
 
 <!-- How We Build Section -->
-<section class="py-20 md:py-32 bg-gray-50">
+<section aria-labelledby="how-we-build-heading" class="py-20 md:py-32 bg-gray-50">
 	<div class="max-w-6xl mx-auto px-6">
 		<div class="text-center mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
 			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
 				Our Approach
 			</span>
-			<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+			<h2 id="how-we-build-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
 				How We Build
 			</h2>
 			<p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -149,7 +151,7 @@
 					class="relative"
 					use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: i * 0.15 }}
 				>
-					<span class="text-6xl md:text-7xl font-bold text-nbrs-green/10 absolute -top-4 -left-2">
+					<span class="text-6xl md:text-7xl font-bold text-nbrs-green/10 absolute -top-4 -left-2" aria-hidden="true">
 						{step.number}
 					</span>
 					<div class="relative pt-8 pl-4">
@@ -163,14 +165,14 @@
 </section>
 
 <!-- About/Mission Section -->
-<section class="py-20 md:py-32 bg-white">
+<section aria-labelledby="about-heading" class="py-20 md:py-32 bg-white">
 	<div class="max-w-6xl mx-auto px-6">
 		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
 				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
 					Who We Are
 				</span>
-				<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+				<h2 id="about-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
 					Neighbourhood<br />Scale Housing
 				</h2>
 				<p class="text-lg text-gray-600 mb-4">
@@ -191,7 +193,7 @@
 					class="btn btn-secondary group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green"
 				>
 					<span>Our Mission</span>
-					<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10">
+					<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
 						<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
 					</svg>
 				</a>
@@ -210,9 +212,9 @@
 </section>
 
 <!-- Partner CTA Section -->
-<section class="py-20 md:py-32 bg-nbrs-green text-white">
+<section aria-labelledby="partner-cta-heading" class="py-20 md:py-32 bg-nbrs-green text-white">
 	<div class="max-w-4xl mx-auto px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
-		<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+		<h2 id="partner-cta-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
 			Build With Us
 		</h2>
 		<p class="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
@@ -224,7 +226,7 @@
 			class="btn btn-white group inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-nbrs-green"
 		>
 			<span>Partner With NBRS</span>
-			<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10">
+			<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
 				<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
 			</svg>
 		</a>

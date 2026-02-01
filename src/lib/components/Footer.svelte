@@ -13,10 +13,10 @@
 		<!-- Spacer for top -->
 		<div class="h-16 md:h-20"></div>
 
-		<!-- Large brand text -->
-		<h2 class="text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl">
+		<!-- Large brand text (decorative, not a heading) -->
+		<p class="text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl" aria-hidden="true">
 			Neighbourhood<br class="hidden sm:block" /> Scale
-		</h2>
+		</p>
 
 		<!-- Flexible spacer -->
 		<div class="min-h-16 flex-1"></div>
@@ -45,12 +45,16 @@
 					action="https://formspree.io/f/FORM_ID"
 					method="POST"
 					class="hidden items-center gap-2 border-b border-white/60 pb-1 sm:flex focus-within:border-white"
+					aria-label="Newsletter signup"
 				>
+					<label for="footer-email-desktop" class="sr-only">Email address</label>
 					<input
 						type="email"
+						id="footer-email-desktop"
 						name="email"
 						placeholder="Enter email"
 						required
+						autocomplete="email"
 						class="w-32 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70 md:w-40"
 					/>
 					<button type="submit" class="btn text-sm hover:opacity-80">
@@ -64,12 +68,16 @@
 				action="https://formspree.io/f/FORM_ID"
 				method="POST"
 				class="flex items-center gap-2 border-b border-white/60 pb-1 focus-within:border-white sm:hidden"
+				aria-label="Newsletter signup"
 			>
+				<label for="footer-email-mobile" class="sr-only">Email address</label>
 				<input
 					type="email"
+					id="footer-email-mobile"
 					name="email"
 					placeholder="Enter email"
 					required
+					autocomplete="email"
 					class="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70"
 				/>
 				<button type="submit" class="btn text-sm hover:opacity-80">

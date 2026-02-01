@@ -112,9 +112,9 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="relative py-24 md:py-32 bg-gray-900 text-white overflow-hidden">
-	<div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900"></div>
-	<div class="absolute inset-0 opacity-20">
+<section aria-label="FAMILY 1 Waitlist" class="relative py-24 md:py-32 bg-gray-900 text-white overflow-hidden">
+	<div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" aria-hidden="true"></div>
+	<div class="absolute inset-0 opacity-20" aria-hidden="true">
 		<div class="absolute top-1/4 right-1/4 w-96 h-96 bg-nbrs-green rounded-full blur-3xl"></div>
 		<div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-nbrs-green rounded-full blur-3xl"></div>
 	</div>
@@ -134,7 +134,7 @@
 </section>
 
 <!-- Features Section -->
-<section class="py-16 md:py-20 bg-white border-b border-gray-100">
+<section aria-label="Unit features" class="py-16 md:py-20 bg-white border-b border-gray-100">
 	<div class="max-w-6xl mx-auto px-6">
 		<div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
 			{#each features as feature, i}
@@ -142,7 +142,7 @@
 					class="text-center"
 					use:scrollReveal={{ type: 'slide-up', duration: 0.6, delay: i * 0.1 }}
 				>
-					<div class="w-14 h-14 mx-auto mb-4 rounded-full bg-nbrs-green/10 flex items-center justify-center">
+					<div class="w-14 h-14 mx-auto mb-4 rounded-full bg-nbrs-green/10 flex items-center justify-center" aria-hidden="true">
 						{#if feature.icon === 'bedroom'}
 							<svg class="w-7 h-7 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -171,14 +171,14 @@
 </section>
 
 <!-- Waitlist Form Section -->
-<section class="py-20 md:py-28 bg-gray-50">
+<section aria-labelledby="waitlist-heading" class="py-20 md:py-28 bg-gray-50">
 	<div class="max-w-6xl mx-auto px-6">
 		<div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
 			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
 				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
 					Join the Waitlist
 				</span>
-				<h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+				<h2 id="waitlist-heading" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
 					Be First to Know
 				</h2>
 				<p class="text-lg text-gray-600 mb-6">
@@ -192,25 +192,25 @@
 					<h3 class="font-bold text-gray-900 mb-4">What to Expect</h3>
 					<ul class="space-y-3">
 						<li class="flex items-start gap-3">
-							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
 							<span class="text-gray-600">Early notification when units become available</span>
 						</li>
 						<li class="flex items-start gap-3">
-							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
 							<span class="text-gray-600">Exclusive preview of floor plans and pricing</span>
 						</li>
 						<li class="flex items-start gap-3">
-							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
 							<span class="text-gray-600">Priority application window before public release</span>
 						</li>
 						<li class="flex items-start gap-3">
-							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+							<svg class="w-5 h-5 text-nbrs-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
 								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
 							</svg>
 							<span class="text-gray-600">Updates on construction progress and timeline</span>
@@ -221,8 +221,8 @@
 
 			<div class="bg-white rounded-2xl p-8 shadow-lg" use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
 				{#if submitStatus === 'success'}
-					<div class="text-center py-8">
-						<div class="w-16 h-16 mx-auto mb-4 rounded-full bg-nbrs-green/10 flex items-center justify-center">
+					<div class="text-center py-8" role="status" aria-live="polite">
+						<div class="w-16 h-16 mx-auto mb-4 rounded-full bg-nbrs-green/10 flex items-center justify-center" aria-hidden="true">
 							<svg class="w-8 h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 							</svg>
@@ -387,11 +387,11 @@
 						>
 							{#if isSubmitting}
 								<span class="inline-flex items-center gap-2">
-									<svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+									<svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
 										<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 										<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
 									</svg>
-									Joining...
+									<span>Joining...</span>
 								</span>
 							{:else}
 								Join Waitlist
@@ -409,9 +409,9 @@
 </section>
 
 <!-- Learn More CTA -->
-<section class="py-16 md:py-24 bg-white">
+<section aria-labelledby="learn-more-heading" class="py-16 md:py-24 bg-white">
 	<div class="max-w-4xl mx-auto px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
-		<h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+		<h2 id="learn-more-heading" class="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
 			Want to Learn More?
 		</h2>
 		<p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
@@ -422,7 +422,7 @@
 			class="btn btn-primary group inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold"
 		>
 			<span>Explore FAMILY 1</span>
-			<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10">
+			<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
 				<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
 			</svg>
 		</a>

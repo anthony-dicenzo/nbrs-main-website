@@ -96,8 +96,8 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section class="relative py-24 md:py-32 bg-nbrs-green text-white overflow-hidden">
-	<div class="absolute inset-0 opacity-10">
+<section aria-label="Partner with NBRS" class="relative py-24 md:py-32 bg-nbrs-green text-white overflow-hidden">
+	<div class="absolute inset-0 opacity-10" aria-hidden="true">
 		<div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
 		<div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2"></div>
 	</div>
@@ -117,13 +117,13 @@
 </section>
 
 <!-- Why Partner Section -->
-<section class="py-20 md:py-28 bg-white">
+<section aria-labelledby="why-partner-heading" class="py-20 md:py-28 bg-white">
 	<div class="max-w-6xl mx-auto px-6">
 		<div class="text-center mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
 			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
 				Why Partner With Us
 			</span>
-			<h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+			<h2 id="why-partner-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
 				Mission-Aligned Investment
 			</h2>
 			<p class="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -137,7 +137,7 @@
 					class="text-center p-8 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300"
 					use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: i * 0.15 }}
 				>
-					<div class="w-16 h-16 mx-auto mb-6 rounded-full bg-nbrs-green/10 flex items-center justify-center">
+					<div class="w-16 h-16 mx-auto mb-6 rounded-full bg-nbrs-green/10 flex items-center justify-center" aria-hidden="true">
 						{#if benefit.icon === 'chart'}
 							<svg class="w-8 h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
@@ -161,19 +161,19 @@
 </section>
 
 <!-- Who We Work With Section -->
-<section class="py-20 md:py-28 bg-gray-50">
+<section aria-labelledby="who-we-work-with-heading" class="py-20 md:py-28 bg-gray-50">
 	<div class="max-w-6xl mx-auto px-6">
 		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
 				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
 					Who We Work With
 				</span>
-				<h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+				<h2 id="who-we-work-with-heading" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
 					Partners at Every Scale
 				</h2>
 				<div class="space-y-6">
 					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0">
+						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
 							<span class="text-nbrs-green font-bold">1</span>
 						</div>
 						<div>
@@ -182,7 +182,7 @@
 						</div>
 					</div>
 					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0">
+						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
 							<span class="text-nbrs-green font-bold">2</span>
 						</div>
 						<div>
@@ -191,7 +191,7 @@
 						</div>
 					</div>
 					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0">
+						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
 							<span class="text-nbrs-green font-bold">3</span>
 						</div>
 						<div>
@@ -200,7 +200,7 @@
 						</div>
 					</div>
 					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0">
+						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
 							<span class="text-nbrs-green font-bold">4</span>
 						</div>
 						<div>
@@ -217,8 +217,8 @@
 				</div>
 
 				{#if submitStatus === 'success'}
-					<div class="text-center py-8">
-						<div class="w-16 h-16 mx-auto mb-4 rounded-full bg-nbrs-green/10 flex items-center justify-center">
+					<div class="text-center py-8" role="status" aria-live="polite">
+						<div class="w-16 h-16 mx-auto mb-4 rounded-full bg-nbrs-green/10 flex items-center justify-center" aria-hidden="true">
 							<svg class="w-8 h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 							</svg>
@@ -320,11 +320,11 @@
 						>
 							{#if isSubmitting}
 								<span class="inline-flex items-center gap-2">
-									<svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+									<svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
 										<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
 										<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
 									</svg>
-									Sending...
+									<span>Sending...</span>
 								</span>
 							{:else}
 								Send Message
@@ -338,7 +338,7 @@
 </section>
 
 <!-- CTA Section -->
-<section class="py-16 md:py-24 bg-white">
+<section aria-label="Contact us" class="py-16 md:py-24 bg-white">
 	<div class="max-w-4xl mx-auto px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
 		<p class="text-lg text-gray-600 mb-6">
 			Prefer to reach out directly?
