@@ -214,7 +214,7 @@
         "Responsive layout (stacked on mobile, horizontal on desktop)",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE8-02",

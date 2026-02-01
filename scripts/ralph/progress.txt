@@ -95,6 +95,14 @@ Started: 2026-01-31
 - Page metadata: Every page needs `<svelte:head>` with unique `<title>` and `<meta name="description">`
 - Nav SVG arrows in buttons: Add `aria-hidden="true"` since text label exists
 
+### SVG Line Drawing Animation (from PHASE8-01)
+- Get path length: `const length = svgPath.getTotalLength()`
+- Set initial state: `gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })`
+- Animate: `gsap.to(path, { strokeDashoffset: 0, duration: 1.5 })`
+- Works with `<path>` elements only, use opacity animation for `<rect>` and `<circle>`
+- Blueprint style: Use `stroke="#4fa64f"` with `fill="none"` for line drawings
+- Warm background: `bg-amber-50` provides cream/beige tone
+
 ---
 
 ## 2026-01-31 - PHASE3-01: GSAP Context Pattern and Reusable Actions
@@ -615,5 +623,46 @@ Started: 2026-01-31
 - Container padding: `px-4 sm:px-6` prevents content touching screen edges
 - Nav overflow prevention: Hide secondary items with `hidden xs:inline-flex`
 - Form already responsive: `sm:grid-cols-2` pattern works well for name fields
+
+---
+
+## 2026-02-01 - PHASE8-01: Illustrated Build Timeline Section
+
+### What was implemented
+- **BuildTimeline.svelte component** (`src/lib/components/BuildTimeline.svelte`):
+  - Three-step visual process: Find Land, Build Together, Welcome Home
+  - Custom SVG illustrations in blueprint/architectural line style:
+    - Step 1: Empty lot with dashed property lines, corner markers, measurement lines, tree
+    - Step 2: Building under construction with crane, floor lines, windows
+    - Step 3: Completed building with roof, windows, door, welcome path, family figures
+  - GSAP scroll-triggered line drawing animation using `strokeDasharray`/`strokeDashoffset`
+  - Fill elements (circles, rectangles) fade in with delay after paths draw
+  - Step cards animate in with stagger
+  - Cream/beige background (`bg-amber-50`) matching americanhousing.co
+  - Bold numbered headings: "1 Find Land", "2 Build Together", "3 Welcome Home"
+  - Responsive layout: stacked on mobile, horizontal 3-column grid on desktop
+  - Proper cleanup with GSAP context and `onDestroy`
+
+- **Homepage integration** (`src/routes/+page.svelte`):
+  - Replaced plain text "How We Build" section with `<BuildTimeline />` component
+  - Removed unused `buildSteps` array
+
+### Files changed
+- src/lib/components/BuildTimeline.svelte (new - 300+ lines)
+- src/routes/+page.svelte (updated imports, replaced section)
+
+### Learnings for future iterations
+- SVG line drawing animation: Use `getTotalLength()` to get path length, then animate `strokeDashoffset` from length to 0
+- For SVG rects, use `fill="none"` with stroke for outline-only blueprint style
+- `bg-amber-50` provides a warm cream/beige background tone
+- Connecting lines between steps on desktop only: `hidden md:block`
+- Ensure GSAP context includes all animations (paths, fills, cards, connectors) for proper cleanup
+- Use `.closest('.step-card')` to find parent trigger for each SVG element's ScrollTrigger
+
+### SVG Line Drawing Pattern (for Codebase Patterns section)
+- Get path length: `const length = svgPath.getTotalLength()`
+- Set initial state: `gsap.set(path, { strokeDasharray: length, strokeDashoffset: length })`
+- Animate: `gsap.to(path, { strokeDashoffset: 0, duration: 1.5 })`
+- Works with `<path>` elements, not `<rect>` or `<circle>` (use opacity for those)
 
 ---
