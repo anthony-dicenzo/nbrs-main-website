@@ -59,6 +59,14 @@ Started: 2026-01-31
 - Use `$derived(!isMobile())` for reactive video visibility
 - MOBILE_BREAKPOINT = 768px matches Tailwind `md:` breakpoint
 
+### HubSpot Integration Pattern (from PHASE6-03)
+- Import `submitPartnerForm`, `submitWaitlistForm` from `$lib/utils/hubspot`
+- Validation: `validatePartnerForm(data)` returns `ValidationErrors` object (empty = valid)
+- Submit: `await submitPartnerForm(data)` returns `{ success, errors?, message? }`
+- Environment: `PUBLIC_HUBSPOT_PORTAL_ID`, `PUBLIC_HUBSPOT_PARTNER_FORM_ID`, `PUBLIC_HUBSPOT_WAITLIST_FORM_ID`
+- Demo mode: Works without HubSpot config (simulates success after 800ms)
+- Error styling: `border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]`
+
 ---
 
 ## 2026-01-31 - PHASE3-01: GSAP Context Pattern and Reusable Actions
@@ -332,5 +340,60 @@ Started: 2026-01-31
 - Feature strips: `grid-cols-2 md:grid-cols-4` for responsive icon/text pairs
 - Blur effect for hero backgrounds: `blur-3xl` on colored circles creates ambient glow
 - Privacy note at form bottom: `text-xs text-gray-500 text-center` for unobtrusive legal text
+
+---
+
+## 2026-02-01 - PHASE6-03: HubSpot Form Integration
+
+### What was implemented
+- **HubSpot utility** (`src/lib/utils/hubspot.ts`):
+  - HubSpot Forms API v3 integration using unauthenticated endpoint
+  - `submitPartnerForm()` and `submitWaitlistForm()` functions
+  - `validatePartnerForm()` and `validateWaitlistForm()` with detailed error messages
+  - TypeScript interfaces for form data and validation errors
+  - Demo mode fallback when HubSpot not configured (simulates success)
+  - `hutk` cookie retrieval for visitor tracking association
+  - Proper error handling with user-friendly messages
+
+- **Partner form updates** (`src/routes/partner/+page.svelte`):
+  - Integrated with HubSpot submission
+  - Field-level validation errors with red border styling
+  - ARIA attributes for accessibility (aria-invalid, aria-describedby)
+  - Loading spinner animation during submission
+  - General error state for network/API failures
+  - Clear field errors on input (oninput/onchange handlers)
+
+- **Waitlist form updates** (`src/routes/waitlist/+page.svelte`):
+  - Same HubSpot integration and validation patterns
+  - All 7 fields have proper error handling
+  - Phone validation for 10+ digit numbers
+
+- **Environment setup**:
+  - Created `.env.example` documenting required variables:
+    - `PUBLIC_HUBSPOT_PORTAL_ID`
+    - `PUBLIC_HUBSPOT_PARTNER_FORM_ID`
+    - `PUBLIC_HUBSPOT_WAITLIST_FORM_ID`
+
+### Files changed
+- src/lib/utils/hubspot.ts (new - 230+ lines)
+- src/routes/partner/+page.svelte (updated form handling)
+- src/routes/waitlist/+page.svelte (updated form handling)
+- .env.example (new)
+
+### Learnings for future iterations
+- HubSpot Forms API v3 endpoint: `https://api.hsforms.com/submissions/v3/integration/submit/:portalId/:formGuid`
+- Field names in `fields` array must match HubSpot property internal names exactly
+- `hutk` cookie enables visitor tracking association - check for `hubspotutk` cookie
+- Use `import.meta.env.PUBLIC_*` for client-exposed environment variables in SvelteKit
+- Demo mode fallback allows development without HubSpot configuration
+- Field-level error styling: `border-red-500 focus:border-red-500 focus:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]`
+- Clear errors on input to provide immediate feedback when user corrects mistakes
+- Loading spinner with SVG animation looks more polished than text-only "Loading..."
+
+### HubSpot Integration Pattern (for Codebase Patterns section)
+- Import from `$lib/utils/hubspot` for form submission utilities
+- Validation functions return `ValidationErrors` object (empty = valid)
+- Submit functions return `SubmissionResult` with `success`, `errors?`, `message?`
+- Forms need: `fieldErrors: ValidationErrors`, `generalError: string`, `clearFieldError()` function
 
 ---
