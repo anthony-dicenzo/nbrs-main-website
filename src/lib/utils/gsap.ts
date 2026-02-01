@@ -177,3 +177,160 @@ export async function createGsapContext(
 
 	return ctx;
 }
+
+/**
+ * Configuration options for scroll reveal animations.
+ */
+export interface ScrollRevealOptions {
+	/** Animation type: 'fade', 'slide-up', 'slide-left', 'slide-right', 'scale' */
+	type?: 'fade' | 'slide-up' | 'slide-left' | 'slide-right' | 'scale';
+	/** Animation duration in seconds (default: 0.8) */
+	duration?: number;
+	/** Delay before animation starts in seconds (default: 0) */
+	delay?: number;
+	/** Distance to travel for slide animations in pixels (default: 60) */
+	distance?: number;
+	/** ScrollTrigger start position (default: 'top 85%') */
+	start?: string;
+	/** Should animation replay when scrolling back up (default: false) */
+	toggleActions?: string;
+	/** Stagger delay for child elements (default: 0 - no stagger) */
+	stagger?: number;
+	/** Selector for child elements to stagger (default: '> *') */
+	staggerSelector?: string;
+}
+
+/**
+ * Svelte action for scroll-triggered reveal animations using GSAP ScrollTrigger.
+ *
+ * Creates subtle, professional animations that trigger as elements enter the viewport.
+ * Automatically respects prefers-reduced-motion for accessibility.
+ *
+ * @example Basic fade-in:
+ * ```svelte
+ * <section use:scrollReveal>
+ *   Content fades in when scrolled into view
+ * </section>
+ * ```
+ *
+ * @example Slide up with custom timing:
+ * ```svelte
+ * <div use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.2 }}>
+ *   Slides up with delay
+ * </div>
+ * ```
+ *
+ * @example Staggered children:
+ * ```svelte
+ * <ul use:scrollReveal={{ type: 'slide-up', stagger: 0.1 }}>
+ *   <li>Item 1</li>
+ *   <li>Item 2</li>
+ *   <li>Item 3</li>
+ * </ul>
+ * ```
+ */
+export const scrollReveal: Action<HTMLElement, ScrollRevealOptions | undefined> = (
+	node,
+	options = {}
+) => {
+	let ctx: gsap.Context | null = null;
+	let currentOptions = options;
+
+	const init = async () => {
+		// Check for reduced motion preference
+		if (prefersReducedMotion()) {
+			// Just ensure element is visible, no animation
+			node.style.opacity = '1';
+			node.style.transform = 'none';
+			return;
+		}
+
+		const gsap = await loadGsap();
+		const ScrollTrigger = await loadScrollTrigger();
+
+		const {
+			type = 'fade',
+			duration = 0.8,
+			delay = 0,
+			distance = 60,
+			start = 'top 85%',
+			toggleActions = 'play none none none',
+			stagger = 0,
+			staggerSelector = '> *'
+		} = currentOptions;
+
+		// Build animation properties based on type
+		const fromProps: gsap.TweenVars = {
+			opacity: 0,
+			duration,
+			delay,
+			ease: 'power2.out'
+		};
+
+		switch (type) {
+			case 'slide-up':
+				fromProps.y = distance;
+				break;
+			case 'slide-left':
+				fromProps.x = distance;
+				break;
+			case 'slide-right':
+				fromProps.x = -distance;
+				break;
+			case 'scale':
+				fromProps.scale = 0.9;
+				break;
+			case 'fade':
+			default:
+				// Just opacity (already set)
+				break;
+		}
+
+		// Create context for proper cleanup
+		ctx = gsap.context(() => {
+			if (stagger > 0) {
+				// Animate children with stagger
+				const children = node.querySelectorAll(staggerSelector);
+				if (children.length > 0) {
+					gsap.from(children, {
+						...fromProps,
+						stagger,
+						scrollTrigger: {
+							trigger: node,
+							start,
+							toggleActions
+						}
+					});
+				}
+			} else {
+				// Animate the element itself
+				gsap.from(node, {
+					...fromProps,
+					scrollTrigger: {
+						trigger: node,
+						start,
+						toggleActions
+					}
+				});
+			}
+		}, node);
+	};
+
+	init();
+
+	return {
+		update(newOptions: ScrollRevealOptions | undefined) {
+			// Clean up previous animation
+			if (ctx) {
+				ctx.revert();
+			}
+			currentOptions = newOptions || {};
+			init();
+		},
+		destroy() {
+			if (ctx) {
+				ctx.revert();
+			}
+		}
+	};
+};
