@@ -234,7 +234,7 @@
         "GSAP line-drawing animation on scroll",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE9-03",
@@ -248,7 +248,7 @@
         "Overall footer matches americanhousing.co reference quality",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE8-02",

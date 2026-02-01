@@ -10,10 +10,10 @@
 </script>
 
 <footer>
-	<!-- Top section: Cream background with tagline -->
-	<div class="bg-amber-50 py-12 sm:py-16 md:py-20">
+	<!-- Top section: White background with tagline -->
+	<div class="bg-white py-8 sm:py-10 md:py-12">
 		<div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
-			<p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium italic text-amber-800 leading-tight">
+			<p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 leading-tight tracking-tight">
 				Built for families.<br class="hidden sm:block" /> Rooted in community.
 			</p>
 		</div>
@@ -23,7 +23,7 @@
 	<div class="bg-nbrs-green text-white">
 		<div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
 			<!-- Large brand text -->
-			<div class="py-8 sm:py-12 md:py-16">
+			<div class="py-6 sm:py-8 md:py-12">
 				<p
 					class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none tracking-tight"
 					aria-hidden="true"

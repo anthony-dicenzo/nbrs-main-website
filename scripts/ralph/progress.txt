@@ -689,3 +689,60 @@ Started: 2026-01-31
 - Video conversion from MOV to web formats already established pattern
 
 ---
+
+## 2026-02-01 - PHASE9-02: Build Timeline - Match americanhousing.co Exactly
+
+### What was implemented
+- **BuildTimeline.svelte** complete redesign:
+  - 3-panel horizontal layout with thin vertical dividers (gray-300)
+  - Each panel: numbered circle (bg-gray-900) + title at TOP, square illustration BELOW
+  - Detailed architectural blueprint-style SVG illustrations:
+    - **Buy Land**: Property lot with corner stakes, dashed setback lines, dimension lines with measurements, architectural tree symbols, north arrow, scale indicator
+    - **Build Homes**: Construction site with building frame, floor levels, roof trusses, window openings, door frame, scaffolding, detailed tower crane with cabin/counterweight/hook, construction materials
+    - **Sell Homes**: Completed townhouse row with 3 units, detailed windows with mullions, doors with handles, steps, landscaping tree, SOLD banner
+  - GSAP line-drawing animation on scroll (paths draw with staggered delay)
+  - Fill elements (circles, text) fade in separately
+  - Headers animate with fade + slide up
+  - Square aspect ratio (`aspect-square`) for each illustration
+  - Cream/beige background (amber-50)
+  - Responsive: stacks on mobile, 3-column grid on desktop
+
+### Files changed
+- src/lib/components/BuildTimeline.svelte (complete rewrite - 260+ lines)
+- scripts/ralph/prd.json (marked PHASE9-01, PHASE9-02 as passes: true)
+- scripts/ralph/progress.txt (this update)
+
+### Learnings for future iterations
+- Architectural blueprint SVGs: Use `viewBox="0 0 400 400"` for square aspect ratio
+- Dimension lines pattern: horizontal line + vertical tick marks at ends + text measurement
+- Architectural tree symbol: Concentric circles with center fill dot
+- North arrow: Vertical line + arrowhead path + "N" text below
+- Staggered path animation: Use `delay: index * 0.03` in forEach loop
+- `md:border-r` for vertical dividers that only show on desktop
+- SR-only heading: `<h2 class="sr-only">` for accessible section title without visual heading
+
+---
+
+## 2026-02-01 - PHASE9-03: Footer - Match americanhousing.co Style
+
+### What was implemented
+- **Footer.svelte** design updates:
+  - Changed tagline section background from cream (amber-50) to white (bg-white)
+  - Updated tagline font from `font-medium italic text-amber-800` to `font-light text-gray-900`
+  - Same font family (Inter) as "Neighbourhood Scale" but lighter weight (font-light vs font-bold)
+  - Added `tracking-tight` to tagline for tighter letter spacing matching the brand text
+  - Reduced tagline section padding: `py-8 sm:py-10 md:py-12` (was `py-12 sm:py-16 md:py-20`)
+  - Reduced brand text section padding: `py-6 sm:py-8 md:py-12` (was `py-8 sm:py-12 md:py-16`)
+  - Overall effect: tagline and green section feel more connected, cleaner visual transition
+
+### Files changed
+- src/lib/components/Footer.svelte (updated styling)
+- scripts/ralph/prd.json (marked passes: true)
+
+### Learnings for future iterations
+- Footer section flow: Use consistent padding reduction between stacked sections for cohesion
+- Typography hierarchy: Same font family with different weights (light vs bold) creates visual connection
+- Color transition: White → Green is cleaner than Cream → Green for section boundaries
+- `tracking-tight` helps larger text feel more compact and branded
+
+---
