@@ -91,7 +91,7 @@
         "No jank or frame drops (60fps)",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE5-02",
@@ -105,7 +105,7 @@
         "All interactions feel responsive and polished",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE6-01",
