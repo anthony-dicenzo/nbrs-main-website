@@ -22,7 +22,6 @@
 
 		// Handle reduced motion preference
 		if (prefersReducedMotion()) {
-			// Skip animation, just show briefly then hide
 			await new Promise((resolve) => setTimeout(resolve, 500));
 			visible = false;
 			if (typeof sessionStorage !== 'undefined') {
@@ -44,7 +43,7 @@
 				}
 			});
 
-			// Initial state: letters invisible
+			// Initial state: letters invisible (matching nbrs.ca)
 			gsap.set(letters, {
 				opacity: 0,
 				scale: 0,
@@ -57,40 +56,39 @@
 				opacity: 1
 			});
 
-			// Phase 1: Letters animate in with stagger
+			// Phase 1: Letters animate in with stagger (0.5s stagger like nbrs.ca)
 			tl.to(letters, {
 				opacity: 1,
 				scale: 1.2,
 				y: 0,
 				rotationX: 0,
 				duration: 0.6,
-				stagger: 0.15,
+				stagger: 0.5,
 				ease: 'back.out(1.7)'
 			});
 
-			// Phase 2: Letters settle to final size with subtle bounce
+			// Phase 2: Letters settle to final size
 			tl.to(
 				letters,
 				{
 					scale: 1,
-					duration: 0.3,
+					duration: 0.4,
 					ease: 'power2.out'
 				},
-				'-=0.1'
+				'-=0.2'
 			);
 
 			// Phase 3: Brief pause to let the logo sit
-			tl.to({}, { duration: 0.4 });
+			tl.to({}, { duration: 0.6 });
 
-			// Phase 4: White circle expands to reveal content
+			// Phase 4: White circle expands to reveal content (1.5s like nbrs.ca)
 			tl.to(
 				circleOverlay,
 				{
 					scale: 3,
-					duration: 0.8,
+					duration: 1.5,
 					ease: 'power2.inOut'
-				},
-				'-=0.1'
+				}
 			);
 
 			// Phase 5: Fade out letters as circle expands
@@ -98,10 +96,10 @@
 				letters,
 				{
 					opacity: 0,
-					duration: 0.3,
+					duration: 0.4,
 					ease: 'power2.in'
 				},
-				'-=0.6'
+				'-=1.2'
 			);
 		}, container);
 	});
@@ -114,19 +112,31 @@
 {#if visible}
 	<div
 		bind:this={container}
-		class="fixed inset-0 z-[9999] flex items-center justify-center bg-nbrs-green"
+		class="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
 		aria-hidden="true"
 	>
+		<!-- Green background with subtle pattern (matching nbrs.ca) -->
+		<div class="absolute inset-0 bg-nbrs-green">
+			<svg class="absolute inset-0 h-full w-full opacity-40" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<pattern id="splash-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+						<circle cx="20" cy="20" r="1.5" fill="white" fill-opacity="0.4" />
+					</pattern>
+				</defs>
+				<rect width="100%" height="100%" fill="url(#splash-pattern)" />
+			</svg>
+		</div>
+
 		<!-- Letters container -->
 		<div
 			bind:this={lettersContainer}
-			class="relative z-10 flex items-center justify-center gap-2 sm:gap-4"
+			class="relative z-10 flex items-center justify-center gap-1 sm:gap-2 md:gap-4"
 			style="perspective: 1000px;"
 		>
 			{#each ['N', 'B', 'R', 'S'] as letter}
 				<span
-					class="splash-letter text-6xl sm:text-8xl md:text-9xl font-bold text-white select-none"
-					style="transform-style: preserve-3d;"
+					class="splash-letter select-none font-black text-white"
+					style="font-size: clamp(2rem, 15vw, 8rem); transform-style: preserve-3d;"
 				>
 					{letter}
 				</span>

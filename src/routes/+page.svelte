@@ -4,46 +4,43 @@
 	import BuildTimeline from '$lib/components/BuildTimeline.svelte';
 	import { scrollReveal } from '$lib/utils/gsap';
 
-	// LCP optimization: Preload the first hero poster for faster initial render
+	// LCP optimization: Preload the hero poster for faster initial render
 	const heroPosterUrl =
 		'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/night_reubgh.jpg';
 
-	// Cloudinary video sources from nbrs.ca
-	const heroVideos = [
-		{
-			mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/night_reubgh.mp4'
-		},
-		{
-			mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/fountain_duwuhb.mp4'
-		},
-		{
-			mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581662/city_tel9gg.mp4'
-		}
-	];
+	// Single hero video (not carousel)
+	const heroVideo = {
+		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/night_reubgh.mp4'
+	};
 
-	// Individual video sources for sections
+	// FAMILY 1 building render video (local asset)
+	const family1Video = {
+		mp4: '/videos/new/building-render-dusk.mov'
+	};
+
+	// Video for other sections
 	const fountainVideo = {
 		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/fountain_duwuhb.mp4'
 	};
 
-	const cityVideo = {
-		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581662/city_tel9gg.mp4'
+	const skylineVideo = {
+		mp4: '/videos/new/toronto-skyline-sunset.mov'
 	};
 </script>
 
 <svelte:head>
-	<title>NBRS - Neighbourhood Based Rental Solutions</title>
+	<title>NBRS - Quality Rental Housing at the Neighbourhood Scale</title>
 	<meta
 		name="description"
-		content="Quality rental housing at the neighbourhood scale. NBRS builds family-sized homes in established Toronto communities."
+		content="Quality rental housing at the neighbourhood scale. NBRS (pronounced 'neighbours') builds family-sized homes in established Toronto communities."
 	/>
 	<!-- Preload LCP image for faster hero render -->
 	<link rel="preload" as="image" href={heroPosterUrl} fetchpriority="high" />
 </svelte:head>
 
-<!-- Hero Section -->
+<!-- Hero Section - Single video -->
 <section aria-label="Welcome">
-	<VideoHero sources={heroVideos} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
+	<VideoHero source={heroVideo} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
 		<div class="flex flex-col items-center justify-center h-full text-white text-center px-4 sm:px-6">
 			<h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
 				Building Homes,<br />Building Community
@@ -51,7 +48,7 @@
 			<p class="text-base xs:text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 max-w-2xl opacity-90">
 				Quality rental housing at the neighbourhood scale
 			</p>
-			<p class="text-sm xs:text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your NBRS</p>
+			<p class="text-sm xs:text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your Neighbours</p>
 
 			<!-- Scroll indicator -->
 			<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
@@ -63,12 +60,12 @@
 	</VideoHero>
 </section>
 
-<!-- FAMILY 1 Project Preview -->
+<!-- FAMILY 1 Project Preview - Using building render video -->
 <section aria-labelledby="family1-heading" class="py-16 sm:py-20 md:py-32 bg-white">
 	<div class="max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'fade', duration: 1 }}>
-				<VideoSection source={cityVideo} aspectRatio="4/3" overlayClass="bg-black/10">
+				<VideoSection source={family1Video} aspectRatio="4/3" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-nbrs-green px-4 py-2 rounded-full">
 							Coming 2026
@@ -127,17 +124,14 @@
 					Neighbourhood<br />Scale Housing
 				</h2>
 				<p class="text-base sm:text-lg text-gray-600 mb-4">
-					We believe great cities are made of great neighbourhoods. NBRS builds quality rental housing
-					that integrates seamlessly into the communities we serve.
+					We believe great cities are made of great neighbourhoods. NBRS (pronounced "neighbours") builds
+					quality rental housing that integrates seamlessly into the communities we serve.
 				</p>
 				<p class="text-base sm:text-lg text-gray-600 mb-4">
 					Smaller, distributed projects. Thoughtful design. Buildings that look like they belong—because they do.
 				</p>
 				<p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
-					Our name says it all: <strong class="text-gray-900">N</strong>eighbourhood
-					<strong class="text-gray-900">B</strong>ased
-					<strong class="text-gray-900">R</strong>ental
-					<strong class="text-gray-900">S</strong>olutions.
+					We're here to prove that rental housing can be beautiful, functional, and good for the neighbourhood.
 				</p>
 				<a
 					href="/mission"
@@ -150,36 +144,14 @@
 				</a>
 			</div>
 			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
-				<VideoSection source={fountainVideo} aspectRatio="4/5" overlayClass="bg-black/5">
+				<VideoSection source={skylineVideo} aspectRatio="4/5" overlayClass="bg-black/5">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
-							Community Spaces
+							Toronto Neighbourhoods
 						</span>
 					</div>
 				</VideoSection>
 			</div>
 		</div>
-	</div>
-</section>
-
-<!-- Partner CTA Section -->
-<section aria-labelledby="partner-cta-heading" class="py-16 sm:py-20 md:py-32 bg-nbrs-green text-white">
-	<div class="max-w-4xl mx-auto px-4 sm:px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
-		<h2 id="partner-cta-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
-			Build With Us
-		</h2>
-		<p class="text-base sm:text-lg md:text-xl opacity-90 mb-6 sm:mb-8 max-w-2xl mx-auto">
-			We're looking for partners who share our vision—investors, nonprofits, landowners,
-			and municipalities ready to create housing that works.
-		</p>
-		<a
-			href="/partner"
-			class="btn btn-white group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-nbrs-green min-h-[48px]"
-		>
-			<span>Partner With NBRS</span>
-			<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
-				<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
-			</svg>
-		</a>
 	</div>
 </section>

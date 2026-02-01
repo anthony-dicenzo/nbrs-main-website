@@ -5,11 +5,9 @@
 	let scrollY = $state(0);
 	let lastScrollY = $state(0);
 	let visible = $state(true);
-	let atTop = $state(true);
 
 	$effect(() => {
-		atTop = scrollY < 50;
-
+		const atTop = scrollY < 50;
 		if (atTop) {
 			visible = true;
 		} else {
@@ -24,44 +22,44 @@
 <!-- Skip to content link for accessibility -->
 <a
 	href="#main-content"
-	class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-nbrs-green"
+	class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:rounded focus:bg-nbrs-green focus:px-4 focus:py-2 focus:text-white"
 >
 	Skip to main content
 </a>
 
-<!-- Nav container -->
+<!-- Nav container - always green background -->
 <header
-	class="pointer-events-none fixed top-0 right-0 left-0 z-50 transition-transform duration-300"
+	class="pointer-events-none fixed top-0 right-0 left-0 z-50 bg-nbrs-green transition-transform duration-300"
 	class:translate-y-0={visible}
 	class:-translate-y-full={!visible}
 >
-	<div class="pointer-events-none relative mx-auto w-full max-w-[1440px]">
-		<!-- Logo -->
+	<div class="pointer-events-none relative mx-auto flex h-16 w-full max-w-[1440px] items-center justify-between px-4 md:h-20 md:px-6">
+		<!-- Logo - white on green -->
 		<a
 			href="/"
 			aria-label="Home"
-			class="pointer-events-auto absolute top-4 left-4 md:top-6 md:left-6"
+			class="pointer-events-auto"
 		>
-			<Logo variant="color" />
+			<Logo variant="white" />
 		</a>
 
-		<!-- Nav links -->
+		<!-- Nav links - aligned with logo -->
 		<nav
 			aria-label="Main"
-			class="pointer-events-auto absolute top-4 right-4 flex items-center gap-2 sm:gap-3 md:top-6 md:right-6"
+			class="pointer-events-auto flex items-center gap-2 sm:gap-3"
 		>
-			<!-- Mission - outlined pill (hidden on very small screens) -->
+			<!-- Mission - white outlined pill -->
 			<a
 				href="/mission"
-				class="pill pill-outlined group text-nbrs-green hidden xs:inline-flex min-h-[44px]"
+				class="group hidden xs:inline-flex items-center rounded-full border border-white/60 bg-transparent px-4 py-2 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10 min-h-[44px]"
 			>
 				<Rollover text="Mission" />
 			</a>
 
-			<!-- Partner - solid pill -->
+			<!-- Partner - white solid pill with green text -->
 			<a
 				href="/partner"
-				class="pill pill-solid group gap-2 text-nbrs-green shadow-sm hover:shadow-md min-h-[44px]"
+				class="group inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-nbrs-green transition-all hover:bg-white/90 hover:shadow-md min-h-[44px]"
 			>
 				<Rollover text="Partner" />
 				<svg
@@ -77,12 +75,4 @@
 			</a>
 		</nav>
 	</div>
-
-	<!-- Background that fades in when scrolled -->
-	<div
-		class="absolute inset-0 -z-10 bg-white shadow-sm transition-opacity duration-300"
-		class:opacity-0={atTop}
-		class:opacity-100={!atTop}
-		aria-hidden="true"
-	></div>
 </header>

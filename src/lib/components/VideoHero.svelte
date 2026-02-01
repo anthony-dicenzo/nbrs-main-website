@@ -10,16 +10,21 @@
 	}
 
 	let {
+		source,
 		sources = [],
 		rotationInterval = 9000,
 		overlayClass = '',
 		children
 	}: {
-		sources: VideoSource[];
+		source?: VideoSource;
+		sources?: VideoSource[];
 		rotationInterval?: number;
 		overlayClass?: string;
 		children?: Snippet;
 	} = $props();
+
+	// Support both single source and array of sources
+	const videoSources = $derived(source ? [source] : sources);
 
 	let currentIndex = $state(0);
 	let videoLoaded = $state(false);
@@ -30,7 +35,7 @@
 	const showVideoOnDevice = $derived(!isMobile());
 
 	// Get current source
-	const currentSource = $derived(sources[currentIndex] || sources[0]);
+	const currentSource = $derived(videoSources[currentIndex] || videoSources[0]);
 
 	// Generate poster URL from video URL if not provided
 	// Cloudinary supports jpg format for video thumbnails
@@ -64,8 +69,8 @@
 
 	// Rotate to next video
 	function rotateVideo() {
-		if (sources.length <= 1) return;
-		currentIndex = (currentIndex + 1) % sources.length;
+		if (videoSources.length <= 1) return;
+		currentIndex = (currentIndex + 1) % videoSources.length;
 		videoLoaded = false;
 	}
 
@@ -73,7 +78,7 @@
 		// Initialize mobile detection
 		initMobileDetection();
 
-		if (!sources.length) return;
+		if (!videoSources.length) return;
 
 		// Preload first poster
 		const posterUrl = getPosterUrl(currentSource);
@@ -81,7 +86,7 @@
 		posterLoaded = true;
 
 		// Start rotation if multiple videos (only on desktop where videos play)
-		if (sources.length > 1 && showVideoOnDevice) {
+		if (videoSources.length > 1 && showVideoOnDevice) {
 			rotationTimer = setInterval(rotateVideo, rotationInterval);
 		}
 	});
