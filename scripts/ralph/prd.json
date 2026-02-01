@@ -195,7 +195,7 @@
         "Touch targets are adequate size (44px min)",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE8-01",

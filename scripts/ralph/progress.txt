@@ -18,6 +18,16 @@ Started: 2026-01-31
 - Config is in `src/app.css` using `@theme` block, NOT tailwind.config.js
 - Brand colors: `--color-nbrs-green: #4fa64f`
 - Use classes like `bg-nbrs-green`, `text-nbrs-green`
+- Custom breakpoint: `--breakpoint-xs: 375px` for extra small screens
+
+### Mobile Responsive Pattern (from PHASE7-03)
+- Use `xs:` prefix for 375px+ breakpoint (iPhone SE and larger)
+- Typography scale: `text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl`
+- Container padding: `px-4 sm:px-6` for mobile-first spacing
+- Touch targets: `min-h-[44px]` or `min-h-[48px]` for buttons and links
+- Buttons: Stack vertically on mobile with `flex-col xs:flex-row`
+- Hide secondary nav items on small screens: `hidden xs:inline-flex`
+- Forms: Already responsive with `sm:grid-cols-2` pattern
 
 ### Page Transitions
 - Use Svelte `#key` block with `data.pathname` in +layout.svelte
@@ -539,5 +549,71 @@ Started: 2026-01-31
 - Success states: Add `role="status" aria-live="polite"` for dynamic announcements
 - Semantic structure: Use `<header>`, `<main>`, `<footer>`, `<nav>` appropriately
 - Page metadata: Every page needs `<svelte:head>` with unique `<title>` and `<meta name="description">`
+
+---
+
+## 2026-02-01 - PHASE7-03: Mobile Responsive Polish
+
+### What was implemented
+- **Custom xs breakpoint** (`src/app.css`):
+  - Added `--breakpoint-xs: 375px` for extra small screens (iPhone SE and larger)
+  - Enables `xs:` utility classes for fine-grained responsive control
+
+- **Nav mobile fixes** (`src/lib/components/Nav.svelte`):
+  - Reduced gap between nav items on small screens (`gap-2 sm:gap-3`)
+  - Hide "Mission" button on screens < 375px to prevent overflow
+  - Added `min-h-[44px]` to nav pills for touch target accessibility
+
+- **Homepage responsive polish** (`src/routes/+page.svelte`):
+  - Hero text scales from `text-3xl` to `text-7xl` across breakpoints
+  - Reduced section padding on mobile (`py-16 sm:py-20 md:py-32`)
+  - Buttons stack vertically on mobile, horizontal on xs+ (`flex-col xs:flex-row`)
+  - All buttons have `min-h-[48px]` for adequate touch targets
+  - How We Build section uses 2-column grid on small screens
+
+- **Partner page** (`src/routes/partner/+page.svelte`):
+  - Hero text and decorative circles scale appropriately
+  - Benefit cards smaller padding on mobile (`p-6 sm:p-8`)
+  - Partner list items with smaller badges on mobile (`w-10 sm:w-12`)
+  - Form container with reduced padding on mobile
+
+- **Waitlist page** (`src/routes/waitlist/+page.svelte`):
+  - Hero with smaller typography on mobile
+  - Feature icons smaller on mobile (`w-12 sm:w-14`)
+  - Expectations list with smaller checkmarks and gaps
+  - Form with 48px minimum touch targets
+
+- **Footer** (`src/lib/components/Footer.svelte`):
+  - Reduced minimum height on mobile (320px vs 400px)
+  - Brand text smaller on mobile (`text-3xl xs:text-4xl`)
+  - Nav links horizontal on all screen sizes with 44px touch targets
+  - Form inputs and buttons with 44px minimum height
+
+- **Placeholder pages** (mission, family-1, faqs, contact):
+  - Replaced fixed `p-8` with responsive `px-4 py-16 sm:px-6 sm:py-20`
+  - Added max-width container for content centering
+  - Smaller headings on mobile (`text-2xl xs:text-3xl sm:text-4xl`)
+  - Nav links with 44px minimum touch targets
+
+### Files changed
+- src/app.css (added xs breakpoint)
+- src/lib/components/Nav.svelte (mobile gap, hidden Mission, touch targets)
+- src/lib/components/Footer.svelte (smaller mobile, horizontal nav, touch targets)
+- src/routes/+page.svelte (responsive typography, buttons, padding)
+- src/routes/partner/+page.svelte (responsive hero, cards, badges, form)
+- src/routes/waitlist/+page.svelte (responsive hero, features, form)
+- src/routes/mission/+page.svelte (responsive padding, typography)
+- src/routes/family-1/+page.svelte (responsive padding, typography)
+- src/routes/faqs/+page.svelte (responsive padding, typography)
+- src/routes/contact/+page.svelte (responsive padding, typography)
+
+### Learnings for future iterations
+- Custom breakpoints in Tailwind v4: Add to `@theme { --breakpoint-xs: 375px }`
+- Touch targets: Use `min-h-[44px]` for links, `min-h-[48px]` for primary buttons
+- Button stacking: `flex-col xs:flex-row` ensures buttons stack on tiny screens
+- Typography scale: Always include smallest size for 320px (`text-2xl` or `text-3xl`)
+- Container padding: `px-4 sm:px-6` prevents content touching screen edges
+- Nav overflow prevention: Hide secondary items with `hidden xs:inline-flex`
+- Form already responsive: `sm:grid-cols-2` pattern works well for name fields
 
 ---
