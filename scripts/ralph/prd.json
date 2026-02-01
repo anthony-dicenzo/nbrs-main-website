@@ -136,7 +136,7 @@
         "Pages match site design quality",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE6-03",

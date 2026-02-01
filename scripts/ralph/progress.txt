@@ -298,3 +298,39 @@ Started: 2026-01-31
 - Partner CTA section doesn't need video - text-only with brand color is effective
 
 ---
+
+## 2026-02-01 - PHASE6-02: Partner and Waitlist Pages
+
+### What was implemented
+- **Partner page** (`src/routes/partner/+page.svelte`):
+  - Hero with green background and decorative circles
+  - "Why Partner With Us" section with 3 benefit cards (Stable Returns, Community Impact, Scalable Model)
+  - "Who We Work With" section with numbered partner types (Investors, Nonprofits, Landowners, Municipalities)
+  - Contact form with fields: name, email, organization, partner type, message
+  - Form has loading state, success state, and error handling
+  - Direct email CTA at bottom
+
+- **Waitlist page** (`src/routes/waitlist/+page.svelte`):
+  - Dark hero with "Coming 2026" badge and FAMILY 1 branding
+  - Feature strip showing unit highlights (3 Bedrooms, Storage Space, Outdoor Access, Vibrant Area)
+  - "What to Expect" info card with waitlist benefits
+  - Signup form with fields: first name, last name, email, phone, household size, neighbourhood, unit type
+  - Toronto neighbourhood options (Downtown, East York, Scarborough, North York, Etobicoke, Other GTA)
+  - Form validation, loading state, success state with CTA to FAMILY 1 page
+  - Learn More CTA section at bottom
+
+### Files changed
+- src/routes/partner/+page.svelte (complete rewrite)
+- src/routes/waitlist/+page.svelte (complete rewrite)
+
+### Learnings for future iterations
+- Svelte 5 form pattern: Use `$state()` for formData object, `onsubmit={handleSubmit}` not `on:submit`
+- Use `$state<'idle' | 'success' | 'error'>('idle')` for typed submission status
+- `.form-input` class from app.css provides consistent input styling with focus states
+- Decorative background circles: `opacity-10` or `opacity-20` for subtle visual interest
+- Partner types work well as numbered list with circular badges (1, 2, 3, 4)
+- Feature strips: `grid-cols-2 md:grid-cols-4` for responsive icon/text pairs
+- Blur effect for hero backgrounds: `blur-3xl` on colored circles creates ambient glow
+- Privacy note at form bottom: `text-xs text-gray-500 text-center` for unobtrusive legal text
+
+---
