@@ -76,6 +76,15 @@ Started: 2026-01-31
 - Use `decoding="async"` on images for non-blocking decode
 - Vite: `cssMinify: 'lightningcss'` for smaller, faster CSS
 
+### Accessibility Pattern (from PHASE7-02)
+- Section landmarks: `<section aria-labelledby="heading-id">` or `<section aria-label="Label">`
+- Decorative elements: Add `aria-hidden="true"` to SVG icons, backgrounds, badges
+- Forms: Add `<label>` for all inputs, use `sr-only` class for hidden labels
+- Success states: Add `role="status" aria-live="polite"` for dynamic announcements
+- Semantic structure: Use `<header>`, `<main>`, `<footer>`, `<nav>` appropriately
+- Page metadata: Every page needs `<svelte:head>` with unique `<title>` and `<meta name="description">`
+- Nav SVG arrows in buttons: Add `aria-hidden="true"` since text label exists
+
 ---
 
 ## 2026-01-31 - PHASE3-01: GSAP Context Pattern and Reusable Actions
@@ -457,5 +466,78 @@ Started: 2026-01-31
 - Use `fetchpriority="high"` on LCP images
 - Always add `width` and `height` to images to prevent CLS
 - Preload LCP resources in `<svelte:head>` with `rel="preload"`
+
+---
+
+## 2026-02-01 - PHASE7-02: Accessibility Audit and Fixes
+
+### What was implemented
+- **Homepage accessibility** (`src/routes/+page.svelte`):
+  - Added section landmarks with `aria-label` or `aria-labelledby`
+  - Added `id` attributes to h2 headings for section labels
+  - Added `aria-hidden="true"` to decorative SVGs (scroll indicator, arrow icons)
+  - Added `aria-hidden="true"` to decorative step numbers in How We Build section
+
+- **Footer accessibility** (`src/lib/components/Footer.svelte`):
+  - Changed decorative h2 "Neighbourhood Scale" to `<p>` with `aria-hidden="true"`
+  - Added `<label>` with `sr-only` class for email inputs
+  - Added `id` attributes for label/input association
+  - Added `autocomplete="email"` for improved UX
+  - Added `aria-label="Newsletter signup"` to forms
+
+- **Nav accessibility** (`src/lib/components/Nav.svelte`):
+  - Changed container from `<div>` to `<header>` for semantic structure
+  - Added `aria-hidden="true"` to decorative arrow SVG
+  - Added `aria-hidden="true"` to background fade element
+
+- **Partner page** (`src/routes/partner/+page.svelte`):
+  - Added section landmarks with proper headings
+  - Added `aria-hidden="true"` to decorative background circles
+  - Added `aria-hidden="true"` to benefit icon containers
+  - Added `aria-hidden="true"` to numbered partner badges
+  - Added `role="status"` and `aria-live="polite"` to success state
+  - Added `aria-hidden="true"` to loading spinner SVG
+
+- **Waitlist page** (`src/routes/waitlist/+page.svelte`):
+  - Added section landmarks with proper headings
+  - Added `aria-hidden="true"` to decorative background gradients
+  - Added `aria-hidden="true"` to feature icon containers
+  - Added `aria-hidden="true"` to checklist SVGs
+  - Added `role="status"` and `aria-live="polite"` to success state
+  - Added `aria-hidden="true"` to loading spinner and CTA arrow SVGs
+
+- **Placeholder pages** (mission, family-1, faqs, contact):
+  - Added `<svelte:head>` with title and meta description
+  - Changed container from `<div>` to `<main>`
+  - Added `aria-label="Page navigation"` to nav elements
+
+### Files changed
+- src/routes/+page.svelte
+- src/lib/components/Footer.svelte
+- src/lib/components/Nav.svelte
+- src/routes/partner/+page.svelte
+- src/routes/waitlist/+page.svelte
+- src/routes/mission/+page.svelte
+- src/routes/family-1/+page.svelte
+- src/routes/faqs/+page.svelte
+- src/routes/contact/+page.svelte
+
+### Learnings for future iterations
+- Use `<section aria-labelledby="id">` + `<h2 id="id">` for sections with headings
+- Use `<section aria-label="Description">` for sections without visible headings
+- Decorative SVGs should always have `aria-hidden="true"`
+- Form success states should have `role="status"` and `aria-live="polite"` for screen readers
+- Use `<header>` instead of `<div>` for site header (has implicit role="banner")
+- Email inputs should have `autocomplete="email"` for better autofill
+- Decorative text (like large branding) should be `<p aria-hidden="true">` not `<h2>`
+- Every page needs `<svelte:head>` with unique title and description
+
+### Accessibility Pattern (for Codebase Patterns section)
+- Section landmarks: `<section aria-labelledby="heading-id">` or `<section aria-label="Label">`
+- Decorative elements: Add `aria-hidden="true"` to SVG icons, backgrounds, badges
+- Forms: Add `<label>` for all inputs, use `sr-only` class for hidden labels
+- Success states: Add `role="status" aria-live="polite"` for dynamic announcements
+- Semantic structure: Use `<header>`, `<main>`, `<footer>`, `<nav>` appropriately
+- Page metadata: Every page needs `<svelte:head>` with unique `<title>` and `<meta name="description">`
 
 ---
