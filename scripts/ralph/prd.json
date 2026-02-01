@@ -201,25 +201,59 @@
       "id": "PHASE8-01",
       "title": "Illustrated Build Timeline Section",
       "priority": 14,
-      "description": "Replace the plain 'How We Build' section with a visually impactful illustrated timeline matching americanhousing.co style. Create SVG blueprint-style illustrations for each step. Three steps: 1) Find Land (empty lot with dashed outline), 2) Build Together (building under construction with crane), 3) Welcome Home (completed building with family/car). Use NBRS green (#4fa64f) for the line drawings on cream/beige background. Animate illustrations on scroll with GSAP - lines should draw in progressively.",
+      "description": "DEPRECATED - See PHASE9-02 for corrected requirements. The current implementation does NOT match americanhousing.co.",
       "acceptanceCriteria": [
-        "BuildTimeline.svelte component with 3-step visual process",
-        "Custom SVG illustrations in blueprint/architectural line style",
-        "Step 1: Empty lot with property lines (dashed)",
-        "Step 2: Building under construction with crane",
-        "Step 3: Completed building with 'Welcome' elements",
-        "GSAP scroll-triggered line drawing animation",
-        "Cream/beige background matching americanhousing.co",
-        "Bold numbered headings (1 Find Land, 2 Build Together, 3 Welcome Home)",
-        "Responsive layout (stacked on mobile, horizontal on desktop)",
-        "Build passes"
+        "See PHASE9-02"
       ],
       "passes": true
     },
     {
+      "id": "PHASE9-01",
+      "title": "Hero Video - Community Oriented",
+      "priority": 14,
+      "description": "Change the hero video from the dark/dusk night video to a more community-oriented video. Use community-street-festival.mov from static/videos/new/ which shows vibrant community life. The current night/dusk vibe doesn't match the brand.",
+      "acceptanceCriteria": [
+        "Hero uses community-street-festival.mov (or similar upbeat community video)",
+        "Video shows community/neighborhood life, not dark/moody atmosphere",
+        "Poster image updated to match",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE9-02",
+      "title": "Build Timeline - Match americanhousing.co Exactly",
+      "priority": 15,
+      "description": "The current Build Timeline is NOT matching americanhousing.co. Look at their website - they have a 3-panel HORIZONTAL layout with: 1) Large numbered black circle + bold title at TOP, 2) Detailed blueprint-style line illustration BELOW taking most of the space, 3) Clean vertical divider lines between panels. The illustrations are detailed architectural drawings, NOT simple icons. Layout: cream/beige background, 3 equal columns with thin vertical dividers. Each panel should be roughly square aspect ratio with the illustration dominating. Reference: https://www.americanhousing.co/",
+      "acceptanceCriteria": [
+        "3-panel horizontal layout matching americanhousing.co exactly",
+        "Each panel: numbered circle + title at top, large illustration below",
+        "Thin vertical divider lines between panels",
+        "Illustrations are detailed architectural blueprint-style (like the reference)",
+        "Cream/beige background",
+        "GSAP line-drawing animation on scroll",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
+      "id": "PHASE9-03",
+      "title": "Footer - Match americanhousing.co Style",
+      "priority": 16,
+      "description": "Fix the footer to match americanhousing.co: 1) The tagline section ('Built for families. Rooted in community.') should have WHITE background (not cream), 2) Use the SAME FONT as 'Neighbourhood Scale' but lighter weight, 3) LESS spacing/padding between the tagline section and the green 'Neighbourhood Scale' section - they should feel connected.",
+      "acceptanceCriteria": [
+        "Tagline section has white background",
+        "Tagline uses same font family as 'Neighbourhood Scale' but lighter weight",
+        "Reduced padding between tagline and green section",
+        "Overall footer matches americanhousing.co reference quality",
+        "Build passes"
+      ],
+      "passes": false
+    },
+    {
       "id": "PHASE8-02",
       "title": "FAMILY 1 Project Section with Building Render Video",
-      "priority": 15,
+      "priority": 17,
       "description": "Update the FAMILY 1 project preview section to use the building render video from static/videos/new/building-render-dusk.mov. This video shows the actual FAMILY 1 building rendering at dusk and MUST be prominently featured. Convert MOV to web formats, add compelling copy about the project timeline, unit mix, and location.",
       "acceptanceCriteria": [
         "FAMILY 1 section uses building-render-dusk video (converted to WebM/MP4)",
@@ -229,12 +263,12 @@
         "Scroll reveal animation on section",
         "Build passes"
       ],
-      "passes": false
+      "passes": true
     },
     {
       "id": "PHASE8-03",
       "title": "Construction Progress Section",
-      "priority": 16,
+      "priority": 18,
       "description": "Add a construction progress section using the local construction videos (construction-crane-progress.mov, construction-site-barriers.mov). Show NBRS building in action - real footage of the construction process. Can be a video carousel or grid layout.",
       "acceptanceCriteria": [
         "Construction section with real site footage",
