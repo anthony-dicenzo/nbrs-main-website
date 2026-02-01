@@ -1,6 +1,7 @@
 <script lang="ts">
 	import VideoHero from '$lib/components/VideoHero.svelte';
 	import VideoSection from '$lib/components/VideoSection.svelte';
+	import BuildTimeline from '$lib/components/BuildTimeline.svelte';
 	import { scrollReveal } from '$lib/utils/gsap';
 
 	// LCP optimization: Preload the first hero poster for faster initial render
@@ -28,25 +29,6 @@
 	const cityVideo = {
 		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581662/city_tel9gg.mp4'
 	};
-
-	// How We Build process steps
-	const buildSteps = [
-		{
-			number: '01',
-			title: 'Find the Right Sites',
-			description: 'We identify underutilized parcels in established neighbourhoods where gentle density makes sense.'
-		},
-		{
-			number: '02',
-			title: 'Design for Families',
-			description: 'Every unit is sized and planned for real family living—bedrooms, storage, outdoor space.'
-		},
-		{
-			number: '03',
-			title: 'Build to Last',
-			description: 'Quality construction that ages well, creating homes people want to stay in for the long term.'
-		}
-	];
 </script>
 
 <svelte:head>
@@ -130,39 +112,8 @@
 	</div>
 </section>
 
-<!-- How We Build Section -->
-<section aria-labelledby="how-we-build-heading" class="py-16 sm:py-20 md:py-32 bg-gray-50">
-	<div class="max-w-6xl mx-auto px-4 sm:px-6">
-		<div class="text-center mb-10 sm:mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
-				Our Approach
-			</span>
-			<h2 id="how-we-build-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-				How We Build
-			</h2>
-			<p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-				We create quality rental homes that fit into existing communities—affordable without looking affordable.
-			</p>
-		</div>
-
-		<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
-			{#each buildSteps as step, i}
-				<div
-					class="relative"
-					use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: i * 0.15 }}
-				>
-					<span class="text-5xl sm:text-6xl md:text-7xl font-bold text-nbrs-green/10 absolute -top-3 sm:-top-4 -left-1 sm:-left-2" aria-hidden="true">
-						{step.number}
-					</span>
-					<div class="relative pt-6 sm:pt-8 pl-3 sm:pl-4">
-						<h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{step.title}</h3>
-						<p class="text-sm sm:text-base text-gray-600 leading-relaxed">{step.description}</p>
-					</div>
-				</div>
-			{/each}
-		</div>
-	</div>
-</section>
+<!-- How We Build Section - Illustrated Timeline -->
+<BuildTimeline />
 
 <!-- About/Mission Section -->
 <section aria-labelledby="about-heading" class="py-16 sm:py-20 md:py-32 bg-white">
