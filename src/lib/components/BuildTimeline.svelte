@@ -5,21 +5,20 @@
 	let container: HTMLElement;
 	let ctx: gsap.Context | null = null;
 
-	// Step data
 	const steps = [
 		{
 			number: '1',
-			title: 'Find Land',
+			title: 'Buy Land',
 			description: 'We identify underutilized parcels in established neighbourhoods where gentle density makes sense.'
 		},
 		{
 			number: '2',
-			title: 'Build Together',
+			title: 'Build Homes',
 			description: 'Quality construction with thoughtful design—homes that fit in and stand out.'
 		},
 		{
 			number: '3',
-			title: 'Welcome Home',
+			title: 'Sell Homes',
 			description: 'Families move into spaces designed for real life—room to grow, room to thrive.'
 		}
 	];
@@ -31,77 +30,42 @@
 		const ScrollTrigger = await loadScrollTrigger();
 
 		ctx = gsap.context(() => {
-			// Animate the SVG paths (line drawing effect)
+			// Animate SVG paths with line drawing effect
 			const paths = container.querySelectorAll('.draw-path');
 			paths.forEach((path) => {
 				const svgPath = path as SVGPathElement;
 				const length = svgPath.getTotalLength();
 
-				// Set up initial state
 				gsap.set(svgPath, {
 					strokeDasharray: length,
 					strokeDashoffset: length
 				});
 
-				// Animate on scroll
 				gsap.to(svgPath, {
 					strokeDashoffset: 0,
 					duration: 1.5,
 					ease: 'power2.out',
 					scrollTrigger: {
 						trigger: svgPath.closest('.step-card'),
-						start: 'top 80%',
+						start: 'top 85%',
 						toggleActions: 'play none none none'
 					}
 				});
 			});
 
-			// Animate fill elements with delay
-			const fills = container.querySelectorAll('.draw-fill');
-			fills.forEach((fill) => {
-				gsap.from(fill, {
-					opacity: 0,
-					duration: 0.8,
-					delay: 0.8,
-					ease: 'power2.out',
-					scrollTrigger: {
-						trigger: fill.closest('.step-card'),
-						start: 'top 80%',
-						toggleActions: 'play none none none'
-					}
-				});
-			});
-
-			// Animate step cards staggered
+			// Animate step cards
 			const cards = container.querySelectorAll('.step-card');
 			gsap.from(cards, {
 				opacity: 0,
-				y: 40,
+				y: 30,
 				duration: 0.8,
-				stagger: 0.2,
+				stagger: 0.15,
 				ease: 'power2.out',
 				scrollTrigger: {
 					trigger: container,
 					start: 'top 80%',
 					toggleActions: 'play none none none'
 				}
-			});
-
-			// Animate connecting lines
-			const connectors = container.querySelectorAll('.connector-line');
-			connectors.forEach((line, i) => {
-				gsap.from(line, {
-					scaleX: 0,
-					duration: 0.6,
-					delay: 0.3 + i * 0.2,
-					ease: 'power2.out',
-					transformOrigin: 'left center',
-					scrollTrigger: {
-						trigger: container,
-						start: 'top 80%',
-						toggleActions: 'play none none none'
-					}
-				});
 			});
 		}, container);
 	});
@@ -113,251 +77,178 @@
 
 <section
 	aria-labelledby="build-timeline-heading"
-	class="py-16 sm:py-20 md:py-32 bg-amber-50"
+	class="py-16 sm:py-20 md:py-24 bg-amber-50"
 	bind:this={container}
 >
-	<div class="max-w-6xl mx-auto px-4 sm:px-6">
-		<!-- Section Header -->
-		<div class="text-center mb-12 sm:mb-16 md:mb-20">
-			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
-				Our Approach
-			</span>
-			<h2 id="build-timeline-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-				How We Build
-			</h2>
-			<p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-				A simple process that creates quality homes in the neighbourhoods that need them.
-			</p>
-		</div>
-
-		<!-- Timeline Steps -->
-		<div class="grid md:grid-cols-3 gap-8 md:gap-6 lg:gap-12 relative">
-			<!-- Connecting lines (desktop only) -->
-			<div class="hidden md:block absolute top-32 left-1/3 right-1/3 h-0.5" aria-hidden="true">
-				<div class="connector-line h-full bg-nbrs-green/30 w-full absolute left-0"></div>
-			</div>
+	<div class="max-w-7xl mx-auto px-4 sm:px-6">
+		<!-- Timeline Grid - 3 columns with dividers -->
+		<div class="grid md:grid-cols-3 relative">
+			<!-- Vertical dividers (desktop only) -->
+			<div class="hidden md:block absolute top-0 bottom-0 left-1/3 w-px bg-nbrs-green/20" aria-hidden="true"></div>
+			<div class="hidden md:block absolute top-0 bottom-0 left-2/3 w-px bg-nbrs-green/20" aria-hidden="true"></div>
 
 			{#each steps as step, i}
-				<div class="step-card relative">
-					<!-- Illustration Container -->
-					<div class="relative w-full aspect-square max-w-[280px] mx-auto mb-6 sm:mb-8">
-						<!-- Background circle -->
-						<div class="absolute inset-4 rounded-full bg-white shadow-sm" aria-hidden="true"></div>
+				<div class="step-card px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-0 {i > 0 ? 'border-t md:border-t-0 border-nbrs-green/20' : ''}">
+					<!-- Step Header -->
+					<h3 class="flex items-center gap-3 text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 md:mb-8">
+						<span class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-900 text-white text-lg sm:text-xl font-bold">
+							{step.number}
+						</span>
+						<span>{step.title}</span>
+					</h3>
 
-						<!-- SVG Illustration -->
-						<svg
-							viewBox="0 0 200 200"
-							class="w-full h-full relative z-10"
-							aria-hidden="true"
-						>
+					<!-- Illustration -->
+					<div class="w-full aspect-[4/3] mb-6 md:mb-8">
+						<svg viewBox="0 0 400 300" class="w-full h-full" aria-hidden="true">
 							{#if step.number === '1'}
-								<!-- Step 1: Find Land - Empty lot with dashed property lines -->
+								<!-- Buy Land: Property lot with dashed lines, measurement marks, small vegetation -->
 								<!-- Ground line -->
-								<path
-									class="draw-path"
-									d="M 30 150 L 170 150"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<!-- Property lines (dashed) -->
-								<path
-									class="draw-path"
-									d="M 50 150 L 50 80 L 150 80 L 150 150"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-dasharray="8 4"
-									stroke-linecap="round"
-								/>
-								<!-- Corner markers -->
-								<circle class="draw-fill" cx="50" cy="150" r="4" fill="#4fa64f"/>
-								<circle class="draw-fill" cx="150" cy="150" r="4" fill="#4fa64f"/>
-								<circle class="draw-fill" cx="50" cy="80" r="4" fill="#4fa64f"/>
-								<circle class="draw-fill" cx="150" cy="80" r="4" fill="#4fa64f"/>
-								<!-- Measurement lines -->
-								<path
-									class="draw-path"
-									d="M 40 90 L 40 140"
-									stroke="#4fa64f"
-									stroke-width="1"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<path
-									class="draw-path"
-									d="M 36 90 L 44 90 M 36 140 L 44 140"
-									stroke="#4fa64f"
-									stroke-width="1"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<!-- Tree suggestion -->
-								<path
-									class="draw-path"
-									d="M 120 130 L 120 140 M 110 130 Q 120 110 130 130"
-									stroke="#4fa64f"
-									stroke-width="1.5"
-									fill="none"
-									stroke-linecap="round"
-								/>
+								<line class="draw-path" x1="40" y1="260" x2="360" y2="260" stroke="#4fa64f" stroke-width="2"/>
+
+								<!-- Property boundary - dashed rectangle -->
+								<rect class="draw-path" x="80" y="100" width="240" height="160" fill="none" stroke="#4fa64f" stroke-width="2" stroke-dasharray="12 6"/>
+
+								<!-- Corner stakes -->
+								<circle cx="80" cy="100" r="6" fill="#4fa64f"/>
+								<circle cx="320" cy="100" r="6" fill="#4fa64f"/>
+								<circle cx="80" cy="260" r="6" fill="#4fa64f"/>
+								<circle cx="320" cy="260" r="6" fill="#4fa64f"/>
+
+								<!-- Measurement lines left side -->
+								<line class="draw-path" x1="50" y1="110" x2="50" y2="250" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="42" y1="110" x2="58" y2="110" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="42" y1="250" x2="58" y2="250" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Measurement lines bottom -->
+								<line class="draw-path" x1="90" y1="280" x2="310" y2="280" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="90" y1="272" x2="90" y2="288" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="310" y1="272" x2="310" y2="288" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Small trees/vegetation -->
+								<path class="draw-path" d="M140 240 L140 260" stroke="#4fa64f" stroke-width="2"/>
+								<path class="draw-path" d="M120 240 Q140 200 160 240" stroke="#4fa64f" stroke-width="2" fill="none"/>
+
+								<path class="draw-path" d="M280 240 L280 260" stroke="#4fa64f" stroke-width="2"/>
+								<path class="draw-path" d="M260 240 Q280 200 300 240" stroke="#4fa64f" stroke-width="2" fill="none"/>
+
+								<!-- Small grass tufts -->
+								<path class="draw-path" d="M180 258 L185 248 M185 258 L188 250 M190 258 L193 252" stroke="#4fa64f" stroke-width="1.5" stroke-linecap="round"/>
+								<path class="draw-path" d="M230 258 L235 250 M235 258 L240 252" stroke="#4fa64f" stroke-width="1.5" stroke-linecap="round"/>
+
 							{:else if step.number === '2'}
-								<!-- Step 2: Build Together - Building under construction with crane -->
-								<!-- Building base -->
-								<path
-									class="draw-path"
-									d="M 60 150 L 60 90 L 140 90 L 140 150"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
+								<!-- Build Homes: Building under construction with crane -->
+								<!-- Ground -->
+								<line class="draw-path" x1="20" y1="260" x2="380" y2="260" stroke="#4fa64f" stroke-width="2"/>
+
+								<!-- Building structure -->
+								<rect class="draw-path" x="60" y="120" width="180" height="140" fill="none" stroke="#4fa64f" stroke-width="2"/>
+
 								<!-- Floor lines -->
-								<path
-									class="draw-path"
-									d="M 60 110 L 140 110 M 60 130 L 140 130"
-									stroke="#4fa64f"
-									stroke-width="1.5"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<!-- Windows -->
-								<rect class="draw-fill" x="70" y="95" width="15" height="10" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<rect class="draw-fill" x="115" y="95" width="15" height="10" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<rect class="draw-fill" x="70" y="115" width="15" height="10" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<rect class="draw-fill" x="115" y="115" width="15" height="10" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<!-- Crane -->
-								<path
-									class="draw-path"
-									d="M 160 150 L 160 50 L 180 50 L 180 55 L 160 55"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
+								<line class="draw-path" x1="60" y1="160" x2="240" y2="160" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="60" y1="200" x2="240" y2="200" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Windows Row 1 -->
+								<rect class="draw-path" x="75" y="130" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="90" y1="130" x2="90" y2="152" stroke="#4fa64f" stroke-width="1"/>
+								<rect class="draw-path" x="125" y="130" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="140" y1="130" x2="140" y2="152" stroke="#4fa64f" stroke-width="1"/>
+								<rect class="draw-path" x="195" y="130" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="210" y1="130" x2="210" y2="152" stroke="#4fa64f" stroke-width="1"/>
+
+								<!-- Windows Row 2 -->
+								<rect class="draw-path" x="75" y="170" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="125" y="170" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="195" y="170" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Windows Row 3 -->
+								<rect class="draw-path" x="75" y="210" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="195" y="210" width="30" height="22" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Door opening -->
+								<rect class="draw-path" x="125" y="210" width="50" height="50" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Crane tower -->
+								<line class="draw-path" x1="310" y1="260" x2="310" y2="40" stroke="#4fa64f" stroke-width="3"/>
+								<!-- Crane base -->
+								<line class="draw-path" x1="290" y1="260" x2="330" y2="260" stroke="#4fa64f" stroke-width="3"/>
 								<!-- Crane arm -->
-								<path
-									class="draw-path"
-									d="M 160 55 L 90 55"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<!-- Crane cable and hook -->
-								<path
-									class="draw-path"
-									d="M 100 55 L 100 75 M 95 75 L 105 75 L 100 82 Z"
-									stroke="#4fa64f"
-									stroke-width="1.5"
-									fill="none"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<!-- Ground -->
-								<path
-									class="draw-path"
-									d="M 30 150 L 170 150"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
+								<line class="draw-path" x1="310" y1="50" x2="380" y2="50" stroke="#4fa64f" stroke-width="2.5"/>
+								<line class="draw-path" x1="310" y1="50" x2="270" y2="50" stroke="#4fa64f" stroke-width="2.5"/>
+								<!-- Crane cabin -->
+								<rect class="draw-path" x="300" y="55" width="20" height="25" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<!-- Counter weight -->
+								<rect class="draw-path" x="268" y="45" width="15" height="12" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<!-- Cable and hook -->
+								<line class="draw-path" x1="360" y1="50" x2="360" y2="110" stroke="#4fa64f" stroke-width="1.5"/>
+								<path class="draw-path" d="M352 110 L360 120 L368 110" stroke="#4fa64f" stroke-width="2" fill="none"/>
+								<!-- Beam being lifted -->
+								<rect class="draw-path" x="340" y="125" width="40" height="8" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
 							{:else}
-								<!-- Step 3: Welcome Home - Completed building with welcome elements -->
-								<!-- Building complete -->
-								<path
-									class="draw-path"
-									d="M 50 150 L 50 70 L 100 50 L 150 70 L 150 150"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<!-- Roof detail -->
-								<path
-									class="draw-path"
-									d="M 45 70 L 100 48 L 155 70"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<!-- Windows row 1 -->
-								<rect class="draw-fill" x="60" y="80" width="20" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<rect class="draw-fill" x="120" y="80" width="20" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<!-- Windows row 2 -->
-								<rect class="draw-fill" x="60" y="105" width="20" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<rect class="draw-fill" x="120" y="105" width="20" height="15" fill="none" stroke="#4fa64f" stroke-width="1.5" rx="1"/>
-								<!-- Door -->
-								<path
-									class="draw-path"
-									d="M 88 150 L 88 125 L 112 125 L 112 150"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<!-- Door handle -->
-								<circle class="draw-fill" cx="108" cy="138" r="2" fill="#4fa64f"/>
+								<!-- Sell Homes: Completed townhouse with car -->
 								<!-- Ground -->
-								<path
-									class="draw-path"
-									d="M 30 150 L 170 150"
-									stroke="#4fa64f"
-									stroke-width="2"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<!-- Welcome path -->
-								<path
-									class="draw-path"
-									d="M 100 150 L 100 165 Q 100 175 90 175 L 70 175"
-									stroke="#4fa64f"
-									stroke-width="1.5"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<!-- Simple family figure -->
-								<circle class="draw-fill" cx="40" cy="160" r="5" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<path
-									class="draw-path"
-									d="M 40 165 L 40 180 M 35 172 L 45 172 M 40 180 L 35 190 M 40 180 L 45 190"
-									stroke="#4fa64f"
-									stroke-width="1.5"
-									fill="none"
-									stroke-linecap="round"
-								/>
-								<!-- Smaller figure (child) -->
-								<circle class="draw-fill" cx="55" cy="167" r="3.5" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
-								<path
-									class="draw-path"
-									d="M 55 170 L 55 180 M 52 175 L 58 175 M 55 180 L 52 188 M 55 180 L 58 188"
-									stroke="#4fa64f"
-									stroke-width="1.5"
-									fill="none"
-									stroke-linecap="round"
-								/>
+								<line class="draw-path" x1="20" y1="260" x2="380" y2="260" stroke="#4fa64f" stroke-width="2"/>
+
+								<!-- Main building -->
+								<rect class="draw-path" x="50" y="100" width="220" height="160" fill="none" stroke="#4fa64f" stroke-width="2"/>
+
+								<!-- Roof -->
+								<line class="draw-path" x1="50" y1="100" x2="50" y2="80" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="270" y1="100" x2="270" y2="80" stroke="#4fa64f" stroke-width="2"/>
+								<line class="draw-path" x1="40" y1="80" x2="280" y2="80" stroke="#4fa64f" stroke-width="2"/>
+
+								<!-- Vertical dividers (townhouse units) -->
+								<line class="draw-path" x1="130" y1="80" x2="130" y2="260" stroke="#4fa64f" stroke-width="1.5"/>
+								<line class="draw-path" x1="190" y1="80" x2="190" y2="260" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Windows Unit 1 -->
+								<rect class="draw-path" x="65" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="95" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="65" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="95" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Door Unit 1 -->
+								<rect class="draw-path" x="75" y="200" width="35" height="60" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<circle cx="105" cy="235" r="3" fill="#4fa64f"/>
+
+								<!-- Windows Unit 2 -->
+								<rect class="draw-path" x="145" y="110" width="30" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="145" y="145" width="30" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Door Unit 2 -->
+								<rect class="draw-path" x="147" y="200" width="28" height="60" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<circle cx="170" cy="235" r="3" fill="#4fa64f"/>
+
+								<!-- Windows Unit 3 -->
+								<rect class="draw-path" x="205" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="235" y="110" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="205" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<rect class="draw-path" x="235" y="145" width="25" height="20" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+
+								<!-- Door Unit 3 -->
+								<rect class="draw-path" x="212" y="200" width="35" height="60" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<circle cx="242" cy="235" r="3" fill="#4fa64f"/>
+
+								<!-- Car -->
+								<path class="draw-path" d="M295 260 L295 240 Q295 230 310 230 L355 230 Q370 230 370 240 L370 260" stroke="#4fa64f" stroke-width="2" fill="none"/>
+								<line class="draw-path" x1="295" y1="245" x2="370" y2="245" stroke="#4fa64f" stroke-width="1.5"/>
+								<!-- Car windows -->
+								<path class="draw-path" d="M305 245 L310 235 L340 235 L345 245" stroke="#4fa64f" stroke-width="1.5" fill="none"/>
+								<!-- Wheels -->
+								<circle class="draw-path" cx="310" cy="260" r="10" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<circle class="draw-path" cx="355" cy="260" r="10" fill="none" stroke="#4fa64f" stroke-width="2"/>
+								<!-- For Sale sign -->
+								<line class="draw-path" x1="320" y1="200" x2="320" y2="180" stroke="#4fa64f" stroke-width="2"/>
+								<rect class="draw-path" x="300" y="165" width="55" height="18" fill="none" stroke="#4fa64f" stroke-width="1.5"/>
+								<text x="327" y="178" text-anchor="middle" fill="#4fa64f" font-size="8" font-weight="bold">For Sale</text>
 							{/if}
 						</svg>
 					</div>
 
-					<!-- Step Content -->
-					<div class="text-center">
-						<h3 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-							<span class="text-nbrs-green">{step.number}</span>
-							{' '}{step.title}
-						</h3>
-						<p class="text-sm sm:text-base text-gray-600 leading-relaxed max-w-xs mx-auto">
-							{step.description}
-						</p>
-					</div>
+					<!-- Description -->
+					<p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+						{step.description}
+					</p>
 				</div>
 			{/each}
 		</div>

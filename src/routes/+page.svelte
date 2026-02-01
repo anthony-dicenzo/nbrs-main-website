@@ -2,6 +2,7 @@
 	import VideoHero from '$lib/components/VideoHero.svelte';
 	import VideoSection from '$lib/components/VideoSection.svelte';
 	import BuildTimeline from '$lib/components/BuildTimeline.svelte';
+	import CompanyTimeline from '$lib/components/CompanyTimeline.svelte';
 	import { scrollReveal } from '$lib/utils/gsap';
 
 	// LCP optimization: Preload the hero poster for faster initial render
@@ -18,13 +19,14 @@
 		mp4: '/videos/new/building-render-dusk.mov'
 	};
 
-	// Video for other sections
-	const fountainVideo = {
-		mp4: 'https://res.cloudinary.com/dvdzjssdi/video/upload/v1760581661/fountain_duwuhb.mp4'
+	// Community/neighbourhood video
+	const communityVideo = {
+		mp4: '/videos/new/community-street-festival.mov'
 	};
 
-	const skylineVideo = {
-		mp4: '/videos/new/toronto-skyline-sunset.mov'
+	// Construction progress video
+	const constructionVideo = {
+		mp4: '/videos/new/construction-crane-progress.mov'
 	};
 </script>
 
@@ -65,7 +67,7 @@
 	<div class="max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'fade', duration: 1 }}>
-				<VideoSection source={family1Video} aspectRatio="4/3" overlayClass="bg-black/10">
+				<VideoSection source={family1Video} aspectRatio="3/4" objectPosition="top" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-nbrs-green px-4 py-2 rounded-full">
 							Coming 2026
@@ -144,10 +146,10 @@
 				</a>
 			</div>
 			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
-				<VideoSection source={skylineVideo} aspectRatio="4/5" overlayClass="bg-black/5">
+				<VideoSection source={communityVideo} aspectRatio="16/9" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
-							Toronto Neighbourhoods
+							Community Living
 						</span>
 					</div>
 				</VideoSection>
@@ -155,3 +157,6 @@
 		</div>
 	</div>
 </section>
+
+<!-- Company Timeline -->
+<CompanyTimeline />

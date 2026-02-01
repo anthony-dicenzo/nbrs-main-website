@@ -4,92 +4,88 @@
 	const navLinks = [
 		{ label: 'Contact', href: '/contact' },
 		{ label: 'Mission', href: '/mission' },
-		{ label: 'FAQs', href: '/faqs' }
+		{ label: 'FAQs', href: '/faqs' },
+		{ label: 'Partner', href: '/partner' }
 	];
 </script>
 
-<footer class="bg-nbrs-green">
-	<div class="mx-auto flex min-h-[320px] sm:min-h-[400px] max-w-[1440px] flex-col px-4 py-6 text-white sm:p-4 md:p-6">
-		<!-- Spacer for top -->
-		<div class="h-8 sm:h-16 md:h-20"></div>
+<footer>
+	<!-- Top section: Cream background with tagline -->
+	<div class="bg-amber-50 py-12 sm:py-16 md:py-20">
+		<div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+			<p class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium italic text-amber-800 leading-tight">
+				Built for families.<br class="hidden sm:block" /> Rooted in community.
+			</p>
+		</div>
+	</div>
 
-		<!-- Large brand text (decorative, not a heading) -->
-		<p class="text-3xl xs:text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl" aria-hidden="true">
-			Neighbourhood<br class="hidden xs:block" /> Scale
-		</p>
-
-		<!-- Flexible spacer -->
-		<div class="min-h-10 sm:min-h-16 flex-1"></div>
-
-		<!-- Bottom section: social | nav + form | copyright -->
-		<div class="flex flex-col gap-5 sm:gap-6">
-			<!-- Row: Social icons, nav links, email form -->
-			<div class="flex flex-col items-start gap-4 sm:gap-6 sm:flex-row sm:items-center">
-				<!-- Social icons -->
-				<SocialIcons />
-
-				<!-- Spacer -->
-				<div class="hidden flex-1 sm:block"></div>
-
-				<!-- Nav links -->
-				<nav aria-label="Footer" class="flex flex-row flex-wrap gap-4 text-sm sm:gap-6 md:gap-10">
-					{#each navLinks as link}
-						<a href={link.href} class="link-underline hover:opacity-80 min-h-[44px] flex items-center">
-							{link.label}
-						</a>
-					{/each}
-				</nav>
-
-				<!-- Email signup form (hidden on mobile, shown sm+) -->
-				<form
-					action="https://formspree.io/f/FORM_ID"
-					method="POST"
-					class="hidden items-center gap-2 border-b border-white/60 pb-1 sm:flex focus-within:border-white"
-					aria-label="Newsletter signup"
+	<!-- Bottom section: Green background with large brand name -->
+	<div class="bg-nbrs-green text-white">
+		<div class="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+			<!-- Large brand text -->
+			<div class="py-8 sm:py-12 md:py-16">
+				<p
+					class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none tracking-tight"
+					aria-hidden="true"
 				>
-					<label for="footer-email-desktop" class="sr-only">Email address</label>
-					<input
-						type="email"
-						id="footer-email-desktop"
-						name="email"
-						placeholder="Enter email"
-						required
-						autocomplete="email"
-						class="w-32 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70 md:w-40 min-h-[44px]"
-					/>
-					<button type="submit" class="btn text-sm hover:opacity-80 min-h-[44px] px-3">
-						Sign up
-					</button>
-				</form>
+					Neighbourhood<br />Scale
+				</p>
 			</div>
 
-			<!-- Mobile email form -->
-			<form
-				action="https://formspree.io/f/FORM_ID"
-				method="POST"
-				class="flex items-center gap-2 border-b border-white/60 pb-1 focus-within:border-white sm:hidden"
-				aria-label="Newsletter signup"
-			>
-				<label for="footer-email-mobile" class="sr-only">Email address</label>
-				<input
-					type="email"
-					id="footer-email-mobile"
-					name="email"
-					placeholder="Enter email"
-					required
-					autocomplete="email"
-					class="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70 min-h-[44px]"
-				/>
-				<button type="submit" class="btn text-sm hover:opacity-80 min-h-[44px] px-3">
-					Sign up
-				</button>
-			</form>
+			<!-- Bottom bar: social, nav, email, copyright -->
+			<div class="border-t border-white/20 py-6 sm:py-8">
+				<div class="flex flex-col gap-6 sm:gap-0 sm:flex-row sm:items-center sm:justify-between">
+					<!-- Left: Social icons -->
+					<div class="order-2 sm:order-1">
+						<SocialIcons />
+					</div>
 
-			<!-- Copyright -->
-			<div class="text-xs sm:text-sm opacity-70">Neighbourhood Scale, 2026</div>
+					<!-- Right: Nav links and email form -->
+					<div class="order-1 sm:order-2 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 md:gap-8">
+						<!-- Nav links -->
+						<nav aria-label="Footer" class="flex flex-wrap gap-4 sm:gap-6 md:gap-8 text-sm">
+							{#each navLinks as link}
+								<a
+									href={link.href}
+									class="hover:opacity-80 transition-opacity min-h-[44px] flex items-center"
+								>
+									{link.label}
+								</a>
+							{/each}
+						</nav>
+
+						<!-- Email signup -->
+						<form
+							action="https://formspree.io/f/FORM_ID"
+							method="POST"
+							class="flex items-center gap-2 border-b border-white/40 pb-1 focus-within:border-white transition-colors"
+							aria-label="Newsletter signup"
+						>
+							<label for="footer-email" class="sr-only">Email address</label>
+							<input
+								type="email"
+								id="footer-email"
+								name="email"
+								placeholder="Enter email"
+								required
+								autocomplete="email"
+								class="w-28 sm:w-32 md:w-40 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70 min-h-[44px]"
+							/>
+							<button
+								type="submit"
+								class="text-sm font-medium hover:opacity-80 transition-opacity min-h-[44px] px-2"
+							>
+								Sign up
+							</button>
+						</form>
+					</div>
+				</div>
+
+				<!-- Copyright -->
+				<div class="mt-6 sm:mt-8 text-xs sm:text-sm opacity-70">
+					© Neighbourhood Scale, 2026
+				</div>
+			</div>
 		</div>
-
-		<!-- Bottom spacer -->
-		<div class="h-4 sm:h-8 md:h-10"></div>
 	</div>
 </footer>

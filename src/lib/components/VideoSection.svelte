@@ -12,12 +12,14 @@
 	let {
 		source,
 		aspectRatio = '16/9',
+		objectPosition = 'center',
 		overlayClass = '',
 		rootMargin = '200px',
 		children
 	}: {
 		source: VideoSource;
 		aspectRatio?: string;
+		objectPosition?: string;
 		overlayClass?: string;
 		rootMargin?: string;
 		children?: Snippet;
@@ -105,6 +107,7 @@
 		alt=""
 		class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 		class:opacity-0={videoLoaded && showVideoOnDevice}
+		style="object-position: {objectPosition};"
 		aria-hidden="true"
 		loading="lazy"
 		decoding="async"
@@ -117,6 +120,7 @@
 		<video
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 			class:opacity-0={!videoLoaded}
+			style="object-position: {objectPosition};"
 			autoplay
 			muted
 			loop
