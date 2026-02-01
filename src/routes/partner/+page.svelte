@@ -96,20 +96,20 @@
 </svelte:head>
 
 <!-- Hero Section -->
-<section aria-label="Partner with NBRS" class="relative py-24 md:py-32 bg-nbrs-green text-white overflow-hidden">
+<section aria-label="Partner with NBRS" class="relative py-16 sm:py-24 md:py-32 bg-nbrs-green text-white overflow-hidden">
 	<div class="absolute inset-0 opacity-10" aria-hidden="true">
-		<div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
-		<div class="absolute bottom-0 left-0 w-64 h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2"></div>
+		<div class="absolute top-0 right-0 w-64 sm:w-96 h-64 sm:h-96 bg-white rounded-full -translate-y-1/2 translate-x-1/2"></div>
+		<div class="absolute bottom-0 left-0 w-48 sm:w-64 h-48 sm:h-64 bg-white rounded-full translate-y-1/2 -translate-x-1/2"></div>
 	</div>
-	<div class="relative max-w-6xl mx-auto px-6">
+	<div class="relative max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="max-w-3xl" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-			<span class="text-white/80 font-semibold text-sm tracking-wider uppercase mb-4 block">
+			<span class="text-white/80 font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
 				Partnership Opportunities
 			</span>
-			<h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
+			<h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
 				Build Housing<br />That Works
 			</h1>
-			<p class="text-xl md:text-2xl font-light opacity-90 max-w-2xl">
+			<p class="text-lg sm:text-xl md:text-2xl font-light opacity-90 max-w-2xl">
 				We're looking for partners who share our vision of quality rental housing at the neighbourhood scale.
 			</p>
 		</div>
@@ -117,43 +117,43 @@
 </section>
 
 <!-- Why Partner Section -->
-<section aria-labelledby="why-partner-heading" class="py-20 md:py-28 bg-white">
-	<div class="max-w-6xl mx-auto px-6">
-		<div class="text-center mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+<section aria-labelledby="why-partner-heading" class="py-16 sm:py-20 md:py-28 bg-white">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="text-center mb-10 sm:mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
+			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
 				Why Partner With Us
 			</span>
-			<h2 id="why-partner-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+			<h2 id="why-partner-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
 				Mission-Aligned Investment
 			</h2>
-			<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+			<p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
 				NBRS creates quality rental housing that generates stable returns while addressing the housing crisis in meaningful ways.
 			</p>
 		</div>
 
-		<div class="grid md:grid-cols-3 gap-8 md:gap-12">
+		<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
 			{#each benefits as benefit, i}
 				<div
-					class="text-center p-8 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300"
+					class="text-center p-6 sm:p-8 rounded-2xl bg-gray-50 hover:bg-gray-100 transition-colors duration-300"
 					use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: i * 0.15 }}
 				>
-					<div class="w-16 h-16 mx-auto mb-6 rounded-full bg-nbrs-green/10 flex items-center justify-center" aria-hidden="true">
+					<div class="w-14 sm:w-16 h-14 sm:h-16 mx-auto mb-4 sm:mb-6 rounded-full bg-nbrs-green/10 flex items-center justify-center" aria-hidden="true">
 						{#if benefit.icon === 'chart'}
-							<svg class="w-8 h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-7 sm:w-8 h-7 sm:h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
 							</svg>
 						{:else if benefit.icon === 'community'}
-							<svg class="w-8 h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-7 sm:w-8 h-7 sm:h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
 							</svg>
 						{:else}
-							<svg class="w-8 h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<svg class="w-7 sm:w-8 h-7 sm:h-8 text-nbrs-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
 							</svg>
 						{/if}
 					</div>
-					<h3 class="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
-					<p class="text-gray-600 leading-relaxed">{benefit.description}</p>
+					<h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{benefit.title}</h3>
+					<p class="text-sm sm:text-base text-gray-600 leading-relaxed">{benefit.description}</p>
 				</div>
 			{/each}
 		</div>
@@ -161,59 +161,59 @@
 </section>
 
 <!-- Who We Work With Section -->
-<section aria-labelledby="who-we-work-with-heading" class="py-20 md:py-28 bg-gray-50">
-	<div class="max-w-6xl mx-auto px-6">
-		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+<section aria-labelledby="who-we-work-with-heading" class="py-16 sm:py-20 md:py-28 bg-gray-50">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-start">
 			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
 					Who We Work With
 				</span>
-				<h2 id="who-we-work-with-heading" class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+				<h2 id="who-we-work-with-heading" class="text-2xl xs:text-3xl sm:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
 					Partners at Every Scale
 				</h2>
-				<div class="space-y-6">
-					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-							<span class="text-nbrs-green font-bold">1</span>
+				<div class="space-y-4 sm:space-y-6">
+					<div class="flex gap-3 sm:gap-4">
+						<div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+							<span class="text-nbrs-green font-bold text-sm sm:text-base">1</span>
 						</div>
-						<div>
-							<h3 class="font-bold text-gray-900 mb-1">Impact Investors</h3>
-							<p class="text-gray-600">Seeking stable returns with measurable social impact in the housing sector.</p>
-						</div>
-					</div>
-					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-							<span class="text-nbrs-green font-bold">2</span>
-						</div>
-						<div>
-							<h3 class="font-bold text-gray-900 mb-1">Nonprofit Organizations</h3>
-							<p class="text-gray-600">Looking to expand affordable housing in the communities you serve.</p>
+						<div class="min-w-0">
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Impact Investors</h3>
+							<p class="text-gray-600 text-sm sm:text-base">Seeking stable returns with measurable social impact in the housing sector.</p>
 						</div>
 					</div>
-					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-							<span class="text-nbrs-green font-bold">3</span>
+					<div class="flex gap-3 sm:gap-4">
+						<div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+							<span class="text-nbrs-green font-bold text-sm sm:text-base">2</span>
 						</div>
-						<div>
-							<h3 class="font-bold text-gray-900 mb-1">Landowners</h3>
-							<p class="text-gray-600">With underutilized parcels ready for sensitive, community-friendly development.</p>
+						<div class="min-w-0">
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Nonprofit Organizations</h3>
+							<p class="text-gray-600 text-sm sm:text-base">Looking to expand affordable housing in the communities you serve.</p>
 						</div>
 					</div>
-					<div class="flex gap-4">
-						<div class="w-12 h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
-							<span class="text-nbrs-green font-bold">4</span>
+					<div class="flex gap-3 sm:gap-4">
+						<div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+							<span class="text-nbrs-green font-bold text-sm sm:text-base">3</span>
 						</div>
-						<div>
-							<h3 class="font-bold text-gray-900 mb-1">Municipalities</h3>
-							<p class="text-gray-600">Committed to adding quality rental housing without changing neighbourhood character.</p>
+						<div class="min-w-0">
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Landowners</h3>
+							<p class="text-gray-600 text-sm sm:text-base">With underutilized parcels ready for sensitive, community-friendly development.</p>
+						</div>
+					</div>
+					<div class="flex gap-3 sm:gap-4">
+						<div class="w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-nbrs-green/10 flex items-center justify-center flex-shrink-0" aria-hidden="true">
+							<span class="text-nbrs-green font-bold text-sm sm:text-base">4</span>
+						</div>
+						<div class="min-w-0">
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Municipalities</h3>
+							<p class="text-gray-600 text-sm sm:text-base">Committed to adding quality rental housing without changing neighbourhood character.</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="bg-white rounded-2xl p-8 shadow-lg" use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
-				<div class="text-center mb-8">
-					<h3 class="text-2xl font-bold text-gray-900 mb-2">Get In Touch</h3>
-					<p class="text-gray-600">Tell us about your partnership interests.</p>
+			<div class="bg-white rounded-2xl p-5 sm:p-8 shadow-lg" use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
+				<div class="text-center mb-6 sm:mb-8">
+					<h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Get In Touch</h3>
+					<p class="text-sm sm:text-base text-gray-600">Tell us about your partnership interests.</p>
 				</div>
 
 				{#if submitStatus === 'success'}
@@ -316,7 +316,7 @@
 						<button
 							type="submit"
 							disabled={isSubmitting}
-							class="btn btn-primary w-full py-3 rounded-lg font-semibold text-lg {isSubmitting ? 'loading' : ''}"
+							class="btn btn-primary w-full py-3 rounded-lg font-semibold text-base sm:text-lg min-h-[48px] {isSubmitting ? 'loading' : ''}"
 						>
 							{#if isSubmitting}
 								<span class="inline-flex items-center gap-2">
@@ -338,14 +338,14 @@
 </section>
 
 <!-- CTA Section -->
-<section aria-label="Contact us" class="py-16 md:py-24 bg-white">
-	<div class="max-w-4xl mx-auto px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
-		<p class="text-lg text-gray-600 mb-6">
+<section aria-label="Contact us" class="py-12 sm:py-16 md:py-24 bg-white">
+	<div class="max-w-4xl mx-auto px-4 sm:px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
+		<p class="text-base sm:text-lg text-gray-600 mb-4 sm:mb-6">
 			Prefer to reach out directly?
 		</p>
 		<a
 			href="mailto:partner@nbrs.ca"
-			class="text-nbrs-green text-xl md:text-2xl font-semibold hover:underline"
+			class="text-nbrs-green text-lg sm:text-xl md:text-2xl font-semibold hover:underline break-all"
 		>
 			partner@nbrs.ca
 		</a>

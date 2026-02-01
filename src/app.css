@@ -38,6 +38,8 @@
 	--color-nbrs-coral-hover: #FF8787;
 	--font-sans: "Inter", system-ui, sans-serif;
 	--font-sans--font-feature-settings: "liga" 1, "calt" 1;
+	/* Custom breakpoint for extra small screens (375px = iPhone SE and larger) */
+	--breakpoint-xs: 375px;
 }
 
 /* ================================================

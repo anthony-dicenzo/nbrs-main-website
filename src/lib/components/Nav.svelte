@@ -48,12 +48,12 @@
 		<!-- Nav links -->
 		<nav
 			aria-label="Main"
-			class="pointer-events-auto absolute top-4 right-4 flex items-center gap-3 md:top-6 md:right-6"
+			class="pointer-events-auto absolute top-4 right-4 flex items-center gap-2 sm:gap-3 md:top-6 md:right-6"
 		>
-			<!-- Mission - outlined pill -->
+			<!-- Mission - outlined pill (hidden on very small screens) -->
 			<a
 				href="/mission"
-				class="pill pill-outlined group text-nbrs-green"
+				class="pill pill-outlined group text-nbrs-green hidden xs:inline-flex min-h-[44px]"
 			>
 				<Rollover text="Mission" />
 			</a>
@@ -61,7 +61,7 @@
 			<!-- Partner - solid pill -->
 			<a
 				href="/partner"
-				class="pill pill-solid group gap-2 text-nbrs-green shadow-sm hover:shadow-md"
+				class="pill pill-solid group gap-2 text-nbrs-green shadow-sm hover:shadow-md min-h-[44px]"
 			>
 				<Rollover text="Partner" />
 				<svg

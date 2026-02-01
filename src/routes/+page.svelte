@@ -62,14 +62,14 @@
 <!-- Hero Section -->
 <section aria-label="Welcome">
 	<VideoHero sources={heroVideos} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
-		<div class="flex flex-col items-center justify-center h-full text-white text-center px-6">
-			<h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
+		<div class="flex flex-col items-center justify-center h-full text-white text-center px-4 sm:px-6">
+			<h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
 				Building Homes,<br />Building Community
 			</h1>
-			<p class="text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 max-w-2xl opacity-90">
+			<p class="text-base xs:text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 max-w-2xl opacity-90">
 				Quality rental housing at the neighbourhood scale
 			</p>
-			<p class="text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your NBRS</p>
+			<p class="text-sm xs:text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your NBRS</p>
 
 			<!-- Scroll indicator -->
 			<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
@@ -82,12 +82,12 @@
 </section>
 
 <!-- FAMILY 1 Project Preview -->
-<section aria-labelledby="family1-heading" class="py-20 md:py-32 bg-white">
-	<div class="max-w-6xl mx-auto px-6">
-		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+<section aria-labelledby="family1-heading" class="py-16 sm:py-20 md:py-32 bg-white">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'fade', duration: 1 }}>
 				<VideoSection source={cityVideo} aspectRatio="4/3" overlayClass="bg-black/10">
-					<div class="absolute inset-0 flex items-end p-6">
+					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-nbrs-green px-4 py-2 rounded-full">
 							Coming 2026
 						</span>
@@ -95,23 +95,23 @@
 				</VideoSection>
 			</div>
 			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: 0.2 }}>
-				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
 					Our First Project
 				</span>
-				<h2 id="family1-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+				<h2 id="family1-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
 					FAMILY 1
 				</h2>
-				<p class="text-lg text-gray-600 mb-4">
+				<p class="text-base sm:text-lg text-gray-600 mb-4">
 					Six family-sized rental units in a vibrant Toronto neighbourhood. Designed from the ground up
 					for families who need space to grow.
 				</p>
-				<p class="text-lg text-gray-600 mb-8">
+				<p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
 					Three-bedroom homes with real storage, outdoor space, and room for life to happen.
 				</p>
-				<div class="flex flex-wrap gap-4">
+				<div class="flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4">
 					<a
 						href="/family-1"
-						class="btn btn-primary group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium"
+						class="btn btn-primary group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium min-h-[48px]"
 					>
 						<span>Learn More</span>
 						<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
@@ -120,7 +120,7 @@
 					</a>
 					<a
 						href="/waitlist"
-						class="btn btn-secondary inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green"
+						class="btn btn-secondary inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green min-h-[48px]"
 					>
 						Join the Waitlist
 					</a>
@@ -131,32 +131,32 @@
 </section>
 
 <!-- How We Build Section -->
-<section aria-labelledby="how-we-build-heading" class="py-20 md:py-32 bg-gray-50">
-	<div class="max-w-6xl mx-auto px-6">
-		<div class="text-center mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+<section aria-labelledby="how-we-build-heading" class="py-16 sm:py-20 md:py-32 bg-gray-50">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="text-center mb-10 sm:mb-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
+			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
 				Our Approach
 			</span>
-			<h2 id="how-we-build-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+			<h2 id="how-we-build-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
 				How We Build
 			</h2>
-			<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+			<p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
 				We create quality rental homes that fit into existing communities—affordable without looking affordable.
 			</p>
 		</div>
 
-		<div class="grid md:grid-cols-3 gap-8 md:gap-12">
+		<div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12">
 			{#each buildSteps as step, i}
 				<div
 					class="relative"
 					use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: i * 0.15 }}
 				>
-					<span class="text-6xl md:text-7xl font-bold text-nbrs-green/10 absolute -top-4 -left-2" aria-hidden="true">
+					<span class="text-5xl sm:text-6xl md:text-7xl font-bold text-nbrs-green/10 absolute -top-3 sm:-top-4 -left-1 sm:-left-2" aria-hidden="true">
 						{step.number}
 					</span>
-					<div class="relative pt-8 pl-4">
-						<h3 class="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-						<p class="text-gray-600 leading-relaxed">{step.description}</p>
+					<div class="relative pt-6 sm:pt-8 pl-3 sm:pl-4">
+						<h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">{step.title}</h3>
+						<p class="text-sm sm:text-base text-gray-600 leading-relaxed">{step.description}</p>
 					</div>
 				</div>
 			{/each}
@@ -165,24 +165,24 @@
 </section>
 
 <!-- About/Mission Section -->
-<section aria-labelledby="about-heading" class="py-20 md:py-32 bg-white">
-	<div class="max-w-6xl mx-auto px-6">
-		<div class="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+<section aria-labelledby="about-heading" class="py-16 sm:py-20 md:py-32 bg-white">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-4 block">
+				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
 					Who We Are
 				</span>
-				<h2 id="about-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+				<h2 id="about-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
 					Neighbourhood<br />Scale Housing
 				</h2>
-				<p class="text-lg text-gray-600 mb-4">
+				<p class="text-base sm:text-lg text-gray-600 mb-4">
 					We believe great cities are made of great neighbourhoods. NBRS builds quality rental housing
 					that integrates seamlessly into the communities we serve.
 				</p>
-				<p class="text-lg text-gray-600 mb-4">
+				<p class="text-base sm:text-lg text-gray-600 mb-4">
 					Smaller, distributed projects. Thoughtful design. Buildings that look like they belong—because they do.
 				</p>
-				<p class="text-lg text-gray-600 mb-8">
+				<p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
 					Our name says it all: <strong class="text-gray-900">N</strong>eighbourhood
 					<strong class="text-gray-900">B</strong>ased
 					<strong class="text-gray-900">R</strong>ental
@@ -190,7 +190,7 @@
 				</p>
 				<a
 					href="/mission"
-					class="btn btn-secondary group inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green"
+					class="btn btn-secondary group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green min-h-[48px]"
 				>
 					<span>Our Mission</span>
 					<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
@@ -200,7 +200,7 @@
 			</div>
 			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
 				<VideoSection source={fountainVideo} aspectRatio="4/5" overlayClass="bg-black/5">
-					<div class="absolute inset-0 flex items-end p-6">
+					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
 							Community Spaces
 						</span>
@@ -212,18 +212,18 @@
 </section>
 
 <!-- Partner CTA Section -->
-<section aria-labelledby="partner-cta-heading" class="py-20 md:py-32 bg-nbrs-green text-white">
-	<div class="max-w-4xl mx-auto px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
-		<h2 id="partner-cta-heading" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+<section aria-labelledby="partner-cta-heading" class="py-16 sm:py-20 md:py-32 bg-nbrs-green text-white">
+	<div class="max-w-4xl mx-auto px-4 sm:px-6 text-center" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
+		<h2 id="partner-cta-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
 			Build With Us
 		</h2>
-		<p class="text-lg md:text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+		<p class="text-base sm:text-lg md:text-xl opacity-90 mb-6 sm:mb-8 max-w-2xl mx-auto">
 			We're looking for partners who share our vision—investors, nonprofits, landowners,
 			and municipalities ready to create housing that works.
 		</p>
 		<a
 			href="/partner"
-			class="btn btn-white group inline-flex items-center gap-2 px-8 py-4 rounded-lg font-semibold text-nbrs-green"
+			class="btn btn-white group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-nbrs-green min-h-[48px]"
 		>
 			<span>Partner With NBRS</span>
 			<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
