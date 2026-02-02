@@ -1,9 +1,16 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { prefersReducedMotion, loadGsap, loadScrollTrigger } from '$lib/utils/gsap';
+	import VideoSection from './VideoSection.svelte';
 
 	let container: HTMLElement;
 	let ctx: gsap.Context | null = null;
+
+	// Park with tulips - represents our vision for vibrant communities
+	const visionVideo = {
+		mp4: '/videos/new/park-tulips-skyline.mp4',
+		poster: '/videos/new/park-tulips-skyline.jpg'
+	};
 
 	const milestones = [
 		{
@@ -93,19 +100,33 @@
 	class="py-16 sm:py-20 md:py-32 bg-gray-50"
 	bind:this={container}
 >
-	<div class="max-w-4xl mx-auto px-4 sm:px-6">
-		<!-- Section Header -->
-		<div class="text-center mb-12 sm:mb-16">
-			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
-				Our Story
-			</span>
-			<h2 id="company-timeline-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
-				A Growing Journey
-			</h2>
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<!-- Section Header with Video -->
+		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center mb-12 sm:mb-16 md:mb-20">
+			<div class="text-left">
+				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
+					Our Story
+				</span>
+				<h2 id="company-timeline-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+					A Growing Journey
+				</h2>
+				<p class="text-base sm:text-lg text-gray-600">
+					From a vision to build better rental housing to breaking ground on our first project—here's how we're growing alongside the neighbourhoods we serve.
+				</p>
+			</div>
+			<div class="order-first md:order-last">
+				<VideoSection source={visionVideo} aspectRatio="16/9" overlayClass="bg-black/10">
+					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
+						<span class="text-white text-sm font-medium bg-nbrs-green/90 px-3 py-1 rounded-full">
+							Our Vision
+						</span>
+					</div>
+				</VideoSection>
+			</div>
 		</div>
 
 		<!-- Timeline -->
-		<div class="relative">
+		<div class="relative max-w-4xl mx-auto">
 			<!-- Vertical line -->
 			<div
 				class="timeline-line absolute left-4 sm:left-1/2 top-0 bottom-0 w-0.5 bg-nbrs-green/30 sm:-translate-x-1/2"

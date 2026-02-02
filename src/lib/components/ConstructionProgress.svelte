@@ -12,6 +12,11 @@
 			mp4: '/videos/new/construction-site-barriers.mp4',
 			poster: '/videos/new/construction-site-barriers.jpg',
 			label: 'Site Progress'
+		},
+		{
+			mp4: '/videos/new/construction-site-tree.mp4',
+			poster: '/videos/new/construction-site-tree.jpg',
+			label: 'Growing Together'
 		}
 	];
 </script>
@@ -32,7 +37,7 @@
 		</div>
 
 		<!-- Video Grid -->
-		<div class="grid sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+		<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
 			{#each videos as video, i}
 				<div use:scrollReveal={{ type: 'fade', duration: 0.8, delay: i * 0.15 }}>
 					<VideoSection

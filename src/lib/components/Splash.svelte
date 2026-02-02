@@ -11,12 +11,13 @@
 	let visible = $state(true);
 
 	onMount(async () => {
+		// TODO: Re-enable session check for production
 		// Check if splash was already shown this session
-		if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nbrs-splash-shown')) {
-			visible = false;
-			onComplete?.();
-			return;
-		}
+		// if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nbrs-splash-shown')) {
+		// 	visible = false;
+		// 	onComplete?.();
+		// 	return;
+		// }
 
 		const gsap = await loadGsap();
 
@@ -143,12 +144,13 @@
 			{/each}
 		</div>
 
-		<!-- White circle overlay for reveal -->
+		<!-- White circle overlay for reveal (starts scaled to 0) -->
 		<div
 			bind:this={circleOverlay}
 			class="absolute inset-0 flex items-center justify-center pointer-events-none"
+			style="transform: scale(0);"
 		>
-			<div class="w-[150vmax] h-[150vmax] rounded-full bg-white"></div>
+			<div class="aspect-square w-[200vmax] rounded-full bg-white"></div>
 		</div>
 	</div>
 {/if}
