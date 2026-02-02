@@ -184,11 +184,11 @@ export async function createGsapContext(
 export interface ScrollRevealOptions {
 	/** Animation type: 'fade', 'slide-up', 'slide-left', 'slide-right', 'scale' */
 	type?: 'fade' | 'slide-up' | 'slide-left' | 'slide-right' | 'scale';
-	/** Animation duration in seconds (default: 0.8) */
+	/** Animation duration in seconds (default: 1) */
 	duration?: number;
 	/** Delay before animation starts in seconds (default: 0) */
 	delay?: number;
-	/** Distance to travel for slide animations in pixels (default: 60) */
+	/** Distance to travel for slide animations in pixels (default: 40) */
 	distance?: number;
 	/** ScrollTrigger start position (default: 'top 85%') */
 	start?: string;
@@ -198,6 +198,8 @@ export interface ScrollRevealOptions {
 	stagger?: number;
 	/** Selector for child elements to stagger (default: '> *') */
 	staggerSelector?: string;
+	/** Easing function (default: 'power3.out') */
+	ease?: string;
 }
 
 /**
@@ -250,13 +252,14 @@ export const scrollReveal: Action<HTMLElement, ScrollRevealOptions | undefined> 
 
 		const {
 			type = 'fade',
-			duration = 0.8,
+			duration = 1,
 			delay = 0,
-			distance = 60,
+			distance = 40,
 			start = 'top 85%',
 			toggleActions = 'play none none none',
 			stagger = 0,
-			staggerSelector = '> *'
+			staggerSelector = '> *',
+			ease = 'power3.out'
 		} = currentOptions;
 
 		// Build animation properties based on type
@@ -264,7 +267,7 @@ export const scrollReveal: Action<HTMLElement, ScrollRevealOptions | undefined> 
 			opacity: 0,
 			duration,
 			delay,
-			ease: 'power2.out'
+			ease
 		};
 
 		switch (type) {
@@ -331,6 +334,68 @@ export const scrollReveal: Action<HTMLElement, ScrollRevealOptions | undefined> 
 			if (ctx) {
 				ctx.revert();
 			}
+		}
+	};
+};
+
+/**
+ * Configuration for parallax scroll effect.
+ */
+export interface ParallaxOptions {
+	/** Speed multiplier - higher = more parallax movement (default: 0.3) */
+	speed?: number;
+	/** Direction: 'up' moves element up as you scroll down (default: 'up') */
+	direction?: 'up' | 'down';
+}
+
+/**
+ * Svelte action for subtle parallax scroll effect.
+ * Creates a premium feel where elements move at different speeds during scroll.
+ *
+ * @example
+ * ```svelte
+ * <div use:parallax={{ speed: 0.2 }}>
+ *   This element moves slower than scroll
+ * </div>
+ * ```
+ */
+export const parallax: Action<HTMLElement, ParallaxOptions | undefined> = (node, options = {}) => {
+	let ctx: gsap.Context | null = null;
+	let currentOptions = options;
+
+	const init = async () => {
+		if (prefersReducedMotion()) return;
+
+		const gsap = await loadGsap();
+		const ScrollTrigger = await loadScrollTrigger();
+
+		const { speed = 0.3, direction = 'up' } = currentOptions;
+		const yPercent = direction === 'up' ? -100 * speed : 100 * speed;
+
+		ctx = gsap.context(() => {
+			gsap.to(node, {
+				yPercent,
+				ease: 'none',
+				scrollTrigger: {
+					trigger: node,
+					start: 'top bottom',
+					end: 'bottom top',
+					scrub: true
+				}
+			});
+		}, node);
+	};
+
+	init();
+
+	return {
+		update(newOptions: ParallaxOptions | undefined) {
+			if (ctx) ctx.revert();
+			currentOptions = newOptions || {};
+			init();
+		},
+		destroy() {
+			if (ctx) ctx.revert();
 		}
 	};
 };

@@ -21,17 +21,17 @@
 	];
 </script>
 
-<section aria-labelledby="construction-heading" class="py-16 sm:py-20 md:py-24 bg-gray-900 text-white">
+<section aria-labelledby="construction-heading" class="py-16 sm:py-20 md:py-24 bg-white">
 	<div class="max-w-7xl mx-auto px-4 sm:px-6">
 		<!-- Header -->
 		<div class="text-center mb-10 sm:mb-12 md:mb-16" use:scrollReveal={{ type: 'fade', duration: 0.8 }}>
 			<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
 				Building in Progress
 			</span>
-			<h2 id="construction-heading" class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 sm:mb-6">
+			<h2 id="construction-heading" class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 sm:mb-6 text-gray-900">
 				Watch Us Build
 			</h2>
-			<p class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">
+			<p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
 				Real footage from our construction sites. Quality homes taking shape in Toronto neighbourhoods.
 			</p>
 		</div>

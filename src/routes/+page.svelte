@@ -4,7 +4,7 @@
 	import BuildTimeline from '$lib/components/BuildTimeline.svelte';
 	import ConstructionProgress from '$lib/components/ConstructionProgress.svelte';
 	import CompanyTimeline from '$lib/components/CompanyTimeline.svelte';
-	import { scrollReveal } from '$lib/utils/gsap';
+	import { scrollReveal, parallax } from '$lib/utils/gsap';
 
 	// LCP optimization: Preload the hero poster for faster initial render
 	const heroPosterUrl = '/videos/new/community-street-festival.jpg';
@@ -74,10 +74,10 @@
 </section>
 
 <!-- FAMILY 1 Project Preview - Using building render video -->
-<section aria-labelledby="family1-heading" class="py-16 sm:py-20 md:py-32 bg-white">
+<section aria-labelledby="family1-heading" class="py-16 sm:py-20 md:py-32 bg-white overflow-hidden">
 	<div class="max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-			<div use:scrollReveal={{ type: 'fade', duration: 1 }}>
+			<div use:scrollReveal={{ type: 'fade', duration: 1.2 }} use:parallax={{ speed: 0.15 }}>
 				<VideoSection source={family1Video} aspectRatio="3/4" objectPosition="top" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-nbrs-green px-4 py-2 rounded-full">
@@ -86,18 +86,31 @@
 					</div>
 				</VideoSection>
 			</div>
-			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: 0.2 }}>
-				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
+			<div>
+				<span
+					use:scrollReveal={{ type: 'slide-up', duration: 0.8, distance: 20 }}
+					class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block"
+				>
 					Our First Project
 				</span>
-				<h2 id="family1-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+				<h2
+					id="family1-heading"
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.1, distance: 30 }}
+					class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
+				>
 					FAMILY 1
 				</h2>
-				<p class="text-base sm:text-lg text-gray-600 mb-4">
+				<p
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.2, distance: 25 }}
+					class="text-base sm:text-lg text-gray-600 mb-4"
+				>
 					Six family-sized rental units in a vibrant Toronto neighbourhood. Designed from the ground up
 					for families who need space to grow.
 				</p>
-				<p class="text-base sm:text-lg text-gray-600">
+				<p
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.3, distance: 25 }}
+					class="text-base sm:text-lg text-gray-600"
+				>
 					Three-bedroom homes with real storage, outdoor space, and room for life to happen.
 				</p>
 			</div>
@@ -112,28 +125,44 @@
 <ConstructionProgress />
 
 <!-- About/Mission Section -->
-<section aria-labelledby="about-heading" class="py-16 sm:py-20 md:py-32 bg-white">
+<section aria-labelledby="about-heading" class="py-16 sm:py-20 md:py-32 bg-white overflow-hidden">
 	<div class="max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
+			<div>
+				<span
+					use:scrollReveal={{ type: 'slide-up', duration: 0.8, distance: 20 }}
+					class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block"
+				>
 					Who We Are
 				</span>
-				<h2 id="about-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+				<h2
+					id="about-heading"
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.1, distance: 30 }}
+					class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight"
+				>
 					Neighbourhood<br />Scale Housing
 				</h2>
-				<p class="text-base sm:text-lg text-gray-600 mb-4">
+				<p
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.2, distance: 25 }}
+					class="text-base sm:text-lg text-gray-600 mb-4"
+				>
 					We believe great cities are made of great neighbourhoods. NBRS (pronounced "neighbours") builds
 					quality rental housing that integrates seamlessly into the communities we serve.
 				</p>
-				<p class="text-base sm:text-lg text-gray-600 mb-4">
+				<p
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.3, distance: 25 }}
+					class="text-base sm:text-lg text-gray-600 mb-4"
+				>
 					Smaller, distributed projects. Thoughtful design. Buildings that look like they belong—because they do.
 				</p>
-				<p class="text-base sm:text-lg text-gray-600">
+				<p
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.4, distance: 25 }}
+					class="text-base sm:text-lg text-gray-600"
+				>
 					We're here to prove that rental housing can be beautiful, functional, and good for the neighbourhood.
 				</p>
 			</div>
-			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
+			<div use:scrollReveal={{ type: 'fade', duration: 1.2 }} use:parallax={{ speed: 0.15 }}>
 				<VideoSection source={torontoVideo} aspectRatio="16/9" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
