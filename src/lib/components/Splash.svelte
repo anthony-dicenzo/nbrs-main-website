@@ -79,10 +79,36 @@
 				'-=0.2'
 			);
 
-			// Phase 3: Brief pause to let the logo sit
-			tl.to({}, { duration: 0.6 });
+			// Phase 3: Wiggle effect - each letter wiggles with stagger
+			tl.to(letters, {
+				rotation: 8,
+				duration: 0.1,
+				stagger: 0.08,
+				ease: 'power1.inOut'
+			});
+			tl.to(letters, {
+				rotation: -6,
+				duration: 0.1,
+				stagger: 0.08,
+				ease: 'power1.inOut'
+			});
+			tl.to(letters, {
+				rotation: 4,
+				duration: 0.1,
+				stagger: 0.08,
+				ease: 'power1.inOut'
+			});
+			tl.to(letters, {
+				rotation: 0,
+				duration: 0.15,
+				stagger: 0.08,
+				ease: 'power2.out'
+			});
 
-			// Phase 4: White circle expands to reveal content (1.5s like nbrs.ca)
+			// Phase 4: Brief pause to let the logo sit
+			tl.to({}, { duration: 0.4 });
+
+			// Phase 5: White circle expands to reveal content (1.5s like nbrs.ca)
 			tl.to(
 				circleOverlay,
 				{
@@ -92,7 +118,7 @@
 				}
 			);
 
-			// Phase 5: Fade out letters as circle expands
+			// Phase 6: Fade out letters as circle expands
 			tl.to(
 				letters,
 				{
