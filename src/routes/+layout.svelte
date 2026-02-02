@@ -1,5 +1,5 @@
 <script>
-	import { fade } from 'svelte/transition';
+	import { onNavigate } from '$app/navigation';
 	import '../app.css';
 	import Nav from '$lib/components/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -8,21 +8,25 @@
 	let { children, data } = $props();
 
 	let splashComplete = $state(false);
+	let isNavigating = $state(false);
+
+	// Only show splash on homepage on initial load (not after navigation)
+	const showSplash = $derived(data.pathname === '/' && !splashComplete && !isNavigating);
+
+	// Track navigation to prevent splash on client-side nav
+	onNavigate(() => {
+		isNavigating = true;
+	});
 </script>
 
-<Splash onComplete={() => (splashComplete = true)} />
+{#if showSplash}
+	<Splash onComplete={() => (splashComplete = true)} />
+{/if}
 
 <Nav />
 
-{#key data.pathname}
-	<main
-		id="main-content"
-		class="min-h-screen pt-16"
-		in:fade={{ duration: 150, delay: 150 }}
-		out:fade={{ duration: 150 }}
-	>
-		{@render children()}
-	</main>
-{/key}
+<main id="main-content" class="min-h-screen pt-16">
+	{@render children()}
+</main>
 
 <Footer />

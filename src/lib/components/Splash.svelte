@@ -11,13 +11,12 @@
 	let visible = $state(true);
 
 	onMount(async () => {
-		// TODO: Re-enable session check for production
 		// Check if splash was already shown this session
-		// if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nbrs-splash-shown')) {
-		// 	visible = false;
-		// 	onComplete?.();
-		// 	return;
-		// }
+		if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('nbrs-splash-shown')) {
+			visible = false;
+			onComplete?.();
+			return;
+		}
 
 		const gsap = await loadGsap();
 

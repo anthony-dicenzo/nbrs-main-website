@@ -18,7 +18,8 @@
 
 	// FAMILY 1 building render video (local asset)
 	const family1Video = {
-		mp4: '/videos/new/building-render-dusk.mov'
+		mp4: '/videos/new/building-render-dusk.mp4',
+		poster: '/videos/new/building-render-dusk.jpg'
 	};
 
 	// Toronto skyline video for About section
@@ -35,6 +36,17 @@
 		name="description"
 		content="Quality rental housing at the neighbourhood scale. NBRS (pronounced 'neighbours') builds family-sized homes in established Toronto communities."
 	/>
+	<!-- Open Graph / Social -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://nbrs.ca/" />
+	<meta property="og:title" content="NBRS - Quality Rental Housing at the Neighbourhood Scale" />
+	<meta property="og:description" content="Quality rental housing at the neighbourhood scale. NBRS builds family-sized homes in established Toronto communities." />
+	<meta property="og:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="NBRS - Quality Rental Housing at the Neighbourhood Scale" />
+	<meta name="twitter:description" content="Quality rental housing at the neighbourhood scale. NBRS builds family-sized homes in established Toronto communities." />
+	<meta name="twitter:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
 	<!-- Preload LCP image for faster hero render -->
 	<link rel="preload" as="image" href={heroPosterUrl} fetchpriority="high" />
 </svelte:head>
