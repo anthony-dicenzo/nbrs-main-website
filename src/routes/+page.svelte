@@ -165,7 +165,7 @@
 				<VideoSection source={torontoVideo} aspectRatio="16/9" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
-							Toronto Living
+							Toronto
 						</span>
 					</div>
 				</VideoSection>

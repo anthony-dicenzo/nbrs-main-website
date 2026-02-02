@@ -111,7 +111,7 @@
 	bind:this={container}
 >
 	<!-- Section Header -->
-	<div class="max-w-[1440px] mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
 		<h2 id="timeline-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900">
 			Our Journey
 		</h2>
@@ -129,7 +129,7 @@
 		onmousemove={handleMouseMove}
 		onmouseleave={handleMouseLeave}
 	>
-		<div class="flex gap-4 sm:gap-6 pb-4" style="width: max-content; padding-left: max(1rem, calc((100vw - 1440px) / 2 + 1.5rem));">
+		<div class="flex gap-4 sm:gap-6 pb-4" style="width: max-content; padding-left: max(1rem, calc((100vw - 72rem) / 2 + 1.5rem));">
 			<!-- First card aligns with "Our Journey" title on desktop -->
 			{#each milestones as milestone, i}
 				<div
@@ -177,7 +177,7 @@
 	</div>
 
 	<!-- Scroll hint -->
-	<div class="max-w-[1440px] mx-auto px-4 sm:px-6 mt-6 sm:mt-8">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6 mt-6 sm:mt-8">
 		<p class="text-sm text-gray-400 flex items-center gap-2">
 			<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
 				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
