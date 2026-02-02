@@ -85,26 +85,9 @@
 					Six family-sized rental units in a vibrant Toronto neighbourhood. Designed from the ground up
 					for families who need space to grow.
 				</p>
-				<p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
+				<p class="text-base sm:text-lg text-gray-600">
 					Three-bedroom homes with real storage, outdoor space, and room for life to happen.
 				</p>
-				<div class="flex flex-col xs:flex-row flex-wrap gap-3 sm:gap-4">
-					<a
-						href="/family-1"
-						class="btn btn-primary group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium min-h-[48px]"
-					>
-						<span>Learn More</span>
-						<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
-							<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
-						</svg>
-					</a>
-					<a
-						href="/waitlist"
-						class="btn btn-secondary inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green min-h-[48px]"
-					>
-						Join the Waitlist
-					</a>
-				</div>
 			</div>
 		</div>
 	</div>
@@ -134,18 +117,9 @@
 				<p class="text-base sm:text-lg text-gray-600 mb-4">
 					Smaller, distributed projects. Thoughtful design. Buildings that look like they belong—because they do.
 				</p>
-				<p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
+				<p class="text-base sm:text-lg text-gray-600">
 					We're here to prove that rental housing can be beautiful, functional, and good for the neighbourhood.
 				</p>
-				<a
-					href="/mission"
-					class="btn btn-secondary group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green min-h-[48px]"
-				>
-					<span>Our Mission</span>
-					<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
-						<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
-					</svg>
-				</a>
 			</div>
 			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
 				<VideoSection source={torontoVideo} aspectRatio="16/9" overlayClass="bg-black/10">

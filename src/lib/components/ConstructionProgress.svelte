@@ -55,17 +55,5 @@
 			{/each}
 		</div>
 
-		<!-- Call to Action -->
-		<div class="text-center mt-10 sm:mt-12 md:mt-16" use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: 0.3 }}>
-			<a
-				href="/family-1"
-				class="btn btn-secondary inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-white border-white/30 hover:bg-white/10 min-h-[48px]"
-			>
-				<span>See FAMILY 1 Project</span>
-				<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
-					<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
-				</svg>
-			</a>
-		</div>
 	</div>
 </section>
