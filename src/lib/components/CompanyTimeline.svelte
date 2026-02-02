@@ -30,19 +30,19 @@
 			year: '2025',
 			title: 'Approvals',
 			description: 'Permits in hand. FAMILY 1 moves from vision to reality.',
-			image: '/videos/new/construction-crane-progress.jpg'
+			image: '/videos/new/construction-site-tree.jpg'
 		},
 		{
 			year: 'Fall 2026',
 			title: 'Construction',
 			description: 'Shovels in the ground. Six family-sized units taking shape.',
-			image: '/videos/new/construction-site-barriers.jpg'
+			image: '/videos/new/construction-crane-progress.jpg'
 		},
 		{
 			year: 'Fall 2027',
 			title: 'Move In',
 			description: 'First NBRS families call FAMILY 1 home.',
-			image: '/videos/new/interior-living-room.jpg'
+			image: '/videos/new/building-render-dusk.jpg'
 		}
 	];
 
