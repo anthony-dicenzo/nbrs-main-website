@@ -4,9 +4,9 @@
 
 	const videos = [
 		{
-			mp4: '/videos/new/construction-crane-progress.mp4',
-			poster: '/videos/new/construction-crane-progress.jpg',
-			label: 'Active Construction'
+			mp4: '/videos/new/construction-site-tree.mp4',
+			poster: '/videos/new/construction-site-tree.jpg',
+			label: 'Excavation'
 		},
 		{
 			mp4: '/videos/new/construction-site-barriers.mp4',
@@ -14,9 +14,9 @@
 			label: 'Site Progress'
 		},
 		{
-			mp4: '/videos/new/construction-site-tree.mp4',
-			poster: '/videos/new/construction-site-tree.jpg',
-			label: 'Growing Together'
+			mp4: '/videos/new/construction-crane-progress.mp4',
+			poster: '/videos/new/construction-crane-progress.jpg',
+			label: 'Pouring Concrete'
 		}
 	];
 </script>

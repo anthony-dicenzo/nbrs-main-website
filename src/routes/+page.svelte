@@ -27,18 +27,6 @@
 		poster: '/videos/new/toronto-skyline-sunset.jpg'
 	};
 
-	// Park with tulips - vision/planning content
-	const parkVideo = {
-		mp4: '/videos/new/park-tulips-skyline.mp4',
-		poster: '/videos/new/park-tulips-skyline.jpg'
-	};
-
-	// Interior living room - showcasing home interiors
-	const interiorVideo = {
-		mp4: '/videos/new/interior-living-room.mp4',
-		poster: '/videos/new/interior-living-room.jpg'
-	};
-
 	</script>
 
 <svelte:head>
@@ -172,45 +160,5 @@
 	</div>
 </section>
 
-<!-- Inside Your Future Home -->
-<section aria-labelledby="interior-heading" class="py-16 sm:py-20 md:py-32 bg-gray-50">
-	<div class="max-w-6xl mx-auto px-4 sm:px-6">
-		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-			<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
-				<span class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block">
-					Life at NBRS
-				</span>
-				<h2 id="interior-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-					Space to Live,<br />Room to Grow
-				</h2>
-				<p class="text-base sm:text-lg text-gray-600 mb-4">
-					Our homes are designed for real life. Open living spaces that connect families, abundant natural light, and views that remind you why you love this city.
-				</p>
-				<p class="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
-					Every unit features thoughtful layouts, quality finishes, and the kind of details that make a house feel like home.
-				</p>
-				<a
-					href="/family-1"
-					class="btn btn-secondary group inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green min-h-[48px]"
-				>
-					<span>Explore FAMILY 1</span>
-					<svg class="w-4 h-4 icon-arrow" fill="currentColor" viewBox="0 0 12 10" aria-hidden="true">
-						<path d="M7.5 0L6.4 1.1L9.3 4H0V5.5H9.3L6.4 8.4L7.5 9.5L12 5L7.5 0Z" />
-					</svg>
-				</a>
-			</div>
-			<div use:scrollReveal={{ type: 'fade', duration: 1, delay: 0.2 }}>
-				<VideoSection source={interiorVideo} aspectRatio="16/9" overlayClass="bg-black/5">
-					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
-						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
-							FAMILY 1 Interior
-						</span>
-					</div>
-				</VideoSection>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- Company Timeline -->
+<!-- Company Timeline - Visual Journey -->
 <CompanyTimeline />
