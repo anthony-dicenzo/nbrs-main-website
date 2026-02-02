@@ -8,15 +8,18 @@
 	const steps = [
 		{
 			number: '1',
-			title: 'Buy Land'
+			title: 'Buy Land',
+			description: 'We target as-of-right sites that permit neighbourhood-scale buildings—no rezoning required.'
 		},
 		{
 			number: '2',
-			title: 'Build Homes'
+			title: 'Build Homes',
+			description: 'Our tech-enabled process delivers new housing in 12-18 months from acquisition.'
 		},
 		{
 			number: '3',
-			title: 'Sell Homes'
+			title: 'Rent Homes',
+			description: 'Quality rental housing for families who want to stay in the neighbourhoods they love.'
 		}
 	];
 
@@ -93,21 +96,36 @@
 	bind:this={container}
 >
 	<div class="max-w-7xl mx-auto px-4 sm:px-6">
-		<!-- Section heading (visually hidden but accessible) -->
-		<h2 id="build-timeline-heading" class="sr-only">How We Build</h2>
+		<!-- Section Header -->
+		<div class="text-center mb-12 sm:mb-16 max-w-3xl mx-auto">
+			<h2 id="build-timeline-heading" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
+				The Missing Middle
+			</h2>
+			<p class="text-base sm:text-lg text-gray-700 leading-relaxed">
+				It's not just about buildings—it's about people. The missing middle isn't just the neighbourhood-scale homes we love in our city, it's the missing middle class. Families shouldn't have to leave Toronto to afford a home.
+			</p>
+			<p class="text-base sm:text-lg text-gray-700 leading-relaxed mt-4">
+				We build 5-10 unit buildings in established neighbourhoods. Our experience in high-rise development taught us what's broken—now we're using that knowledge to deliver new housing faster.
+			</p>
+		</div>
 
 		<!-- 3-Panel Grid -->
 		<div class="grid md:grid-cols-3 relative">
 			{#each steps as step, i}
 				<div class="step-panel relative {i < 2 ? 'md:border-r md:border-gray-300' : ''} px-4 sm:px-6 md:px-8 lg:px-12 py-8 md:py-12">
 					<!-- Step Header: Number + Title -->
-					<div class="step-header flex items-center gap-4 mb-8 md:mb-10">
-						<span class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gray-900 text-white text-xl sm:text-2xl font-bold fill-element">
-							{step.number}
-						</span>
-						<h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
-							{step.title}
-						</h3>
+					<div class="step-header mb-6 md:mb-8">
+						<div class="flex items-center gap-4 mb-3">
+							<span class="flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gray-900 text-white text-xl sm:text-2xl font-bold fill-element">
+								{step.number}
+							</span>
+							<h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
+								{step.title}
+							</h3>
+						</div>
+						<p class="text-sm sm:text-base text-gray-600 leading-relaxed pl-0 sm:pl-[4.5rem]">
+							{step.description}
+						</p>
 					</div>
 
 					<!-- Large Illustration Area -->
@@ -309,9 +327,9 @@
 								<line class="draw-path" x1="180" y1="360" x2="180" y2="380" stroke="#4fa64f" stroke-width="1.5"/>
 								<line class="draw-path" x1="274" y1="360" x2="274" y2="380" stroke="#4fa64f" stroke-width="1.5"/>
 
-								<!-- SOLD banner -->
+								<!-- HOME banner -->
 								<rect class="draw-path" x="340" y="140" width="50" height="22" fill="none" stroke="#4fa64f" stroke-width="2"/>
-								<text x="365" y="156" text-anchor="middle" fill="#4fa64f" font-size="12" font-weight="bold" class="fill-element">SOLD</text>
+								<text x="365" y="156" text-anchor="middle" fill="#4fa64f" font-size="11" font-weight="bold" class="fill-element">HOME</text>
 							{/if}
 						</svg>
 					</div>

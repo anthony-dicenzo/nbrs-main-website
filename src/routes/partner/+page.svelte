@@ -22,9 +22,10 @@
 	let generalError = $state('');
 
 	const partnerTypes = [
-		{ value: 'investor', label: 'Investor' },
-		{ value: 'nonprofit', label: 'Nonprofit Organization' },
+		{ value: 'investor', label: 'Accredited Investor' },
 		{ value: 'landowner', label: 'Landowner' },
+		{ value: 'broker', label: 'Broker with Sites' },
+		{ value: 'nonprofit', label: 'Nonprofit Organization' },
 		{ value: 'municipality', label: 'Municipality / Government' },
 		{ value: 'other', label: 'Other' }
 	];
@@ -177,7 +178,7 @@
 							<span class="text-nbrs-green font-bold text-sm sm:text-base">1</span>
 						</div>
 						<div class="min-w-0">
-							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Impact Investors</h3>
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Accredited Investors</h3>
 							<p class="text-gray-600 text-sm sm:text-base">Seeking stable returns with measurable social impact in the housing sector.</p>
 						</div>
 					</div>
@@ -186,8 +187,8 @@
 							<span class="text-nbrs-green font-bold text-sm sm:text-base">2</span>
 						</div>
 						<div class="min-w-0">
-							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Nonprofit Organizations</h3>
-							<p class="text-gray-600 text-sm sm:text-base">Looking to expand affordable housing in the communities you serve.</p>
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Landowners</h3>
+							<p class="text-gray-600 text-sm sm:text-base">With underutilized parcels ready for sensitive, community-friendly development.</p>
 						</div>
 					</div>
 					<div class="flex gap-3 sm:gap-4">
@@ -195,8 +196,8 @@
 							<span class="text-nbrs-green font-bold text-sm sm:text-base">3</span>
 						</div>
 						<div class="min-w-0">
-							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Landowners</h3>
-							<p class="text-gray-600 text-sm sm:text-base">With underutilized parcels ready for sensitive, community-friendly development.</p>
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Brokers with Sites</h3>
+							<p class="text-gray-600 text-sm sm:text-base">Representing off-market or as-of-right properties in established Toronto neighbourhoods.</p>
 						</div>
 					</div>
 					<div class="flex gap-3 sm:gap-4">
@@ -204,8 +205,8 @@
 							<span class="text-nbrs-green font-bold text-sm sm:text-base">4</span>
 						</div>
 						<div class="min-w-0">
-							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Municipalities</h3>
-							<p class="text-gray-600 text-sm sm:text-base">Committed to adding quality rental housing without changing neighbourhood character.</p>
+							<h3 class="font-bold text-gray-900 mb-1 text-sm sm:text-base">Nonprofit Organizations</h3>
+							<p class="text-gray-600 text-sm sm:text-base">Looking to expand affordable housing in the communities you serve.</p>
 						</div>
 					</div>
 				</div>
