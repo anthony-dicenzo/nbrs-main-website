@@ -51,8 +51,8 @@
 	<link rel="preload" as="image" href={heroPosterUrl} fetchpriority="high" />
 </svelte:head>
 
-<!-- Hero Section - Single video -->
-<section aria-label="Welcome">
+<!-- Hero Section - Single video (negative margin to go behind nav) -->
+<section aria-label="Welcome" class="-mt-16">
 	<VideoHero source={heroVideo} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
 		<div class="flex flex-col items-center justify-center h-full text-white text-center px-4 sm:px-6">
 			<h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">

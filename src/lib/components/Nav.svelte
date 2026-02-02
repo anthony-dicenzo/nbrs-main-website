@@ -1,23 +1,42 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Logo from './Logo.svelte';
 	import Rollover from './Rollover.svelte';
 
-	let scrollY = $state(0);
-	let lastScrollY = $state(0);
 	let visible = $state(true);
+	let lastScrollY = 0;
+	let ticking = false;
 
-	$effect(() => {
-		const atTop = scrollY < 50;
+	function updateNav() {
+		const currentScrollY = window.scrollY;
+		const atTop = currentScrollY < 50;
+
 		if (atTop) {
 			visible = true;
-		} else {
-			visible = scrollY < lastScrollY; // Show on scroll up
+		} else if (currentScrollY < lastScrollY - 5) {
+			// Scrolling up (with 5px threshold to avoid jitter)
+			visible = true;
+		} else if (currentScrollY > lastScrollY + 5) {
+			// Scrolling down
+			visible = false;
 		}
-		lastScrollY = scrollY;
+
+		lastScrollY = currentScrollY;
+		ticking = false;
+	}
+
+	function onScroll() {
+		if (!ticking) {
+			requestAnimationFrame(updateNav);
+			ticking = true;
+		}
+	}
+
+	onMount(() => {
+		window.addEventListener('scroll', onScroll, { passive: true });
+		return () => window.removeEventListener('scroll', onScroll);
 	});
 </script>
-
-<svelte:window bind:scrollY />
 
 <!-- Skip to content link for accessibility -->
 <a
