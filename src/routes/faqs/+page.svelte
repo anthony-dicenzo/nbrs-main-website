@@ -20,7 +20,7 @@
 		},
 		{
 			question: 'How big are the units?',
-			answer: "Our units are designed for families, with real bedrooms, real storage, and real space. FAMILY 1 features three-bedroom units with dedicated outdoor space—the kind of homes that are almost impossible to find in Toronto's rental market."
+			answer: "Our units are designed for families, with real bedrooms, real storage, and real space. FAMILY 1 features 1,300 square foot, three-bedroom, 2.5-bathroom homes with dedicated outdoor space—the kind of homes that are almost impossible to find in Toronto's rental market."
 		},
 		{
 			question: 'What does "as-of-right" mean?',
@@ -32,7 +32,7 @@
 		},
 		{
 			question: 'When will FAMILY 1 be ready?',
-			answer: "FAMILY 1 is currently in development. We expect construction to begin in 2026 with first move-ins in 2027. Join our waitlist to stay updated on progress and availability."
+			answer: "FAMILY 1 is currently under construction with first move-ins expected in Spring 2026. Join our waitlist to stay updated on progress and availability."
 		}
 	];
 

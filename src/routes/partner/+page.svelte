@@ -1,10 +1,11 @@
 <script lang="ts">
-	import {
-		submitPartnerForm,
-		validatePartnerForm,
-		type PartnerFormData,
-		type ValidationErrors
-	} from '$lib/utils/hubspot';
+	interface PartnerFormData {
+		name: string;
+		email: string;
+		organization: string;
+		partnerType: string;
+		message: string;
+	}
 
 	let formData = $state<PartnerFormData>({
 		name: '',
@@ -16,7 +17,7 @@
 
 	let isSubmitting = $state(false);
 	let submitStatus = $state<'idle' | 'success' | 'error'>('idle');
-	let fieldErrors = $state<ValidationErrors>({});
+	let fieldErrors = $state<Record<string, string>>({});
 	let generalError = $state('');
 
 	const partnerTypes = [
@@ -27,6 +28,15 @@
 		{ value: 'municipality', label: 'Municipality / Government' },
 		{ value: 'other', label: 'Other' }
 	];
+
+	function validateForm(): Record<string, string> {
+		const errors: Record<string, string> = {};
+		if (!formData.name.trim()) errors.name = 'Name is required';
+		if (!formData.email.trim()) errors.email = 'Email is required';
+		else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errors.email = 'Invalid email';
+		if (!formData.partnerType) errors.partnerType = 'Please select a partner type';
+		return errors;
+	}
 
 	function clearFieldError(field: keyof PartnerFormData) {
 		if (fieldErrors[field]) {
@@ -41,22 +51,33 @@
 		fieldErrors = {};
 		generalError = '';
 
-		const errors = validatePartnerForm(formData);
+		const errors = validateForm();
 		if (Object.keys(errors).length > 0) {
 			fieldErrors = errors;
 			isSubmitting = false;
 			return;
 		}
 
-		const result = await submitPartnerForm(formData);
+		try {
+			const response = await fetch('https://formspree.io/f/xlglobnk', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			});
 
-		if (result.success) {
-			submitStatus = 'success';
-			formData = { name: '', email: '', organization: '', partnerType: '', message: '' };
-		} else {
+			if (response.ok) {
+				submitStatus = 'success';
+				formData = { name: '', email: '', organization: '', partnerType: '', message: '' };
+			} else {
+				submitStatus = 'error';
+				generalError = 'Something went wrong. Please try again.';
+			}
+		} catch {
 			submitStatus = 'error';
-			if (result.errors) fieldErrors = result.errors;
-			if (result.message) generalError = result.message;
+			generalError = 'Something went wrong. Please try again.';
 		}
 
 		isSubmitting = false;

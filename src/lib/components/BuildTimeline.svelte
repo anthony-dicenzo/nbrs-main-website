@@ -14,7 +14,7 @@
 		{
 			number: '2',
 			title: 'Build Homes',
-			description: 'Our tech-enabled process delivers new housing in 12-18 months from acquisition.'
+			description: 'A decade of industry experience and our tech-enabled process delivers new housing in 12-18 months from acquisition.'
 		},
 		{
 			number: '3',

@@ -36,11 +36,11 @@
 		{
 			year: 'September 2025',
 			title: 'Construction',
-			description: 'Six family-sized units taking shape in the neighbourhood.',
+			description: 'Five family-sized units taking shape in the neighbourhood.',
 			image: '/videos/new/construction-crane-progress.jpg'
 		},
 		{
-			year: '2027',
+			year: 'Spring 2026',
 			title: 'Residents Move In',
 			description: 'First NBRS families call FAMILY 1 home.',
 			image: '/videos/new/building-render-dusk.jpg'

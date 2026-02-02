@@ -1,13 +1,16 @@
 <script lang="ts">
 	import { scrollReveal } from '$lib/utils/gsap';
-	import {
-		submitWaitlistForm,
-		validateWaitlistForm,
-		type WaitlistFormData,
-		type ValidationErrors
-	} from '$lib/utils/hubspot';
 
-	// Form state using Svelte 5 runes
+	interface WaitlistFormData {
+		firstName: string;
+		lastName: string;
+		email: string;
+		phone: string;
+		householdSize: string;
+		neighbourhood: string;
+		unitType: string;
+	}
+
 	let formData = $state<WaitlistFormData>({
 		firstName: '',
 		lastName: '',
@@ -20,7 +23,7 @@
 
 	let isSubmitting = $state(false);
 	let submitStatus = $state<'idle' | 'success' | 'error'>('idle');
-	let fieldErrors = $state<ValidationErrors>({});
+	let fieldErrors = $state<Record<string, string>>({});
 	let generalError = $state('');
 
 	const householdSizes = [
@@ -48,7 +51,6 @@
 		{ value: 'flexible', label: 'Flexible / No Preference' }
 	];
 
-	// Features of FAMILY 1 units
 	const features = [
 		{ icon: 'bedroom', title: '3 Bedrooms', description: 'Real family-sized units' },
 		{ icon: 'storage', title: 'Storage Space', description: 'Room for life to happen' },
@@ -56,7 +58,19 @@
 		{ icon: 'community', title: 'Vibrant Area', description: 'Established neighbourhood' }
 	];
 
-	// Clear field error when user starts typing
+	function validateForm(): Record<string, string> {
+		const errors: Record<string, string> = {};
+		if (!formData.firstName.trim()) errors.firstName = 'First name is required';
+		if (!formData.lastName.trim()) errors.lastName = 'Last name is required';
+		if (!formData.email.trim()) errors.email = 'Email is required';
+		else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) errors.email = 'Invalid email';
+		if (!formData.phone.trim()) errors.phone = 'Phone is required';
+		if (!formData.householdSize) errors.householdSize = 'Please select household size';
+		if (!formData.neighbourhood) errors.neighbourhood = 'Please select neighbourhood';
+		if (!formData.unitType) errors.unitType = 'Please select unit type';
+		return errors;
+	}
+
 	function clearFieldError(field: keyof WaitlistFormData) {
 		if (fieldErrors[field]) {
 			fieldErrors = { ...fieldErrors, [field]: '' };
@@ -70,36 +84,41 @@
 		fieldErrors = {};
 		generalError = '';
 
-		// Client-side validation first
-		const errors = validateWaitlistForm(formData);
+		const errors = validateForm();
 		if (Object.keys(errors).length > 0) {
 			fieldErrors = errors;
 			isSubmitting = false;
 			return;
 		}
 
-		// Submit to HubSpot
-		const result = await submitWaitlistForm(formData);
+		try {
+			const response = await fetch('https://formspree.io/f/xykpbwjq', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
+				body: JSON.stringify(formData)
+			});
 
-		if (result.success) {
-			submitStatus = 'success';
-			formData = {
-				firstName: '',
-				lastName: '',
-				email: '',
-				phone: '',
-				householdSize: '',
-				neighbourhood: '',
-				unitType: ''
-			};
-		} else {
+			if (response.ok) {
+				submitStatus = 'success';
+				formData = {
+					firstName: '',
+					lastName: '',
+					email: '',
+					phone: '',
+					householdSize: '',
+					neighbourhood: '',
+					unitType: ''
+				};
+			} else {
+				submitStatus = 'error';
+				generalError = 'Something went wrong. Please try again.';
+			}
+		} catch {
 			submitStatus = 'error';
-			if (result.errors) {
-				fieldErrors = result.errors;
-			}
-			if (result.message) {
-				generalError = result.message;
-			}
+			generalError = 'Something went wrong. Please try again.';
 		}
 
 		isSubmitting = false;
@@ -227,8 +246,8 @@
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 							</svg>
 						</div>
-						<h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">You're on the List!</h3>
-						<p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">We'll reach out as soon as units become available. Thank you for your interest in FAMILY 1.</p>
+						<h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2">Welcome to the NBRHOOD!</h3>
+						<p class="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">You're on the list. We'll reach out as soon as units become available.</p>
 						<a
 							href="/family-1"
 							class="btn btn-secondary inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-lg font-medium text-nbrs-green border-nbrs-green min-h-[48px] text-sm sm:text-base"

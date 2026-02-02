@@ -56,7 +56,7 @@
 	<VideoHero source={heroVideo} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
 		<div class="flex flex-col items-center justify-center h-full text-white text-center px-4 sm:px-6">
 			<h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
-				Building Homes,<br />Building Community
+				Built for Families.<br />Rooted in Community.
 			</h1>
 			<p class="text-base xs:text-lg sm:text-xl md:text-2xl font-light max-w-2xl opacity-90">
 				Quality rental housing at the neighbourhood scale
@@ -103,7 +103,7 @@
 					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.2, distance: 25 }}
 					class="text-base sm:text-lg text-gray-600 mb-4"
 				>
-					Six family-sized rental units in a vibrant Toronto neighbourhood. Designed from the ground up
+					Five family-sized rentals in a vibrant Toronto neighbourhood. Designed from the ground up
 					for families who need space to grow.
 				</p>
 				<p
