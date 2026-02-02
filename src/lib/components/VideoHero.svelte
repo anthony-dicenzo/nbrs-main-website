@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import type { Snippet } from 'svelte';
-	import { initMobileDetection, isMobile } from '$lib/utils/mobile.svelte';
 
 	interface VideoSource {
 		mp4: string;
@@ -31,8 +30,8 @@
 	let posterLoaded = $state(false);
 	let rotationTimer: ReturnType<typeof setInterval> | null = null;
 
-	// Mobile detection - show poster only on mobile devices
-	const showVideoOnDevice = $derived(!isMobile());
+	// Always show video on all devices for consistent experience
+	const showVideoOnDevice = true;
 
 	// Get current source
 	const currentSource = $derived(videoSources[currentIndex] || videoSources[0]);
@@ -75,9 +74,6 @@
 	}
 
 	onMount(async () => {
-		// Initialize mobile detection
-		initMobileDetection();
-
 		if (!videoSources.length) return;
 
 		// Preload first poster
@@ -85,8 +81,8 @@
 		await preloadPoster(posterUrl);
 		posterLoaded = true;
 
-		// Start rotation if multiple videos (only on desktop where videos play)
-		if (videoSources.length > 1 && showVideoOnDevice) {
+		// Start rotation if multiple videos
+		if (videoSources.length > 1) {
 			rotationTimer = setInterval(rotateVideo, rotationInterval);
 		}
 	});
