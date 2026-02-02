@@ -2,10 +2,9 @@
 	import SocialIcons from './SocialIcons.svelte';
 
 	const navLinks = [
-		{ label: 'Contact', href: '/contact' },
+		{ label: 'Contact', href: '/partner' },
 		{ label: 'Mission', href: '/mission' },
-		{ label: 'FAQs', href: '/faqs' },
-		{ label: 'Partner', href: '/partner' }
+		{ label: 'FAQs', href: '/faqs' }
 	];
 </script>
 

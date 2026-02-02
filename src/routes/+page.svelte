@@ -58,10 +58,9 @@
 			<h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
 				Building Homes,<br />Building Community
 			</h1>
-			<p class="text-base xs:text-lg sm:text-xl md:text-2xl font-light mb-6 md:mb-8 max-w-2xl opacity-90">
+			<p class="text-base xs:text-lg sm:text-xl md:text-2xl font-light max-w-2xl opacity-90">
 				Quality rental housing at the neighbourhood scale
 			</p>
-			<p class="text-sm xs:text-base md:text-lg italic opacity-80 tracking-wide">Sincerely, Your Neighbours</p>
 
 			<!-- Scroll indicator -->
 			<div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">

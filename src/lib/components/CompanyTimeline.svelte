@@ -9,37 +9,32 @@
 	// Timeline milestones with rich imagery
 	const milestones = [
 		{
-			year: '2023',
-			title: 'The Vision',
-			description: 'NBRS was born from a simple idea: build the homes Toronto actually needs.',
-			image: '/videos/new/park-tulips-skyline.jpg'
-		},
-		{
 			year: '2024',
 			title: 'The Opportunity',
 			description: 'As-of-right permissions finally permit neighbourhood-scale buildings.',
-			image: '/videos/new/toronto-skyline-sunset.jpg'
+			image: '/videos/new/house-original.jpg'
 		},
 		{
 			year: '2025',
 			title: 'Site Secured',
 			description: 'First property acquired in an established Toronto neighbourhood.',
-			image: '/videos/new/construction-site-tree.jpg'
+			image: '/videos/new/site-house.jpg'
 		},
 		{
 			year: '2025',
-			title: 'Approvals',
-			description: 'Permits in hand. FAMILY 1 moves from vision to reality.',
-			image: '/videos/new/construction-site-tree.jpg'
+			title: 'Demolition',
+			description: 'Making way for something new. The old house comes down.',
+			image: '/videos/new/demolition.jpg',
+			video: '/videos/new/demolition.mp4'
 		},
 		{
-			year: 'Fall 2026',
+			year: '2026',
 			title: 'Construction',
 			description: 'Shovels in the ground. Six family-sized units taking shape.',
 			image: '/videos/new/construction-crane-progress.jpg'
 		},
 		{
-			year: 'Fall 2027',
+			year: '2027',
 			title: 'Move In',
 			description: 'First NBRS families call FAMILY 1 home.',
 			image: '/videos/new/building-render-dusk.jpg'
@@ -133,15 +128,28 @@
 				<div
 					class="timeline-card flex-shrink-0 w-[280px] sm:w-[320px] md:w-[400px] lg:w-[450px] group"
 				>
-					<!-- Large Image -->
+					<!-- Large Image or Video -->
 					<div class="relative aspect-[4/3] overflow-hidden rounded-xl mb-4">
-						<img
-							src={milestone.image}
-							alt={milestone.title}
-							class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-							loading={i < 3 ? 'eager' : 'lazy'}
-							draggable="false"
-						/>
+						{#if milestone.video}
+							<video
+								autoplay
+								muted
+								loop
+								playsinline
+								poster={milestone.image}
+								class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+							>
+								<source src={milestone.video} type="video/mp4" />
+							</video>
+						{:else}
+							<img
+								src={milestone.image}
+								alt={milestone.title}
+								class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+								loading={i < 3 ? 'eager' : 'lazy'}
+								draggable="false"
+							/>
+						{/if}
 						<!-- Gradient overlay -->
 						<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
 						<!-- Year badge -->
