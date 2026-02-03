@@ -96,9 +96,9 @@
 
 <style>
 	/* Hide native video controls/play button while loading */
-	video::-webkit-media-controls,
-	video::-webkit-media-controls-start-playback-button,
-	video::-webkit-media-controls-play-button {
+	:global(video::-webkit-media-controls),
+	:global(video::-webkit-media-controls-start-playback-button),
+	:global(video::-webkit-media-controls-play-button) {
 		display: none !important;
 		-webkit-appearance: none;
 		opacity: 0 !important;
@@ -129,6 +129,7 @@
 			<video
 				class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 				class:opacity-0={!videoLoaded}
+				class:invisible={!videoLoaded}
 				autoplay
 				muted
 				loop
