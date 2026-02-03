@@ -135,6 +135,7 @@
 			class:opacity-0={!videoLoaded}
 			class:invisible={!videoLoaded}
 			style="object-position: {objectPosition};"
+			autoplay
 			muted
 			loop
 			playsinline

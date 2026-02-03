@@ -136,6 +136,7 @@
 				class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 				class:opacity-0={!videoLoaded}
 				class:invisible={!videoLoaded}
+				autoplay
 				muted
 				loop
 				playsinline
