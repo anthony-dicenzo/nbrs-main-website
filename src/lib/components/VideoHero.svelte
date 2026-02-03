@@ -27,6 +27,7 @@
 
 	let currentIndex = $state(0);
 	let videoLoaded = $state(false);
+	let videoCanPlay = $state(false);
 	let posterLoaded = $state(false);
 	let rotationTimer: ReturnType<typeof setInterval> | null = null;
 
@@ -61,6 +62,45 @@
 		});
 	}
 
+	// Preload video and check if it can play
+	function preloadVideo(source: VideoSource): Promise<void> {
+		return new Promise((resolve) => {
+			const video = document.createElement('video');
+			video.muted = true;
+			video.playsInline = true;
+			video.preload = 'auto';
+
+			const webmUrl = getWebmUrl(source);
+			if (webmUrl) {
+				const webmSource = document.createElement('source');
+				webmSource.src = webmUrl;
+				webmSource.type = 'video/webm';
+				video.appendChild(webmSource);
+			}
+
+			const mp4Source = document.createElement('source');
+			mp4Source.src = source.mp4;
+			mp4Source.type = 'video/mp4';
+			video.appendChild(mp4Source);
+
+			video.oncanplay = () => {
+				videoCanPlay = true;
+				resolve();
+			};
+			video.onerror = () => resolve(); // Continue even if video fails
+
+			// Timeout fallback in case canplay never fires
+			setTimeout(() => {
+				if (!videoCanPlay) {
+					videoCanPlay = true;
+					resolve();
+				}
+			}, 5000);
+
+			video.load();
+		});
+	}
+
 	// Handle video load event
 	function handleVideoLoaded() {
 		videoLoaded = true;
@@ -71,6 +111,9 @@
 		if (videoSources.length <= 1) return;
 		currentIndex = (currentIndex + 1) % videoSources.length;
 		videoLoaded = false;
+		videoCanPlay = false;
+		// Preload the next video
+		preloadVideo(videoSources[currentIndex]);
 	}
 
 	onMount(async () => {
@@ -80,6 +123,9 @@
 		const posterUrl = getPosterUrl(currentSource);
 		await preloadPoster(posterUrl);
 		posterLoaded = true;
+
+		// Preload video before showing it (prevents flash of play button on mobile)
+		await preloadVideo(currentSource);
 
 		// Start rotation if multiple videos
 		if (videoSources.length > 1) {
@@ -111,8 +157,8 @@
 		/>
 	{/if}
 
-	<!-- Video (autoplays when ready - desktop only) -->
-	{#if currentSource && posterLoaded && showVideoOnDevice}
+	<!-- Video (only mounts after preload to prevent mobile play button flash) -->
+	{#if currentSource && posterLoaded && showVideoOnDevice && videoCanPlay}
 		{#key currentIndex}
 			<video
 				class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"

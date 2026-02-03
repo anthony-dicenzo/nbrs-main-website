@@ -27,6 +27,7 @@
 	let containerRef: HTMLDivElement | null = null;
 	let isVisible = $state(false);
 	let videoLoaded = $state(false);
+	let videoCanPlay = $state(false);
 	let shouldLoad = $state(false);
 	let observer: IntersectionObserver | null = null;
 
@@ -45,6 +46,45 @@
 		return src.mp4.replace(/\.mp4$/, '.webm');
 	}
 
+	// Preload video and check if it can play
+	function preloadVideo(src: VideoSource): Promise<void> {
+		return new Promise((resolve) => {
+			const video = document.createElement('video');
+			video.muted = true;
+			video.playsInline = true;
+			video.preload = 'auto';
+
+			const webmUrl = getWebmUrl(src);
+			if (webmUrl) {
+				const webmSource = document.createElement('source');
+				webmSource.src = webmUrl;
+				webmSource.type = 'video/webm';
+				video.appendChild(webmSource);
+			}
+
+			const mp4Source = document.createElement('source');
+			mp4Source.src = src.mp4;
+			mp4Source.type = 'video/mp4';
+			video.appendChild(mp4Source);
+
+			video.oncanplay = () => {
+				videoCanPlay = true;
+				resolve();
+			};
+			video.onerror = () => resolve(); // Continue even if video fails
+
+			// Timeout fallback in case canplay never fires
+			setTimeout(() => {
+				if (!videoCanPlay) {
+					videoCanPlay = true;
+					resolve();
+				}
+			}, 5000);
+
+			video.load();
+		});
+	}
+
 	// Handle video load event
 	function handleVideoLoaded() {
 		videoLoaded = true;
@@ -55,6 +95,7 @@
 			// Fallback: load immediately if IntersectionObserver not available
 			shouldLoad = true;
 			isVisible = true;
+			preloadVideo(source);
 			return;
 		}
 
@@ -63,9 +104,11 @@
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						shouldLoad = true;
-						// Small delay before showing to allow video to start loading
-						requestAnimationFrame(() => {
-							isVisible = true;
+						// Preload video before showing (prevents flash of play button on mobile)
+						preloadVideo(source).then(() => {
+							requestAnimationFrame(() => {
+								isVisible = true;
+							});
 						});
 						// Stop observing once visible (video stays loaded)
 						observer?.unobserve(entry.target);
@@ -111,8 +154,8 @@
 		height="1080"
 	/>
 
-	<!-- Video (loads when in/near viewport - desktop only) -->
-	{#if shouldLoad && showVideoOnDevice}
+	<!-- Video (only mounts after preload to prevent mobile play button flash) -->
+	{#if shouldLoad && showVideoOnDevice && videoCanPlay}
 		<video
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 			class:opacity-0={!videoLoaded}
