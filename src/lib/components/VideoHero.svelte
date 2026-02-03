@@ -28,26 +28,22 @@
 	let currentIndex = $state(0);
 	let videoLoaded = $state(false);
 	let posterLoaded = $state(false);
+	let autoplayBlocked = $state(false);
+	let videoRef: HTMLVideoElement | null = null;
 	let rotationTimer: ReturnType<typeof setInterval> | null = null;
-
-	// Always show video on all devices for consistent experience
-	const showVideoOnDevice = true;
 
 	// Get current source
 	const currentSource = $derived(videoSources[currentIndex] || videoSources[0]);
 
 	// Generate poster URL from video URL if not provided
-	// Cloudinary supports jpg format for video thumbnails
 	function getPosterUrl(source: VideoSource): string {
 		if (source.poster) return source.poster;
-		// Convert mp4 URL to jpg for poster
 		return source.mp4.replace(/\.mp4$/, '.jpg');
 	}
 
 	// Generate WebM URL if not provided
 	function getWebmUrl(source: VideoSource): string | undefined {
 		if (source.webm) return source.webm;
-		// Convert mp4 URL to webm
 		return source.mp4.replace(/\.mp4$/, '.webm');
 	}
 
@@ -56,19 +52,41 @@
 		return new Promise((resolve) => {
 			const img = new Image();
 			img.onload = () => resolve();
-			img.onerror = () => resolve(); // Continue even if poster fails
+			img.onerror = () => resolve();
 			img.src = url;
 		});
 	}
 
-	// Handle video load event
-	function handleVideoLoaded() {
-		videoLoaded = true;
+	// Try to play video and detect autoplay blocks
+	async function tryAutoplay() {
+		if (!videoRef) return;
+
+		try {
+			await videoRef.play();
+			// Autoplay worked
+			autoplayBlocked = false;
+		} catch (error) {
+			// Autoplay was blocked (Low Power Mode, Data Saver, etc.)
+			autoplayBlocked = true;
+			videoLoaded = false;
+		}
+	}
+
+	// Handle video canplay event
+	function handleCanPlay() {
+		tryAutoplay();
+	}
+
+	// Handle video playing event (confirms video is actually playing)
+	function handlePlaying() {
+		if (!autoplayBlocked) {
+			videoLoaded = true;
+		}
 	}
 
 	// Rotate to next video
 	function rotateVideo() {
-		if (videoSources.length <= 1) return;
+		if (videoSources.length <= 1 || autoplayBlocked) return;
 		currentIndex = (currentIndex + 1) % videoSources.length;
 		videoLoaded = false;
 	}
@@ -81,7 +99,7 @@
 		await preloadPoster(posterUrl);
 		posterLoaded = true;
 
-		// Start rotation if multiple videos
+		// Start rotation if multiple videos (and autoplay works)
 		if (videoSources.length > 1) {
 			rotationTimer = setInterval(rotateVideo, rotationInterval);
 		}
@@ -94,27 +112,14 @@
 	});
 </script>
 
-<style>
-	/* Hide native video controls/play button while loading */
-	:global(video::-webkit-media-controls),
-	:global(video::-webkit-media-controls-start-playback-button),
-	:global(video::-webkit-media-controls-play-button) {
-		display: none !important;
-		-webkit-appearance: none;
-		opacity: 0 !important;
-		pointer-events: none;
-	}
-</style>
-
 <div class="relative w-full h-svh min-h-[600px] overflow-hidden">
-	<!-- Poster image (shows immediately, stays visible on mobile) -->
-	<!-- fetchpriority="high" ensures LCP image loads first -->
+	<!-- Poster image (shows immediately, stays visible if autoplay blocked) -->
 	{#if currentSource}
 		<img
 			src={getPosterUrl(currentSource)}
 			alt=""
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-			class:opacity-0={videoLoaded && showVideoOnDevice}
+			class:opacity-0={videoLoaded && !autoplayBlocked}
 			aria-hidden="true"
 			fetchpriority="high"
 			decoding="async"
@@ -123,31 +128,30 @@
 		/>
 	{/if}
 
-	<!-- Video (autoplays when ready - desktop only) -->
-	{#if currentSource && posterLoaded && showVideoOnDevice}
+	<!-- Video (only shown if autoplay is not blocked) -->
+	{#if currentSource && posterLoaded && !autoplayBlocked}
 		{#key currentIndex}
 			<video
+				bind:this={videoRef}
 				class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 				class:opacity-0={!videoLoaded}
 				class:invisible={!videoLoaded}
-				autoplay
 				muted
 				loop
 				playsinline
-				onloadeddata={handleVideoLoaded}
+				oncanplay={handleCanPlay}
+				onplaying={handlePlaying}
 				poster={getPosterUrl(currentSource)}
 			>
-				<!-- WebM source (preferred for smaller file size) -->
 				{#if getWebmUrl(currentSource)}
 					<source src={getWebmUrl(currentSource)} type="video/webm" />
 				{/if}
-				<!-- MP4 fallback -->
 				<source src={currentSource.mp4} type="video/mp4" />
 			</video>
 		{/key}
 	{/if}
 
-	<!-- Optional overlay for darkening/gradient -->
+	<!-- Optional overlay -->
 	{#if overlayClass}
 		<div class="absolute inset-0 {overlayClass}" aria-hidden="true"></div>
 	{/if}

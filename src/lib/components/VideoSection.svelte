@@ -25,13 +25,12 @@
 	} = $props();
 
 	let containerRef: HTMLDivElement | null = null;
+	let videoRef: HTMLVideoElement | null = null;
 	let isVisible = $state(false);
 	let videoLoaded = $state(false);
 	let shouldLoad = $state(false);
+	let autoplayBlocked = $state(false);
 	let observer: IntersectionObserver | null = null;
-
-	// Always show video on all devices for consistent experience
-	const showVideoOnDevice = true;
 
 	// Generate poster URL from video URL if not provided
 	function getPosterUrl(src: VideoSource): string {
@@ -45,14 +44,34 @@
 		return src.mp4.replace(/\.mp4$/, '.webm');
 	}
 
-	// Handle video load event
-	function handleVideoLoaded() {
-		videoLoaded = true;
+	// Try to play video and detect autoplay blocks
+	async function tryAutoplay() {
+		if (!videoRef) return;
+
+		try {
+			await videoRef.play();
+			autoplayBlocked = false;
+		} catch (error) {
+			// Autoplay was blocked (Low Power Mode, Data Saver, etc.)
+			autoplayBlocked = true;
+			videoLoaded = false;
+		}
+	}
+
+	// Handle video canplay event
+	function handleCanPlay() {
+		tryAutoplay();
+	}
+
+	// Handle video playing event (confirms video is actually playing)
+	function handlePlaying() {
+		if (!autoplayBlocked) {
+			videoLoaded = true;
+		}
 	}
 
 	onMount(() => {
 		if (!containerRef || typeof IntersectionObserver === 'undefined') {
-			// Fallback: load immediately if IntersectionObserver not available
 			shouldLoad = true;
 			isVisible = true;
 			return;
@@ -63,17 +82,15 @@
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						shouldLoad = true;
-						// Small delay before showing to allow video to start loading
 						requestAnimationFrame(() => {
 							isVisible = true;
 						});
-						// Stop observing once visible (video stays loaded)
 						observer?.unobserve(entry.target);
 					}
 				});
 			},
 			{
-				rootMargin, // Start loading before element is in view
+				rootMargin,
 				threshold: 0
 			}
 		);
@@ -89,18 +106,6 @@
 	});
 </script>
 
-<style>
-	/* Hide native video controls/play button while loading */
-	:global(video::-webkit-media-controls),
-	:global(video::-webkit-media-controls-start-playback-button),
-	:global(video::-webkit-media-controls-play-button) {
-		display: none !important;
-		-webkit-appearance: none;
-		opacity: 0 !important;
-		pointer-events: none;
-	}
-</style>
-
 <div
 	bind:this={containerRef}
 	class="relative w-full overflow-hidden transition-opacity duration-700 ease-out"
@@ -108,13 +113,12 @@
 	class:opacity-100={isVisible}
 	style="aspect-ratio: {aspectRatio};"
 >
-	<!-- Poster image (shows until video loads, stays visible on mobile) -->
-	<!-- Explicit dimensions prevent layout shift -->
+	<!-- Poster image (shows until video loads, stays visible if autoplay blocked) -->
 	<img
 		src={getPosterUrl(source)}
 		alt=""
 		class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-		class:opacity-0={videoLoaded && showVideoOnDevice}
+		class:opacity-0={videoLoaded && !autoplayBlocked}
 		style="object-position: {objectPosition};"
 		aria-hidden="true"
 		loading="lazy"
@@ -123,30 +127,29 @@
 		height="1080"
 	/>
 
-	<!-- Video (loads when in/near viewport - desktop only) -->
-	{#if shouldLoad && showVideoOnDevice}
+	<!-- Video (only shown if autoplay is not blocked) -->
+	{#if shouldLoad && !autoplayBlocked}
 		<video
+			bind:this={videoRef}
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 			class:opacity-0={!videoLoaded}
 			class:invisible={!videoLoaded}
 			style="object-position: {objectPosition};"
-			autoplay
 			muted
 			loop
 			playsinline
-			onloadeddata={handleVideoLoaded}
+			oncanplay={handleCanPlay}
+			onplaying={handlePlaying}
 			poster={getPosterUrl(source)}
 		>
-			<!-- WebM source (preferred for smaller file size) -->
 			{#if getWebmUrl(source)}
 				<source src={getWebmUrl(source)} type="video/webm" />
 			{/if}
-			<!-- MP4 fallback -->
 			<source src={source.mp4} type="video/mp4" />
 		</video>
 	{/if}
 
-	<!-- Optional overlay for darkening/gradient -->
+	<!-- Optional overlay -->
 	{#if overlayClass}
 		<div class="absolute inset-0 {overlayClass}" aria-hidden="true"></div>
 	{/if}
