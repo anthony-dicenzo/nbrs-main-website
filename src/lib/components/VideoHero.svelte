@@ -94,6 +94,18 @@
 	});
 </script>
 
+<style>
+	/* Hide native video controls/play button while loading */
+	video::-webkit-media-controls,
+	video::-webkit-media-controls-start-playback-button,
+	video::-webkit-media-controls-play-button {
+		display: none !important;
+		-webkit-appearance: none;
+		opacity: 0 !important;
+		pointer-events: none;
+	}
+</style>
+
 <div class="relative w-full h-svh min-h-[600px] overflow-hidden">
 	<!-- Poster image (shows immediately, stays visible on mobile) -->
 	<!-- fetchpriority="high" ensures LCP image loads first -->

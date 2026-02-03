@@ -89,6 +89,18 @@
 	});
 </script>
 
+<style>
+	/* Hide native video controls/play button while loading */
+	video::-webkit-media-controls,
+	video::-webkit-media-controls-start-playback-button,
+	video::-webkit-media-controls-play-button {
+		display: none !important;
+		-webkit-appearance: none;
+		opacity: 0 !important;
+		pointer-events: none;
+	}
+</style>
+
 <div
 	bind:this={containerRef}
 	class="relative w-full overflow-hidden transition-opacity duration-700 ease-out"
