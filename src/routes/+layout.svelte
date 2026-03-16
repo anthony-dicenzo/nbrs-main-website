@@ -24,6 +24,7 @@
 
 <svelte:head>
 	<link rel="canonical" href={canonicalUrl} />
+	<link rel="llms-txt" href="https://nbrs.ca/llms.txt" />
 	<meta property="og:locale" content="en_CA" />
 	<meta property="og:site_name" content="NBRS" />
 </svelte:head>

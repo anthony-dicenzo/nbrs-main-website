@@ -1,0 +1,47 @@
+# NBRS
+
+> NBRS (pronounced "neighbours") is a Toronto-based developer building quality rental housing at the neighbourhood scale. We focus on missing middle housing — 5-10 unit buildings in established neighbourhoods designed for families.
+
+## About
+
+NBRS Developments Inc. was founded in 2023 to address Toronto's missing middle housing gap. We build smaller, distributed projects that integrate seamlessly into existing streetscapes. Our tech-enabled approach delivers new housing in 12-18 months from acquisition by targeting as-of-right sites that don't require rezoning.
+
+- Website: https://nbrs.ca
+- Email: hello@nbrs.ca
+- Location: Toronto, Ontario, Canada
+
+## Current Project: FAMILY 1
+
+Our first development — five family-sized rental units in a vibrant Toronto neighbourhood.
+
+- 1,300 sq ft per unit
+- 3 bedrooms, 2.5 bathrooms
+- Dedicated outdoor space
+- Currently under construction
+- First move-ins expected Fall 2026
+- Waitlist open: https://nbrs.ca/waitlist
+
+## How We Build
+
+1. Buy as-of-right land in established Toronto neighbourhoods — no rezoning required
+2. Design 5-10 unit buildings that fit naturally into the streetscape
+3. Build quality homes with real bedrooms, real storage, real space
+4. Deliver new housing in 12-18 months from acquisition
+5. Rent directly to families who want to stay in the city they love
+
+## Partnership Opportunities
+
+We work with accredited investors, landowners with underutilized parcels, brokers with off-market or as-of-right sites, and nonprofits looking to expand community housing.
+
+- Partner page: https://nbrs.ca/partner
+
+## Pages
+
+- [Home](https://nbrs.ca/)
+- [Our Mission](https://nbrs.ca/mission)
+- [FAMILY 1](https://nbrs.ca/family-1)
+- [FAQs](https://nbrs.ca/faqs)
+- [Partner](https://nbrs.ca/partner)
+- [Waitlist](https://nbrs.ca/waitlist)
+- [Contact](https://nbrs.ca/contact)
+- [Full site content for LLMs](https://nbrs.ca/llms-full.txt)

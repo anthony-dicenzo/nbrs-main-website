@@ -11,22 +11,43 @@ Allow: /
 User-agent: Slurp
 Allow: /
 
-# Block AI crawlers and scrapers
+# AI crawlers — allow content files only, block HTML pages
 User-agent: GPTBot
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /
 
 User-agent: ChatGPT-User
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /
 
 User-agent: Google-Extended
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /
 
 User-agent: anthropic-ai
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /
 
 User-agent: Claude-Web
+Allow: /llms.txt
+Allow: /llms-full.txt
 Disallow: /
 
+User-agent: PerplexityBot
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+User-agent: Applebot-Extended
+Allow: /llms.txt
+Allow: /llms-full.txt
+Disallow: /
+
+# Block pure scrapers entirely
 User-agent: CCBot
 Disallow: /
 
@@ -40,12 +61,6 @@ User-agent: Bytespider
 Disallow: /
 
 User-agent: cohere-ai
-Disallow: /
-
-User-agent: PerplexityBot
-Disallow: /
-
-User-agent: Applebot-Extended
 Disallow: /
 
 # Default: allow other bots
