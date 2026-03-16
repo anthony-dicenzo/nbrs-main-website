@@ -40,7 +40,7 @@
 			image: '/videos/new/construction-crane-progress.jpg'
 		},
 		{
-			year: 'Spring 2026',
+			year: 'Fall 2026',
 			title: 'Residents Move In',
 			description: 'First NBRS families call FAMILY 1 home.',
 			image: '/videos/new/building-render-dusk.jpg'

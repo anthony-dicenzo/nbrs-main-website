@@ -32,7 +32,7 @@
 		},
 		{
 			question: 'When will FAMILY 1 be ready?',
-			answer: "FAMILY 1 is currently under construction with first move-ins expected in Spring 2026. Join our waitlist to stay updated on progress and availability."
+			answer: "FAMILY 1 is currently under construction with first move-ins expected in Fall 2026. Join our waitlist to stay updated on progress and availability."
 		}
 	];
 
