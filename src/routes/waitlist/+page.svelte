@@ -127,7 +127,18 @@
 
 <svelte:head>
 	<title>Join the FAMILY 1 Waitlist | NBRS</title>
-	<meta name="description" content="Be first to know about FAMILY 1 - six family-sized rental units in Toronto. Join the waitlist for 3-bedroom homes designed for families." />
+	<meta name="description" content="Join the waitlist for FAMILY 1 — Toronto family rental homes with 3 bedrooms, real storage, and outdoor space. Neighbourhood-scale rental housing by NBRS." />
+	<!-- Open Graph / Social -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://nbrs.ca/waitlist" />
+	<meta property="og:title" content="Join the FAMILY 1 Waitlist | NBRS" />
+	<meta property="og:description" content="Join the waitlist for FAMILY 1 — Toronto family rental homes with 3 bedrooms, real storage, and outdoor space." />
+	<meta property="og:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Join the FAMILY 1 Waitlist | NBRS" />
+	<meta name="twitter:description" content="Join the waitlist for FAMILY 1 — Toronto family rental homes with 3 bedrooms, real storage, and outdoor space." />
+	<meta name="twitter:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
 </svelte:head>
 
 <!-- Hero Section -->

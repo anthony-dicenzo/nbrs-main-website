@@ -4,17 +4,17 @@
 
 <svelte:head>
 	<title>Our Mission | NBRS</title>
-	<meta name="description" content="NBRS is building the missing middle - quality rental housing at the neighbourhood scale for Toronto families." />
+	<meta name="description" content="NBRS is building the missing middle — neighbourhood-scale rental housing for Toronto families. Quality homes that bring back the housing types our city needs." />
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/mission" />
 	<meta property="og:title" content="Our Mission | NBRS" />
-	<meta property="og:description" content="NBRS is building the missing middle - quality rental housing at the neighbourhood scale for Toronto families." />
+	<meta property="og:description" content="NBRS is building the missing middle — neighbourhood-scale rental housing for Toronto families." />
 	<meta property="og:image" content="https://nbrs.ca/videos/new/fountain-park-people.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Our Mission | NBRS" />
-	<meta name="twitter:description" content="NBRS is building the missing middle - quality rental housing at the neighbourhood scale for Toronto families." />
+	<meta name="twitter:description" content="NBRS is building the missing middle — neighbourhood-scale rental housing for Toronto families." />
 	<meta name="twitter:image" content="https://nbrs.ca/videos/new/fountain-park-people.jpg" />
 </svelte:head>
 
@@ -48,6 +48,7 @@
 					playsinline
 					poster="/videos/new/fountain-park-people.jpg"
 					class="w-full aspect-[4/5] object-cover rounded-sm"
+					aria-label="Families enjoying a park fountain in Toronto"
 				>
 					<source src="/videos/new/fountain-park-people.mp4" type="video/mp4" />
 				</video>
@@ -105,6 +106,7 @@
 					playsinline
 					poster="/videos/new/cyclists-downtown.jpg"
 					class="w-full aspect-[4/5] object-cover rounded-sm"
+					aria-label="Cyclists riding through downtown Toronto"
 				>
 					<source src="/videos/new/cyclists-downtown.mp4" type="video/mp4" />
 				</video>
@@ -174,6 +176,7 @@
 					playsinline
 					poster="/videos/new/building-render-dusk.jpg"
 					class="w-full aspect-[4/5] object-cover rounded-sm"
+					aria-label="FAMILY 1 building render at dusk — missing middle housing in Toronto"
 				>
 					<source src="/videos/new/building-render-dusk.mp4" type="video/mp4" />
 				</video>

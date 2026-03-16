@@ -3,8 +3,19 @@
 </script>
 
 <svelte:head>
-	<title>FAMILY 1 | NBRS</title>
-	<meta name="description" content="FAMILY 1 is our first neighbourhood-scale rental building - six family-sized units in a vibrant Toronto neighbourhood." />
+	<title>FAMILY 1 | NBRS - Neighbourhood-Scale Rental Housing in Toronto</title>
+	<meta name="description" content="FAMILY 1 is NBRS's first neighbourhood-scale housing project — family-sized 3-bedroom rental homes in a vibrant Toronto community. Coming Fall 2026." />
+	<!-- Open Graph / Social -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://nbrs.ca/family-1" />
+	<meta property="og:title" content="FAMILY 1 | NBRS - Neighbourhood-Scale Rental Housing in Toronto" />
+	<meta property="og:description" content="FAMILY 1 is NBRS's first neighbourhood-scale housing project — family-sized 3-bedroom rental homes in a vibrant Toronto community." />
+	<meta property="og:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="FAMILY 1 | NBRS" />
+	<meta name="twitter:description" content="FAMILY 1 is NBRS's first neighbourhood-scale housing project — family-sized 3-bedroom rental homes in Toronto." />
+	<meta name="twitter:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
 </svelte:head>
 
 <main class="min-h-screen bg-white px-4 py-16 sm:px-6 sm:py-20">

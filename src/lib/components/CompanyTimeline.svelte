@@ -151,7 +151,7 @@
 						{:else}
 							<img
 								src={milestone.image}
-								alt={milestone.title}
+								alt="{milestone.title} — {milestone.description}"
 								class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
 								loading={i < 3 ? 'eager' : 'lazy'}
 								draggable="false"

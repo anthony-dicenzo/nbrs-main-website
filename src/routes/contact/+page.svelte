@@ -1,6 +1,16 @@
 <svelte:head>
 	<title>Contact | NBRS</title>
-	<meta name="description" content="Contact NBRS about partnership opportunities, waitlist inquiries, or general questions." />
+	<meta name="description" content="Contact NBRS — Toronto's neighbourhood-scale rental housing developer. Reach out about partnerships, family rental inquiries, or missing middle housing questions." />
+	<!-- Open Graph / Social -->
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://nbrs.ca/contact" />
+	<meta property="og:title" content="Contact | NBRS" />
+	<meta property="og:description" content="Contact NBRS — Toronto's neighbourhood-scale rental housing developer. Reach out about partnerships, family rental inquiries, or missing middle housing questions." />
+	<meta property="og:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
+	<!-- Twitter Card -->
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:title" content="Contact | NBRS" />
+	<meta name="twitter:description" content="Contact NBRS — Toronto's neighbourhood-scale rental housing developer." />
 </svelte:head>
 
 <main class="min-h-screen bg-white px-4 py-16 sm:px-6 sm:py-20">

@@ -86,7 +86,7 @@
 
 <svelte:head>
 	<title>Partner With NBRS | Investment & Partnership Opportunities</title>
-	<meta name="description" content="Join NBRS in building quality rental housing at the neighbourhood scale." />
+	<meta name="description" content="Partner with NBRS to build missing middle rental housing in Toronto. Investment opportunities in neighbourhood-scale family housing development." />
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/partner" />

@@ -34,26 +34,47 @@
 	<title>NBRS - Quality Rental Housing at the Neighbourhood Scale</title>
 	<meta
 		name="description"
-		content="Quality rental housing at the neighbourhood scale. NBRS (pronounced 'neighbours') builds family-sized homes in established Toronto communities."
+		content="NBRS builds neighbourhood-scale rental housing for families in Toronto — quality 3-bedroom homes in established communities. Join our waitlist for FAMILY 1."
 	/>
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/" />
 	<meta property="og:title" content="NBRS - Quality Rental Housing at the Neighbourhood Scale" />
-	<meta property="og:description" content="Quality rental housing at the neighbourhood scale. NBRS builds family-sized homes in established Toronto communities." />
+	<meta property="og:description" content="NBRS builds neighbourhood-scale rental housing for families in Toronto — quality 3-bedroom homes in established communities." />
 	<meta property="og:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="NBRS - Quality Rental Housing at the Neighbourhood Scale" />
-	<meta name="twitter:description" content="Quality rental housing at the neighbourhood scale. NBRS builds family-sized homes in established Toronto communities." />
+	<meta name="twitter:description" content="NBRS builds neighbourhood-scale rental housing for families in Toronto — quality 3-bedroom homes in established communities." />
 	<meta name="twitter:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
 	<!-- Preload LCP image for faster hero render -->
 	<link rel="preload" as="image" href={heroPosterUrl} fetchpriority="high" />
+	<!-- Organization Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "Organization",
+		"name": "NBRS Developments Inc.",
+		"alternateName": "NBRS",
+		"url": "https://nbrs.ca",
+		"logo": "https://nbrs.ca/images/nbrs-logo-dark.svg",
+		"description": "Toronto-based developer building missing middle, neighbourhood-scale rental housing for families. Quality 3-bedroom homes in established communities.",
+		"foundingDate": "2023",
+		"areaServed": {
+			"@type": "City",
+			"name": "Toronto",
+			"containedInPlace": {
+				"@type": "AdministrativeArea",
+				"name": "Ontario, Canada"
+			}
+		},
+		"knowsAbout": ["missing middle housing", "neighbourhood-scale housing", "family rental housing", "as-of-right development", "multiplex development"],
+		"sameAs": []
+	})}</script>`}
 </svelte:head>
 
 <!-- Hero Section - Single video (negative margin to go behind nav) -->
 <section aria-label="Welcome" class="-mt-16">
-	<VideoHero source={heroVideo} overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
+	<VideoHero source={heroVideo} alt="Community street festival in a Toronto neighbourhood" overlayClass="bg-gradient-to-b from-black/40 via-black/20 to-black/50">
 		<div class="flex flex-col items-center justify-center h-full text-white text-center px-4 sm:px-6">
 			<h1 class="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 md:mb-6 leading-tight">
 				Built for Families.<br />Rooted in Community.
@@ -77,7 +98,7 @@
 	<div class="max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'fade', duration: 1.2 }} use:parallax={{ speed: 0.15 }}>
-				<VideoSection source={family1Video} aspectRatio="3/4" objectPosition="top" overlayClass="bg-black/10">
+				<VideoSection source={family1Video} alt="FAMILY 1 building render at dusk — neighbourhood-scale rental housing by NBRS" aspectRatio="3/4" objectPosition="top" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-nbrs-green px-4 py-2 rounded-full">
 							Coming 2026
@@ -162,7 +183,7 @@
 				</p>
 			</div>
 			<div use:scrollReveal={{ type: 'fade', duration: 1.2 }} use:parallax={{ speed: 0.15 }}>
-				<VideoSection source={torontoVideo} aspectRatio="16/9" overlayClass="bg-black/10">
+				<VideoSection source={torontoVideo} alt="Toronto skyline at sunset" aspectRatio="16/9" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-black/40 px-3 py-1 rounded-full">
 							Toronto

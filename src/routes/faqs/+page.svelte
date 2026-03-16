@@ -45,16 +45,30 @@
 
 <svelte:head>
 	<title>FAQs | NBRS</title>
-	<meta name="description" content="Frequently asked questions about NBRS and our neighbourhood-scale rental housing projects in Toronto." />
+	<meta name="description" content="Answers to common questions about missing middle housing, Toronto family rental homes, as-of-right development, and NBRS neighbourhood-scale housing projects." />
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/faqs" />
 	<meta property="og:title" content="FAQs | NBRS" />
-	<meta property="og:description" content="Frequently asked questions about NBRS and our neighbourhood-scale rental housing projects in Toronto." />
+	<meta property="og:description" content="Answers to common questions about missing middle housing, Toronto family rental homes, as-of-right development, and NBRS neighbourhood-scale housing projects." />
+	<meta property="og:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
 	<meta name="twitter:title" content="FAQs | NBRS" />
-	<meta name="twitter:description" content="Frequently asked questions about NBRS neighbourhood-scale rental housing." />
+	<meta name="twitter:description" content="Answers to common questions about missing middle housing, Toronto family rental homes, and NBRS neighbourhood-scale housing." />
+	<!-- FAQ Structured Data -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		"mainEntity": faqs.map(faq => ({
+			"@type": "Question",
+			"name": faq.question,
+			"acceptedAnswer": {
+				"@type": "Answer",
+				"text": faq.answer
+			}
+		}))
+	})}</script>`}
 </svelte:head>
 
 <div class="bg-nbrs-green min-h-screen">

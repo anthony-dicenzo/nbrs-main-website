@@ -13,12 +13,14 @@
 		sources = [],
 		rotationInterval = 9000,
 		overlayClass = '',
+		alt = '',
 		children
 	}: {
 		source?: VideoSource;
 		sources?: VideoSource[];
 		rotationInterval?: number;
 		overlayClass?: string;
+		alt?: string;
 		children?: Snippet;
 	} = $props();
 
@@ -117,10 +119,10 @@
 	{#if currentSource}
 		<img
 			src={getPosterUrl(currentSource)}
-			alt=""
+			alt={alt}
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 			class:opacity-0={videoLoaded && !autoplayBlocked}
-			aria-hidden="true"
+			aria-hidden={!alt}
 			fetchpriority="high"
 			decoding="async"
 			width="1920"

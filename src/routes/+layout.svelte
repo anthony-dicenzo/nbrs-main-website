@@ -13,11 +13,20 @@
 	// Only show splash on homepage on initial load (not after navigation)
 	const showSplash = $derived(data.pathname === '/' && !splashComplete && !isNavigating);
 
+	// Build canonical URL from pathname
+	const canonicalUrl = $derived(`https://nbrs.ca${data.pathname === '/' ? '' : data.pathname}`);
+
 	// Track navigation to prevent splash on client-side nav
 	onNavigate(() => {
 		isNavigating = true;
 	});
 </script>
+
+<svelte:head>
+	<link rel="canonical" href={canonicalUrl} />
+	<meta property="og:locale" content="en_CA" />
+	<meta property="og:site_name" content="NBRS" />
+</svelte:head>
 
 {#if showSplash}
 	<Splash onComplete={() => (splashComplete = true)} />

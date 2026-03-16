@@ -14,6 +14,7 @@
 		objectPosition = 'center',
 		overlayClass = '',
 		rootMargin = '200px',
+		alt = '',
 		children
 	}: {
 		source: VideoSource;
@@ -21,6 +22,7 @@
 		objectPosition?: string;
 		overlayClass?: string;
 		rootMargin?: string;
+		alt?: string;
 		children?: Snippet;
 	} = $props();
 
@@ -116,11 +118,11 @@
 	<!-- Poster image (shows until video loads, stays visible if autoplay blocked) -->
 	<img
 		src={getPosterUrl(source)}
-		alt=""
+		alt={alt}
 		class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
 		class:opacity-0={videoLoaded && !autoplayBlocked}
 		style="object-position: {objectPosition};"
-		aria-hidden="true"
+		aria-hidden={!alt}
 		loading="lazy"
 		decoding="async"
 		width="1920"
