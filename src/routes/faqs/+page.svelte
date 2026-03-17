@@ -4,7 +4,7 @@
 	const faqs = [
 		{
 			question: 'What is NBRS?',
-			answer: 'NBRS (pronounced "neighbours") is a Toronto-based developer building quality rental housing at the neighbourhood scale. We focus on 5-10 unit buildings in established neighbourhoods—the kind of homes Toronto used to build but stopped decades ago.'
+			answer: 'NBRS (pronounced "neighbours") is a Toronto-based developer building quality rental housing at the neighbourhood scale. We focus on 5-10 unit buildings in established neighbourhoods—the kind of homes Toronto used to build but stopped decades ago. <a href="/mission" class="underline hover:opacity-80">Learn more about our mission</a>.'
 		},
 		{
 			question: 'What is "missing middle" housing?',
@@ -16,7 +16,7 @@
 		},
 		{
 			question: 'Who can rent from NBRS?',
-			answer: "Our homes are designed for families who want to stay in Toronto but need more space than typical condos offer. We're looking for renters who value quality, community, and neighbourhood living. Sign up for our waitlist to be notified when units become available."
+			answer: 'Our homes are designed for families who want to stay in Toronto but need more space than typical condos offer. We\'re looking for renters who value quality, community, and neighbourhood living. <a href="/waitlist" class="underline hover:opacity-80">Sign up for our waitlist</a> to be notified when units become available.'
 		},
 		{
 			question: 'How big are the units?',
@@ -28,11 +28,27 @@
 		},
 		{
 			question: 'How can I partner with NBRS?',
-			answer: "We're looking for partners who share our vision: accredited investors seeking stable returns with social impact, landowners with underutilized parcels, brokers with off-market or as-of-right sites, and nonprofits looking to expand community housing. Visit our Partner page to get in touch."
+			answer: 'We\'re looking for partners who share our vision: accredited investors seeking stable returns with social impact, landowners with underutilized parcels, brokers with off-market or as-of-right sites, and nonprofits looking to expand community housing. <a href="/partner" class="underline hover:opacity-80">Visit our Partner page</a> to get in touch.'
 		},
 		{
 			question: 'When will FAMILY 1 be ready?',
-			answer: "FAMILY 1 is currently under construction with first move-ins expected in Fall 2026. Join our waitlist to stay updated on progress and availability."
+			answer: 'FAMILY 1 is currently under construction with first move-ins expected in Fall 2026. <a href="/waitlist" class="underline hover:opacity-80">Join our waitlist</a> to stay updated on progress and availability.'
+		},
+		{
+			question: 'What is a multiplex?',
+			answer: "A multiplex is a residential building with two to six units — including duplexes, triplexes, fourplexes, and sixplexes. These are the building types that shaped Toronto's most beloved neighbourhoods before restrictive zoning made them illegal. Since May 2023, Toronto's updated zoning allows multiplexes to be built as-of-right across the city."
+		},
+		{
+			question: 'Can you build a multiplex in Toronto without rezoning?',
+			answer: "Yes. Since May 2023, Toronto permits multiplex development as-of-right on virtually all residential lots. That means no rezoning applications, no committee of adjustment hearings, and no years-long approval timelines. NBRS targets these as-of-right sites specifically to deliver new housing in 12–18 months."
+		},
+		{
+			question: 'How is NBRS different from other Toronto multiplex developers?',
+			answer: "Most multiplex developers in Toronto build small units aimed at investors. NBRS builds family-sized homes — 3-bedroom, 1,300 sq ft units with real storage and outdoor space. We focus on quality design, fast delivery (12–18 months), and renting directly to families who want to stay in the city."
+		},
+		{
+			question: 'What are the benefits of multiplex housing for neighbourhoods?',
+			answer: "Multiplex housing adds gentle density without changing the character of a street. It keeps families in established neighbourhoods, supports local schools and businesses, and makes better use of existing infrastructure like transit and parks. It's the kind of growth that strengthens communities rather than displacing them."
 		}
 	];
 
@@ -44,18 +60,18 @@
 </script>
 
 <svelte:head>
-	<title>FAQs | NBRS</title>
-	<meta name="description" content="Answers to common questions about missing middle housing, Toronto family rental homes, as-of-right development, and NBRS neighbourhood-scale housing projects." />
+	<title>FAQs | Toronto Multiplex & Missing Middle Housing - NBRS</title>
+	<meta name="description" content="Answers to common questions about multiplex housing, fourplex development, missing middle housing, Toronto family rentals, and as-of-right development by NBRS." />
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/faqs" />
-	<meta property="og:title" content="FAQs | NBRS" />
-	<meta property="og:description" content="Answers to common questions about missing middle housing, Toronto family rental homes, as-of-right development, and NBRS neighbourhood-scale housing projects." />
+	<meta property="og:title" content="FAQs | Toronto Multiplex & Missing Middle Housing - NBRS" />
+	<meta property="og:description" content="Answers to common questions about multiplex housing, fourplex development, missing middle housing, and Toronto family rentals by NBRS." />
 	<meta property="og:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary" />
-	<meta name="twitter:title" content="FAQs | NBRS" />
-	<meta name="twitter:description" content="Answers to common questions about missing middle housing, Toronto family rental homes, and NBRS neighbourhood-scale housing." />
+	<meta name="twitter:title" content="FAQs | Toronto Multiplex & Missing Middle Housing - NBRS" />
+	<meta name="twitter:description" content="Answers to common questions about multiplex housing, missing middle housing, and Toronto family rentals by NBRS." />
 	<!-- FAQ Structured Data -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
 		"@context": "https://schema.org",
@@ -110,7 +126,7 @@
 					{#if openIndex === i}
 						<div class="pb-6 pr-10">
 							<p class="text-base md:text-lg text-white/80 leading-relaxed">
-								{faq.answer}
+								{@html faq.answer}
 							</p>
 						</div>
 					{/if}

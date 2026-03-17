@@ -31,21 +31,21 @@
 	</script>
 
 <svelte:head>
-	<title>NBRS - Quality Rental Housing at the Neighbourhood Scale</title>
+	<title>NBRS - Toronto Multiplex Developer | Family Rental Housing</title>
 	<meta
 		name="description"
-		content="NBRS builds neighbourhood-scale rental housing for families in Toronto — quality 3-bedroom homes in established communities. Join our waitlist for FAMILY 1."
+		content="NBRS builds multiplex and fourplex rental housing for families in Toronto — quality 3-bedroom homes in established neighbourhoods."
 	/>
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/" />
-	<meta property="og:title" content="NBRS - Quality Rental Housing at the Neighbourhood Scale" />
-	<meta property="og:description" content="NBRS builds neighbourhood-scale rental housing for families in Toronto — quality 3-bedroom homes in established communities." />
+	<meta property="og:title" content="NBRS - Toronto Multiplex Developer | Family Rental Housing" />
+	<meta property="og:description" content="NBRS builds multiplex and fourplex rental housing for families in Toronto — quality 3-bedroom homes in established neighbourhoods." />
 	<meta property="og:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="NBRS - Quality Rental Housing at the Neighbourhood Scale" />
-	<meta name="twitter:description" content="NBRS builds neighbourhood-scale rental housing for families in Toronto — quality 3-bedroom homes in established communities." />
+	<meta name="twitter:title" content="NBRS - Toronto Multiplex Developer | Family Rental Housing" />
+	<meta name="twitter:description" content="NBRS builds multiplex and fourplex rental housing for families in Toronto — quality 3-bedroom homes in established neighbourhoods." />
 	<meta name="twitter:image" content="https://nbrs.ca/videos/new/community-street-festival.jpg" />
 	<!-- Preload LCP image for faster hero render -->
 	<link rel="preload" as="image" href={heroPosterUrl} fetchpriority="high" />
@@ -67,7 +67,18 @@
 				"name": "Ontario, Canada"
 			}
 		},
-		"knowsAbout": ["missing middle housing", "neighbourhood-scale housing", "family rental housing", "as-of-right development", "multiplex development"],
+		"knowsAbout": ["missing middle housing", "neighbourhood-scale housing", "family rental housing", "as-of-right development", "multiplex development", "multiplex housing Toronto", "fourplex development", "Toronto fourplex builder", "sixplex Toronto"],
+		"contactPoint": {
+			"@type": "ContactPoint",
+			"email": "hello@nbrs.ca",
+			"contactType": "customer service"
+		},
+		"address": {
+			"@type": "PostalAddress",
+			"addressLocality": "Toronto",
+			"addressRegion": "ON",
+			"addressCountry": "CA"
+		},
 		"sameAs": []
 	})}</script>`}
 </svelte:head>
@@ -98,7 +109,7 @@
 	<div class="max-w-6xl mx-auto px-4 sm:px-6">
 		<div class="grid md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
 			<div use:scrollReveal={{ type: 'fade', duration: 1.2 }} use:parallax={{ speed: 0.15 }}>
-				<VideoSection source={family1Video} alt="FAMILY 1 building render at dusk — neighbourhood-scale rental housing by NBRS" aspectRatio="3/4" objectPosition="top" overlayClass="bg-black/10">
+				<VideoSection source={family1Video} alt="FAMILY 1 multiplex building render at dusk — neighbourhood-scale rental housing by NBRS" aspectRatio="3/4" objectPosition="top" overlayClass="bg-black/10">
 					<div class="absolute inset-0 flex items-end p-4 sm:p-6">
 						<span class="text-white text-sm font-medium bg-nbrs-green px-4 py-2 rounded-full">
 							Coming 2026
@@ -129,12 +140,31 @@
 				</p>
 				<p
 					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.3, distance: 25 }}
-					class="text-base sm:text-lg text-gray-600"
+					class="text-base sm:text-lg text-gray-600 mb-6"
 				>
 					Three-bedroom homes with real storage, outdoor space, and room for life to happen.
 				</p>
+				<a
+					href="/family-1"
+					use:scrollReveal={{ type: 'slide-up', duration: 1, delay: 0.4, distance: 25 }}
+					class="inline-flex items-center gap-2 text-nbrs-green font-semibold hover:opacity-80 transition-opacity"
+				>
+					Learn More
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+					</svg>
+				</a>
 			</div>
 		</div>
+	</div>
+</section>
+
+<!-- Multiplex keyword line -->
+<section aria-hidden="true" class="bg-white pb-0">
+	<div class="max-w-6xl mx-auto px-4 sm:px-6">
+		<p class="text-base sm:text-lg text-gray-500 italic">
+			Multiplex and fourplex housing — the building types Toronto needs most.
+		</p>
 	</div>
 </section>
 

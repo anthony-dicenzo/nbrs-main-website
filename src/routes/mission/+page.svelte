@@ -3,18 +3,18 @@
 </script>
 
 <svelte:head>
-	<title>Our Mission | NBRS</title>
-	<meta name="description" content="NBRS is building the missing middle — neighbourhood-scale rental housing for Toronto families. Quality homes that bring back the housing types our city needs." />
+	<title>Our Mission | NBRS - Toronto Missing Middle Housing Developer</title>
+	<meta name="description" content="NBRS is building Toronto's missing middle — multiplex rental housing for families. Quality homes that bring back the housing types our city needs." />
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/mission" />
-	<meta property="og:title" content="Our Mission | NBRS" />
-	<meta property="og:description" content="NBRS is building the missing middle — neighbourhood-scale rental housing for Toronto families." />
+	<meta property="og:title" content="Our Mission | NBRS - Toronto Missing Middle Housing Developer" />
+	<meta property="og:description" content="NBRS is building Toronto's missing middle — multiplex rental housing for families." />
 	<meta property="og:image" content="https://nbrs.ca/videos/new/fountain-park-people.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Our Mission | NBRS" />
-	<meta name="twitter:description" content="NBRS is building the missing middle — neighbourhood-scale rental housing for Toronto families." />
+	<meta name="twitter:title" content="Our Mission | NBRS - Toronto Missing Middle Housing Developer" />
+	<meta name="twitter:description" content="NBRS is building Toronto's missing middle — multiplex rental housing for families." />
 	<meta name="twitter:image" content="https://nbrs.ca/videos/new/fountain-park-people.jpg" />
 </svelte:head>
 
@@ -158,6 +158,14 @@
 			</div>
 		</section>
 
+		<!-- Multiplex keyword line -->
+		<p
+			class="text-xl md:text-2xl lg:text-3xl text-white/90 font-light leading-relaxed max-w-4xl mb-8"
+			use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}
+		>
+			This is multiplex housing — and it's how Toronto used to grow.
+		</p>
+
 		<!-- Vision text -->
 		<p
 			class="text-xl md:text-2xl lg:text-3xl text-white/90 font-light leading-relaxed max-w-4xl mb-16 md:mb-24"
@@ -165,6 +173,25 @@
 		>
 			This is just the beginning of a larger vision: thriving neighbourhoods where families can grow, find opportunity, and build community.
 		</p>
+
+		<!-- CTA Links -->
+		<div class="flex flex-wrap gap-4 mb-16 md:mb-24" use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
+			<a
+				href="/family-1"
+				class="inline-flex items-center gap-2 bg-white text-nbrs-green px-6 py-3 rounded-full font-semibold hover:bg-white/90 transition-colors"
+			>
+				See FAMILY 1
+				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+				</svg>
+			</a>
+			<a
+				href="/waitlist"
+				class="inline-flex items-center gap-2 border border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white/10 transition-colors"
+			>
+				Join the Waitlist
+			</a>
+		</div>
 
 		<!-- Section 3: Video Left, Text Right (FAMILY 1) -->
 		<div class="flex flex-col md:flex-row mb-16 md:mb-24" use:scrollReveal={{ type: 'fade', duration: 1 }}>
@@ -176,7 +203,7 @@
 					playsinline
 					poster="/videos/new/building-render-dusk.jpg"
 					class="w-full aspect-[4/5] object-cover rounded-sm"
-					aria-label="FAMILY 1 building render at dusk — missing middle housing in Toronto"
+					aria-label="FAMILY 1 multiplex building render at dusk — missing middle housing in Toronto"
 				>
 					<source src="/videos/new/building-render-dusk.mp4" type="video/mp4" />
 				</video>

@@ -126,18 +126,18 @@
 </script>
 
 <svelte:head>
-	<title>Join the FAMILY 1 Waitlist | NBRS</title>
-	<meta name="description" content="Join the waitlist for FAMILY 1 — Toronto family rental homes with 3 bedrooms, real storage, and outdoor space. Neighbourhood-scale rental housing by NBRS." />
+	<title>FAMILY 1 Waitlist | Toronto 3-Bedroom Multiplex Rentals | NBRS</title>
+	<meta name="description" content="Join the waitlist for FAMILY 1 — 3-bedroom multiplex rental homes in Toronto with real storage and outdoor space. Family-sized units by NBRS." />
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/waitlist" />
-	<meta property="og:title" content="Join the FAMILY 1 Waitlist | NBRS" />
-	<meta property="og:description" content="Join the waitlist for FAMILY 1 — Toronto family rental homes with 3 bedrooms, real storage, and outdoor space." />
+	<meta property="og:title" content="FAMILY 1 Waitlist | Toronto 3-Bedroom Multiplex Rentals | NBRS" />
+	<meta property="og:description" content="Join the waitlist for FAMILY 1 — 3-bedroom multiplex rental homes in Toronto with real storage and outdoor space." />
 	<meta property="og:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Join the FAMILY 1 Waitlist | NBRS" />
-	<meta name="twitter:description" content="Join the waitlist for FAMILY 1 — Toronto family rental homes with 3 bedrooms, real storage, and outdoor space." />
+	<meta name="twitter:title" content="FAMILY 1 Waitlist | Toronto 3-Bedroom Multiplex Rentals | NBRS" />
+	<meta name="twitter:description" content="Join the waitlist for FAMILY 1 — 3-bedroom multiplex rental homes in Toronto with real storage and outdoor space." />
 	<meta name="twitter:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
 </svelte:head>
 

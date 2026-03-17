@@ -4,7 +4,10 @@
 	const navLinks = [
 		{ label: 'Contact', href: '/partner' },
 		{ label: 'Mission', href: '/mission' },
-		{ label: 'FAQs', href: '/faqs' }
+		{ label: 'FAQs', href: '/faqs' },
+		{ label: 'FAMILY 1', href: '/family-1' },
+		{ label: 'Waitlist', href: '/waitlist' },
+		{ label: 'Blog', href: '/blog' }
 	];
 
 	let email = $state('');

@@ -85,18 +85,18 @@
 </script>
 
 <svelte:head>
-	<title>Partner With NBRS | Investment & Partnership Opportunities</title>
-	<meta name="description" content="Partner with NBRS to build missing middle rental housing in Toronto. Investment opportunities in neighbourhood-scale family housing development." />
+	<title>Partner With NBRS | Toronto Multiplex Investment Opportunities</title>
+	<meta name="description" content="Partner with NBRS to build multiplex rental housing in Toronto. Investment opportunities in fourplex and missing middle family housing development." />
 	<!-- Open Graph / Social -->
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://nbrs.ca/partner" />
-	<meta property="og:title" content="Partner With NBRS | Investment & Partnership Opportunities" />
-	<meta property="og:description" content="Join NBRS in building quality rental housing at the neighbourhood scale. We're looking for investors, landowners, brokers, and nonprofits." />
+	<meta property="og:title" content="Partner With NBRS | Toronto Multiplex Investment Opportunities" />
+	<meta property="og:description" content="Join NBRS in building multiplex rental housing in Toronto. We're looking for investors, landowners, brokers, and nonprofits." />
 	<meta property="og:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
 	<!-- Twitter Card -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Partner With NBRS" />
-	<meta name="twitter:description" content="Join NBRS in building quality rental housing at the neighbourhood scale." />
+	<meta name="twitter:title" content="Partner With NBRS | Toronto Multiplex Investment Opportunities" />
+	<meta name="twitter:description" content="Join NBRS in building multiplex rental housing in Toronto." />
 	<meta name="twitter:image" content="https://nbrs.ca/videos/new/building-render-dusk.jpg" />
 </svelte:head>
 
