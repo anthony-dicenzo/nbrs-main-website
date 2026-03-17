@@ -61,7 +61,7 @@
 	<div class="relative max-w-6xl mx-auto px-4 sm:px-6 py-32 sm:py-40">
 		<div use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}>
 			<span class="inline-block bg-nbrs-green text-white text-sm font-semibold px-4 py-1 rounded-full mb-4 sm:mb-6">
-				Our First Project
+				Coming Soon
 			</span>
 			<h1 class="text-4xl xs:text-5xl sm:text-6xl md:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight">
 				FAMILY 1
