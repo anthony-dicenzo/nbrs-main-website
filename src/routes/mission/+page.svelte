@@ -19,12 +19,12 @@
 </svelte:head>
 
 <div class="bg-nbrs-green min-h-screen">
-	<div class="h-[80px] md:h-[100px]"></div>
+	<div class="h-[64px] md:h-[80px]"></div>
 
 	<div class="max-w-[1440px] mx-auto px-4 md:px-6">
 		<!-- Hero Title -->
 		<h1
-			class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white leading-[0.9] pt-8 pb-16 md:pb-24"
+			class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-white leading-[0.9] pt-6 pb-10 md:pb-14"
 			use:scrollReveal={{ type: 'slide-up', duration: 0.8 }}
 		>
 			Building the<br/>Missing Middle
@@ -32,7 +32,7 @@
 
 		<!-- Opening paragraph -->
 		<p
-			class="text-xl md:text-2xl lg:text-3xl text-white/90 font-light leading-relaxed max-w-4xl mb-16 md:mb-24"
+			class="text-xl md:text-2xl lg:text-3xl text-white/90 font-light leading-relaxed max-w-4xl mb-10 md:mb-14"
 			use:scrollReveal={{ type: 'slide-up', duration: 0.8, delay: 0.1 }}
 		>
 			Toronto used to build neighbourhood-scale housing. Walk down any established street and you'll see them—the 5-10 unit buildings our grandparents grew up in. The homes that made neighbourhoods feel like neighbourhoods.

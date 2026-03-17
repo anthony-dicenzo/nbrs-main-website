@@ -1,4 +1,59 @@
 <script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
+	import { prefersReducedMotion, loadGsap, loadScrollTrigger } from '$lib/utils/gsap';
+
+	let illustrationContainer: HTMLElement;
+	let ctx: gsap.Context | null = null;
+
+	onMount(async () => {
+		if (prefersReducedMotion()) return;
+
+		const gsap = await loadGsap();
+		const ScrollTrigger = await loadScrollTrigger();
+
+		ctx = gsap.context(() => {
+			const paths = illustrationContainer.querySelectorAll('.draw-path');
+			paths.forEach((path, index) => {
+				const svgPath = path as SVGPathElement;
+				const length = svgPath.getTotalLength();
+
+				gsap.set(svgPath, {
+					strokeDasharray: length,
+					strokeDashoffset: length
+				});
+
+				gsap.to(svgPath, {
+					strokeDashoffset: 0,
+					duration: 1.2,
+					delay: index * 0.03,
+					ease: 'power2.out',
+					scrollTrigger: {
+						trigger: illustrationContainer,
+						start: 'top 85%',
+						toggleActions: 'play none none none'
+					}
+				});
+			});
+
+			const fills = illustrationContainer.querySelectorAll('.fill-element');
+			gsap.from(fills, {
+				opacity: 0,
+				duration: 0.6,
+				stagger: 0.05,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: illustrationContainer,
+					start: 'top 85%',
+					toggleActions: 'play none none none'
+				}
+			});
+		}, illustrationContainer);
+	});
+
+	onDestroy(() => {
+		ctx?.revert();
+	});
+
 	interface PartnerFormData {
 		name: string;
 		email: string;
@@ -114,7 +169,7 @@
 		</div>
 
 		<!-- Main content grid -->
-		<div class="flex-1 grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
+		<div class="grid md:grid-cols-2 gap-8 md:gap-12 lg:gap-16">
 			<!-- Left: Partner info -->
 			<div class="flex flex-col justify-between">
 				<div>
@@ -261,6 +316,159 @@
 					</div>
 				{/if}
 			</div>
+		</div>
+
+		<!-- Neighbourhood Story Illustration -->
+		<div class="mt-4 md:mt-6" bind:this={illustrationContainer}>
+			<svg viewBox="0 0 1200 280" class="w-full h-auto" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+				<!-- Ground line -->
+				<line class="draw-path" x1="0" y1="240" x2="1200" y2="240" stroke="white" stroke-width="2" opacity="0.4"/>
+
+				<!-- === HOUSE 1 (small single-family, left) === -->
+				<!-- Walls -->
+				<rect class="draw-path" x="40" y="150" width="100" height="90" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Roof -->
+				<line class="draw-path" x1="30" y1="150" x2="90" y2="100" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<line class="draw-path" x1="90" y1="100" x2="150" y2="150" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Door -->
+				<rect class="draw-path" x="75" y="195" width="30" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Window -->
+				<rect class="draw-path" x="55" y="165" width="20" height="18" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="110" y="165" width="20" height="18" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<!-- Step -->
+				<rect class="draw-path" x="70" y="235" width="40" height="5" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+
+				<!-- === TREE 1 === -->
+				<line class="draw-path" x1="195" y1="240" x2="195" y2="175" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="195" cy="155" r="25" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="195" cy="155" r="15" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+				<circle class="fill-element" cx="195" cy="155" r="4" fill="white" opacity="0.4"/>
+
+				<!-- === DUPLEX (slightly taller) === -->
+				<!-- Walls -->
+				<rect class="draw-path" x="250" y="120" width="120" height="120" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Roof -->
+				<line class="draw-path" x1="240" y1="120" x2="310" y2="75" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<line class="draw-path" x1="310" y1="75" x2="380" y2="120" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Unit divider -->
+				<line class="draw-path" x1="310" y1="120" x2="310" y2="240" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Doors -->
+				<rect class="draw-path" x="275" y="195" width="25" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<rect class="draw-path" x="320" y="195" width="25" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<circle class="fill-element" cx="296" cy="220" r="2.5" fill="white" opacity="0.5"/>
+				<circle class="fill-element" cx="341" cy="220" r="2.5" fill="white" opacity="0.5"/>
+				<!-- Windows -->
+				<rect class="draw-path" x="265" y="135" width="25" height="22" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<line class="draw-path" x1="277" y1="135" x2="277" y2="157" stroke="white" stroke-width="1" opacity="0.3"/>
+				<rect class="draw-path" x="330" y="135" width="25" height="22" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<line class="draw-path" x1="342" y1="135" x2="342" y2="157" stroke="white" stroke-width="1" opacity="0.3"/>
+
+				<!-- === TREE 2 === -->
+				<line class="draw-path" x1="430" y1="240" x2="430" y2="180" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="430" cy="160" r="22" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="430" cy="160" r="12" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+				<circle class="fill-element" cx="430" cy="160" r="3.5" fill="white" opacity="0.4"/>
+
+				<!-- === MULTIPLEX (central, tallest — the NBRS building) === -->
+				<!-- Main structure -->
+				<rect class="draw-path" x="480" y="60" width="240" height="180" fill="none" stroke="white" stroke-width="2" opacity="0.7"/>
+				<!-- Roof -->
+				<line class="draw-path" x1="470" y1="60" x2="730" y2="60" stroke="white" stroke-width="2.5" opacity="0.7"/>
+				<line class="draw-path" x1="475" y1="55" x2="725" y2="55" stroke="white" stroke-width="1" opacity="0.5"/>
+				<!-- Floor lines -->
+				<line class="draw-path" x1="480" y1="120" x2="720" y2="120" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<line class="draw-path" x1="480" y1="180" x2="720" y2="180" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Unit dividers -->
+				<line class="draw-path" x1="540" y1="60" x2="540" y2="240" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<line class="draw-path" x1="600" y1="60" x2="600" y2="240" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<line class="draw-path" x1="660" y1="60" x2="660" y2="240" stroke="white" stroke-width="1.5" opacity="0.5"/>
+
+				<!-- Windows - top floor -->
+				<rect class="draw-path" x="495" y="72" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+				<line class="draw-path" x1="510" y1="72" x2="510" y2="96" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="555" y="72" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+				<line class="draw-path" x1="570" y1="72" x2="570" y2="96" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="615" y="72" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+				<line class="draw-path" x1="630" y1="72" x2="630" y2="96" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="675" y="72" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+				<line class="draw-path" x1="690" y1="72" x2="690" y2="96" stroke="white" stroke-width="1" opacity="0.4"/>
+
+				<!-- Windows - middle floor -->
+				<rect class="draw-path" x="495" y="132" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+				<rect class="draw-path" x="555" y="132" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+				<rect class="draw-path" x="615" y="132" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+				<rect class="draw-path" x="675" y="132" width="30" height="24" fill="none" stroke="white" stroke-width="1" opacity="0.5"/>
+
+				<!-- Doors - ground floor -->
+				<rect class="draw-path" x="497" y="195" width="28" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.6"/>
+				<circle class="fill-element" cx="520" cy="220" r="2.5" fill="white" opacity="0.5"/>
+				<rect class="draw-path" x="557" y="195" width="28" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.6"/>
+				<circle class="fill-element" cx="580" cy="220" r="2.5" fill="white" opacity="0.5"/>
+				<rect class="draw-path" x="617" y="195" width="28" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.6"/>
+				<circle class="fill-element" cx="640" cy="220" r="2.5" fill="white" opacity="0.5"/>
+				<rect class="draw-path" x="677" y="195" width="28" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.6"/>
+				<circle class="fill-element" cx="700" cy="220" r="2.5" fill="white" opacity="0.5"/>
+
+				<!-- Steps -->
+				<rect class="draw-path" x="492" y="236" width="38" height="4" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="552" y="236" width="38" height="4" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="612" y="236" width="38" height="4" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="672" y="236" width="38" height="4" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+
+				<!-- === TREE 3 === -->
+				<line class="draw-path" x1="775" y1="240" x2="775" y2="175" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="775" cy="155" r="25" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="775" cy="155" r="15" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+				<circle class="fill-element" cx="775" cy="155" r="4" fill="white" opacity="0.4"/>
+
+				<!-- === DUPLEX 2 (right side) === -->
+				<rect class="draw-path" x="830" y="125" width="110" height="115" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Roof -->
+				<line class="draw-path" x1="820" y1="125" x2="885" y2="82" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<line class="draw-path" x1="885" y1="82" x2="950" y2="125" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Unit divider -->
+				<line class="draw-path" x1="885" y1="125" x2="885" y2="240" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Doors -->
+				<rect class="draw-path" x="850" y="195" width="25" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<rect class="draw-path" x="895" y="195" width="25" height="45" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<circle class="fill-element" cx="871" cy="220" r="2.5" fill="white" opacity="0.5"/>
+				<circle class="fill-element" cx="916" cy="220" r="2.5" fill="white" opacity="0.5"/>
+				<!-- Windows -->
+				<rect class="draw-path" x="843" y="140" width="24" height="20" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="903" y="140" width="24" height="20" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+
+				<!-- === TREE 4 === -->
+				<line class="draw-path" x1="1000" y1="240" x2="1000" y2="185" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="1000" cy="168" r="20" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+				<circle class="draw-path" cx="1000" cy="168" r="11" fill="none" stroke="white" stroke-width="1" opacity="0.3"/>
+				<circle class="fill-element" cx="1000" cy="168" r="3" fill="white" opacity="0.4"/>
+
+				<!-- === HOUSE 2 (right) === -->
+				<rect class="draw-path" x="1055" y="155" width="95" height="85" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Roof -->
+				<line class="draw-path" x1="1045" y1="155" x2="1102" y2="108" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<line class="draw-path" x1="1102" y1="108" x2="1160" y2="155" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Door -->
+				<rect class="draw-path" x="1085" y="198" width="28" height="42" fill="none" stroke="white" stroke-width="1.5" opacity="0.5"/>
+				<!-- Window -->
+				<rect class="draw-path" x="1065" y="168" width="18" height="16" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+				<rect class="draw-path" x="1120" y="168" width="18" height="16" fill="none" stroke="white" stroke-width="1" opacity="0.4"/>
+
+				<!-- Pathway lines (subtle) -->
+				<line class="draw-path" x1="90" y1="240" x2="90" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="290" y1="240" x2="290" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="335" y1="240" x2="335" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="510" y1="240" x2="510" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="570" y1="240" x2="570" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="630" y1="240" x2="630" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="690" y1="240" x2="690" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="862" y1="240" x2="862" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="907" y1="240" x2="907" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+				<line class="draw-path" x1="1099" y1="240" x2="1099" y2="255" stroke="white" stroke-width="1" opacity="0.25"/>
+
+				<!-- Sidewalk -->
+				<line class="draw-path" x1="0" y1="258" x2="1200" y2="258" stroke="white" stroke-width="1" opacity="0.2"/>
+			</svg>
 		</div>
 	</div>
 </div>
