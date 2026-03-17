@@ -159,15 +159,6 @@
 	</div>
 </section>
 
-<!-- Multiplex keyword line -->
-<section aria-hidden="true" class="bg-white pb-0">
-	<div class="max-w-6xl mx-auto px-4 sm:px-6">
-		<p class="text-base sm:text-lg text-gray-500 italic">
-			Multiplex and fourplex housing — the building types Toronto needs most.
-		</p>
-	</div>
-</section>
-
 <!-- How We Build Section - Illustrated Timeline -->
 <BuildTimeline />
 

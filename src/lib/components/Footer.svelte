@@ -1,10 +1,13 @@
 <script lang="ts">
 	import SocialIcons from './SocialIcons.svelte';
 
-	const navLinks = [
+	const primaryLinks = [
 		{ label: 'Contact', href: '/partner' },
 		{ label: 'Mission', href: '/mission' },
-		{ label: 'FAQs', href: '/faqs' },
+		{ label: 'FAQs', href: '/faqs' }
+	];
+
+	const secondaryLinks = [
 		{ label: 'FAMILY 1', href: '/family-1' },
 		{ label: 'Waitlist', href: '/waitlist' },
 		{ label: 'Blog', href: '/blog' }
@@ -75,11 +78,19 @@
 					<!-- Right: Nav links and email form -->
 					<div class="order-1 sm:order-2 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 md:gap-8">
 						<!-- Nav links -->
-						<nav aria-label="Footer" class="flex flex-wrap gap-4 sm:gap-6 md:gap-8 text-sm">
-							{#each navLinks as link}
+						<nav aria-label="Footer" class="flex flex-wrap gap-x-6 md:gap-x-8 items-center text-sm">
+							{#each primaryLinks as link}
 								<a
 									href={link.href}
 									class="hover:opacity-80 transition-opacity min-h-[44px] flex items-center"
+								>
+									{link.label}
+								</a>
+							{/each}
+							{#each secondaryLinks as link}
+								<a
+									href={link.href}
+									class="hover:opacity-80 transition-opacity min-h-[44px] flex items-center text-white/60"
 								>
 									{link.label}
 								</a>
@@ -97,7 +108,7 @@
 						{:else}
 							<form
 								onsubmit={handleSubmit}
-								class="flex items-center gap-2 border-b border-white/40 pb-1 focus-within:border-white transition-colors"
+								class="flex items-end gap-2 border-b border-white/40 focus-within:border-white transition-colors"
 								aria-label="Newsletter signup"
 							>
 								<label for="footer-email" class="sr-only">Email address</label>
@@ -109,12 +120,12 @@
 									required
 									autocomplete="email"
 									disabled={status === 'submitting'}
-									class="w-28 sm:w-32 md:w-40 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70 min-h-[44px] disabled:opacity-50"
+									class="w-28 sm:w-32 md:w-40 bg-transparent text-sm text-white outline-none placeholder:text-white/50 focus:placeholder:text-white/70 py-2 disabled:opacity-50"
 								/>
 								<button
 									type="submit"
 									disabled={status === 'submitting'}
-									class="text-sm font-medium hover:opacity-80 transition-opacity min-h-[44px] px-2 disabled:opacity-50"
+									class="text-sm font-medium hover:opacity-80 transition-opacity py-2 px-2 disabled:opacity-50"
 								>
 									{#if status === 'submitting'}
 										...
