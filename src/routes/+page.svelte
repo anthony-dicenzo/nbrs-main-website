@@ -122,7 +122,7 @@
 					use:scrollReveal={{ type: 'slide-up', duration: 0.8, distance: 20 }}
 					class="text-nbrs-green font-semibold text-sm tracking-wider uppercase mb-3 sm:mb-4 block"
 				>
-					Our First Project
+					Coming Soon
 				</span>
 				<h2
 					id="family1-heading"
