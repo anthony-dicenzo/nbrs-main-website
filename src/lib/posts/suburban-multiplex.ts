@@ -20,9 +20,9 @@ export const content = `
 
 <h2>The Soft-Scaping Squeeze</h2>
 
-<p>Toronto's zoning also requires a percentage of each lot to be "soft-scaped" — meaning landscaped, not paved. This is a good policy for managing stormwater and maintaining neighbourhood character. But on a typical suburban lot, once you account for the building footprint, required parking, and soft-scaping minimums, there's often <strong>not enough lot left</strong> to make a multiplex work.</p>
+<p>Toronto's zoning also requires 50% of the rear yard to be "soft-scaped" — meaning landscaped, not paved. This is a good policy for managing stormwater and maintaining neighbourhood character. But on a typical suburban lot, once you account for the building footprint, required parking, and that 50% rear soft-scaping requirement, there's often <strong>not enough lot left</strong> to make a multiplex work.</p>
 
-<p>A fourplex that needs four parking spots and 30% soft-scaping on a 30-foot-wide lot is a geometric puzzle with no solution. The units get too small, the outdoor space disappears, or the project doesn't pencil.</p>
+<p>A fourplex that needs four parking spots and 50% rear soft-scaping on a 30-foot-wide lot is a geometric puzzle with no solution. The units get too small, the outdoor space disappears, or the project doesn't pencil.</p>
 
 <h2>Where Multiplex Housing Works Best</h2>
 

@@ -12,9 +12,9 @@ export const content = `
 
 <h2>The Timeline Problem</h2>
 
-<p>Toronto Hydro's process for new service connections involves multiple stages: application review, design, approval, and installation. For a multiplex project — even a simple fourplex — the timeline from application to energization can stretch to <strong>6-12 months</strong>.</p>
+<p>Toronto Hydro's process for new service connections involves multiple stages: application review, design, approval, and installation. For a multiplex project — even a simple fourplex — the timeline from application to energization can stretch to <strong>up to 18 months</strong>.</p>
 
-<p>That's 6-12 months where a fully constructed building sits empty. No tenants. No revenue. Just carrying costs accumulating on a project that's otherwise complete.</p>
+<p>That's up to 18 months where a fully constructed building sits empty. No tenants. No revenue. Just carrying costs accumulating on a project that's otherwise complete.</p>
 
 <p>For a large condo developer, this is a manageable cost absorbed across hundreds of units. For a multiplex developer building 5-6 units, it can be the difference between a viable project and a money-losing one.</p>
 

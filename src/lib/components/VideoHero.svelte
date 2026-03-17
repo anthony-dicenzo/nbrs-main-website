@@ -59,31 +59,45 @@
 		});
 	}
 
-	// Try to play video and detect autoplay blocks
+	let retryCount = 0;
+	const MAX_RETRIES = 3;
+
+	// Try to play video with retry logic for transient failures
 	async function tryAutoplay() {
 		if (!videoRef) return;
 
 		try {
 			await videoRef.play();
-			// Autoplay worked
 			autoplayBlocked = false;
-		} catch (error) {
-			// Autoplay was blocked (Low Power Mode, Data Saver, etc.)
-			autoplayBlocked = true;
-			videoLoaded = false;
+			retryCount = 0;
+		} catch {
+			// Retry on transient failures (not enough data buffered, etc.)
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(tryAutoplay, 1000 * retryCount);
+			} else {
+				// Only give up after multiple retries
+				autoplayBlocked = true;
+				videoLoaded = false;
+			}
 		}
 	}
 
-	// Handle video canplay event
+	// Handle video events - try autoplay on multiple signals
 	function handleCanPlay() {
 		tryAutoplay();
 	}
 
+	function handleLoadedData() {
+		if (!videoLoaded && !autoplayBlocked) {
+			tryAutoplay();
+		}
+	}
+
 	// Handle video playing event (confirms video is actually playing)
 	function handlePlaying() {
-		if (!autoplayBlocked) {
-			videoLoaded = true;
-		}
+		autoplayBlocked = false;
+		videoLoaded = true;
 	}
 
 	// Rotate to next video
@@ -130,8 +144,8 @@
 		/>
 	{/if}
 
-	<!-- Video (only shown if autoplay is not blocked) -->
-	{#if currentSource && posterLoaded && !autoplayBlocked}
+	<!-- Video (always in DOM, hidden behind poster until playing) -->
+	{#if currentSource && posterLoaded}
 		{#key currentIndex}
 			<video
 				bind:this={videoRef}
@@ -142,7 +156,9 @@
 				muted
 				loop
 				playsinline
+				preload="auto"
 				oncanplay={handleCanPlay}
+				onloadeddata={handleLoadedData}
 				onplaying={handlePlaying}
 				poster={getPosterUrl(currentSource)}
 			>

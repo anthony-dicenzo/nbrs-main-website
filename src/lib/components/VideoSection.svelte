@@ -46,30 +46,43 @@
 		return src.mp4.replace(/\.mp4$/, '.webm');
 	}
 
-	// Try to play video and detect autoplay blocks
+	let retryCount = 0;
+	const MAX_RETRIES = 3;
+
+	// Try to play video with retry logic for transient failures
 	async function tryAutoplay() {
 		if (!videoRef) return;
 
 		try {
 			await videoRef.play();
 			autoplayBlocked = false;
-		} catch (error) {
-			// Autoplay was blocked (Low Power Mode, Data Saver, etc.)
-			autoplayBlocked = true;
-			videoLoaded = false;
+			retryCount = 0;
+		} catch {
+			if (retryCount < MAX_RETRIES) {
+				retryCount++;
+				setTimeout(tryAutoplay, 1000 * retryCount);
+			} else {
+				autoplayBlocked = true;
+				videoLoaded = false;
+			}
 		}
 	}
 
-	// Handle video canplay event
+	// Handle video events - try autoplay on multiple signals
 	function handleCanPlay() {
 		tryAutoplay();
 	}
 
+	function handleLoadedData() {
+		if (!videoLoaded && !autoplayBlocked) {
+			tryAutoplay();
+		}
+	}
+
 	// Handle video playing event (confirms video is actually playing)
 	function handlePlaying() {
-		if (!autoplayBlocked) {
-			videoLoaded = true;
-		}
+		autoplayBlocked = false;
+		videoLoaded = true;
 	}
 
 	onMount(() => {
@@ -129,8 +142,8 @@
 		height="1080"
 	/>
 
-	<!-- Video (only shown if autoplay is not blocked) -->
-	{#if shouldLoad && !autoplayBlocked}
+	<!-- Video (always in DOM once visible, hidden behind poster until playing) -->
+	{#if shouldLoad}
 		<video
 			bind:this={videoRef}
 			class="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
@@ -141,7 +154,9 @@
 			muted
 			loop
 			playsinline
+			preload="auto"
 			oncanplay={handleCanPlay}
+			onloadeddata={handleLoadedData}
 			onplaying={handlePlaying}
 			poster={getPosterUrl(source)}
 		>

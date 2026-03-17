@@ -6,17 +6,17 @@ export const meta = {
 };
 
 export const content = `
-<p>Since Toronto updated its zoning bylaws in May 2023 to allow multiplex housing as-of-right, the city has been approaching a milestone: <strong>1,000 multiplex project applications</strong>.</p>
+<p>Since Toronto updated its zoning bylaws in May 2023 to allow multiplex housing as-of-right, the city has been on a path toward a milestone: <strong>1,000 multiplex project applications</strong>. At the current pace, that number is still a year or two away — but the trajectory is clear.</p>
 
-<p>On paper, this is a success story. The policy is working — developers, homeowners, and builders are responding to the signal that Toronto wants more housing in its neighbourhoods. Duplexes, triplexes, fourplexes, and sixplexes are being proposed across the city.</p>
+<p>On paper, this is a success story in the making. The policy is working — developers, homeowners, and builders are responding to the signal that Toronto wants more housing in its neighbourhoods. Duplexes, triplexes, fourplexes, and sixplexes are being proposed across the city.</p>
 
-<p>But behind that headline number is a less encouraging reality: <strong>the permit process is creating years of unnecessary delay</strong>.</p>
+<p>But behind that trajectory is a less encouraging reality: <strong>the permit process is creating years of unnecessary delay</strong>.</p>
 
 <h2>The Numbers Don't Add Up</h2>
 
 <p>When we analyzed the data on multiplex applications in Toronto, a troubling pattern emerged. The average permit timeline for a straightforward, as-of-right multiplex project — one that <em>already complies with zoning</em> — is stretching well beyond what the policy intended.</p>
 
-<p>Across nearly 1,000 projects, those delays compound. Our estimate: <strong>over 115 years of cumulative delay</strong> are being imposed on projects that should be fast-tracked by design.</p>
+<p>As the city approaches 1,000 projects, those delays will compound. By our estimate, the current pace is on track to impose <strong>over 115 years of cumulative delay</strong> on projects that should be fast-tracked by design.</p>
 
 <p>This isn't a zoning problem. The zoning works. This is a <strong>process problem</strong> — permit review bottlenecks, inconsistent interpretation of building code requirements, and understaffed departments that weren't resourced for the wave of applications the policy created.</p>
 
