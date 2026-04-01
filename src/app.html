@@ -2,7 +2,9 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="%sveltekit.assets%/favicon-32x32.png" type="image/png" sizes="32x32" />
+		<link rel="icon" href="%sveltekit.assets%/favicon-192x192.png" type="image/png" sizes="192x192" />
+		<link rel="apple-touch-icon" href="%sveltekit.assets%/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!-- Preconnect to Cloudinary for faster video/image loading -->
 		<link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
@@ -14,5 +16,7 @@
 	</head>
 	<body data-sveltekit-preload-data="hover">
 		<div style="display: contents">%sveltekit.body%</div>
+		<!-- Cloudflare Web Analytics -->
+		<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "YOUR_BEACON_TOKEN_HERE"}'></script>
 	</body>
 </html>
